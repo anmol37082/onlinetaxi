@@ -73,3 +73,30 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+/* Swiper Customizations */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #f97316 !important;
+  background: white;
+  border-radius: 50%;
+  width: 44px !important;
+  height: 44px !important;
+  margin-top: -22px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 18px !important;
+  font-weight: 700;
+}
+
+.swiper-pagination-bullet {
+  background: #cbd5e1 !important;
+  opacity: 1 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #f97316 !important;
+}

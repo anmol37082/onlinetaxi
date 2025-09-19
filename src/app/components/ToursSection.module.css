@@ -173,32 +173,7 @@
   transform: translateY(0);
 }
 
-/* Swiper Customizations */
-.toursSection :global(.swiper-button-next),
-.toursSection :global(.swiper-button-prev) {
-  color: #f97316 !important;
-  background: white;
-  border-radius: 50%;
-  width: 44px !important;
-  height: 44px !important;
-  margin-top: -22px !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
 
-.toursSection :global(.swiper-button-next:after),
-.toursSection :global(.swiper-button-prev:after) {
-  font-size: 18px !important;
-  font-weight: 700;
-}
-
-.toursSection :global(.swiper-pagination-bullet) {
-  background: #cbd5e1 !important;
-  opacity: 1 !important;
-}
-
-.toursSection :global(.swiper-pagination-bullet-active) {
-  background: #f97316 !important;
-}
 
 /* Responsive Design */
 @media (max-width: 1024px) {
