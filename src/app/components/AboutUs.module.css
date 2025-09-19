@@ -1,0 +1,412 @@
+/* AboutUs.module.css */
+
+.aboutSection {
+  min-height: 100vh;
+  background: #fff3db;
+  position: relative;
+  overflow: hidden;
+  padding: 80px 0;
+}
+
+.backgroundElements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.circle {
+  position: absolute;
+  top: 10%;
+  right: 15%;
+  width: 200px;
+  height: 200px;
+  border: 3px solid rgba(255, 149, 0, 0.3);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+.triangle {
+  position: absolute;
+  bottom: 20%;
+  left: 10%;
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-bottom: 87px solid rgba(255, 149, 0, 0.2);
+  animation: rotate 8s linear infinite;
+}
+
+.dots {
+  position: absolute;
+  top: 30%;
+  left: 5%;
+  width: 100px;
+  height: 100px;
+  background-image: radial-gradient(circle, rgba(255, 149, 0, 0.4) 2px, transparent 2px);
+  background-size: 20px 20px;
+  animation: pulse 4s ease-in-out infinite;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  position: relative;
+  z-index: 2;
+}
+
+.content {
+  flex: 1;
+  max-width: 600px;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #718096;
+}
+
+.separator {
+  color: #ff9500;
+}
+
+.active {
+  color: #ff9500;
+  font-weight: 500;
+}
+
+.tagline {
+  color: #ff9500;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.title {
+  font-size: 4.5rem;
+  font-weight: 800;
+  color: #2d3748;
+  margin-bottom: 30px;
+  line-height: 1.1;
+  background: linear-gradient(135deg, #ff9500, #ff7b00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.description {
+  font-size: 18px;
+  line-height: 1.7;
+  color: #4a5568;
+  margin-bottom: 40px;
+}
+
+.features {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #2d3748;
+  font-weight: 500;
+}
+
+.icon {
+  color: #ff9500;
+  font-size: 20px;
+}
+
+.ctaButton {
+  background: linear-gradient(135deg, #ff9500, #ff7b00);
+  color: #fff;
+  border: none;
+  padding: 16px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(255, 149, 0, 0.3);
+}
+
+.ctaButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(255, 149, 0, 0.4);
+  background: linear-gradient(135deg, #ffb347, #ff9500);
+}
+
+.illustration {
+  flex: 1;
+  position: relative;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carCard {
+  position: absolute;
+  top: 20px;
+  right: 50px;
+  background: rgba(255, 149, 0, 0.08);
+  border: 2px solid rgba(255, 149, 0, 0.2);
+  border-radius: 15px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  animation: float 4s ease-in-out infinite;
+  box-shadow: 0 8px 25px rgba(255, 149, 0, 0.1);
+}
+
+.carIcon {
+  color: #ff9500;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.line {
+  height: 3px;
+  background: rgba(255, 149, 0, 0.5);
+  border-radius: 2px;
+}
+
+.line:nth-child(1) { width: 60px; }
+.line:nth-child(2) { width: 45px; }
+.line:nth-child(3) { width: 30px; }
+
+.characters {
+  position: relative;
+  z-index: 3;
+}
+
+.driver, .customer {
+  position: absolute;
+}
+
+.driver {
+  left: -100px;
+  top: -50px;
+}
+
+.customer {
+  right: -80px;
+  top: -30px;
+}
+
+.person {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.head {
+  width: 40px;
+  height: 40px;
+  background: #ff9500;
+  border-radius: 50%;
+  margin-bottom: 5px;
+  position: relative;
+}
+
+.head::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background: #2d3748;
+  border-radius: 50%;
+}
+
+.body {
+  width: 50px;
+  height: 80px;
+  background: linear-gradient(135deg, #2d3748, #4a5568);
+  border-radius: 25px 25px 0 0;
+  margin-bottom: 5px;
+}
+
+.legs {
+  width: 60px;
+  height: 50px;
+  background: #2d3748;
+  border-radius: 0 0 30px 30px;
+}
+
+.car {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.carBody {
+  width: 200px;
+  height: 80px;
+  background: linear-gradient(135deg, #ff9500, #ff7b00);
+  border-radius: 40px 40px 20px 20px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(255, 149, 0, 0.3);
+}
+
+.carBody::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  right: 20px;
+  height: 30px;
+  background: rgba(45, 55, 72, 0.7);
+  border-radius: 15px;
+}
+
+.wheel {
+  width: 40px;
+  height: 40px;
+  background: #2d3748;
+  border: 5px solid #4a5568;
+  border-radius: 50%;
+  position: absolute;
+  bottom: -20px;
+}
+
+.wheel:first-of-type {
+  left: 20px;
+}
+
+.wheel:last-of-type {
+  right: 20px;
+}
+
+.whatsappButton {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background: #ff9500;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(255, 149, 0, 0.4);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.whatsappButton:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 35px rgba(255, 149, 0, 0.6);
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+  .container {
+    flex-direction: column;
+    gap: 50px;
+    text-align: center;
+  }
+
+  .title {
+    font-size: 3.5rem;
+  }
+
+  .illustration {
+    height: 400px;
+  }
+
+  .features {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .aboutSection {
+    padding: 40px 0;
+  }
+
+  .title {
+    font-size: 2.8rem;
+  }
+
+  .container {
+    padding: 0 15px;
+  }
+
+  .features {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .illustration {
+    height: 300px;
+  }
+
+  .carCard {
+    top: 10px;
+    right: 10px;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 2.2rem;
+  }
+
+  .description {
+    font-size: 16px;
+  }
+
+  .whatsappButton {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    bottom: 20px;
+    right: 20px;
+  }
+}

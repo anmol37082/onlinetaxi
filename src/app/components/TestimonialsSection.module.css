@@ -1,0 +1,516 @@
+.mainContainer {
+  min-height: 100vh;
+  background: #fff3db;
+  padding: 4rem 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.headerSection {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #dcfce7;
+  color: #166534;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.mainTitle {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+}
+
+.gradientText {
+  background: linear-gradient(135deg, #10b981, #2563eb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: #6b7280;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.7;
+  padding: 0;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.statCard {
+  background: white;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.statCard:hover {
+  transform: translateY(-5px);
+}
+
+.statIcon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.statValue {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.statLabel {
+  color: #6b7280;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+/* Loading States */
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  text-align: center;
+}
+
+.loadingSpinner {
+  margin-bottom: 1rem;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #f3f4f6;
+  border-top: 4px solid #10b981;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loadingText {
+  color: #6b7280;
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* No Reviews States */
+.noReviewsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  text-align: center;
+  background: white;
+  border-radius: 2rem;
+  padding: 3rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  margin: 2rem auto;
+  max-width: 500px;
+}
+
+.noReviewsIcon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.7;
+}
+
+.noReviewsTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.noReviewsText {
+  color: #6b7280;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.testimonialSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: stretch;
+}
+
+.testimonialCard {
+  position: relative;
+  background: white;
+  border-radius: 2rem;
+  padding: 2rem;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+  height: 20rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.5s ease;
+}
+
+.testimonialsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.quoteIcon {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+  color: #10b981;
+  opacity: 0.3;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.avatar {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #10b981, #2563eb);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.userName {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin: 0;
+}
+
+.userRole {
+  color: #6b7280;
+  margin: 0;
+  font-size: 1rem;
+}
+
+.stars {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+  justify-content: flex-start;
+}
+
+.testimonialText {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: #4b5563;
+  font-style: italic;
+  text-align: left;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.navButton {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: white;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.25rem;
+}
+
+.navButton:hover {
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+.dots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #d1d5db;
+}
+
+.activeDot {
+  background: #10b981;
+  width: 2rem;
+}
+
+.inactiveDot {
+  background: #d1d5db;
+}
+
+.imageSection {
+  position: relative;
+  width: 26rem;
+  height: 20rem;
+  margin: 0 auto;
+  order: 0;
+  border-radius: 2rem;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.tourImageContainer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 1s ease;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.tourImageIcon {
+  font-size: 4rem;
+  margin-bottom: 0.75rem;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+}
+
+.tourTitle {
+  color: white;
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 0.25rem;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.tourDescription {
+  color: rgba(255,255,255,0.9);
+  font-size: 0.875rem;
+  text-align: center;
+  padding: 0 1rem;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.overlayPattern {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1) 0%, transparent 50%),
+              radial-gradient(circle at 70% 70%, rgba(255,255,255,0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.customerAvatar {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+.ctaSection {
+  text-align: center;
+  margin-top: 4rem;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: linear-gradient(135deg, #10b981, #2563eb);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 2rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.ctaButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.5);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .mainContainer {
+    padding: 2rem 1rem;
+  }
+  .headerSection {
+    margin-bottom: 2rem;
+  }
+  .badge {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+  }
+  .mainTitle {
+    font-size: 2rem;
+  }
+  .subtitle {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+  .statsGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .statCard {
+    padding: 1.5rem 1rem;
+  }
+  .statIcon {
+    font-size: 2rem;
+  }
+  .statValue {
+    font-size: 2rem;
+  }
+  .statLabel {
+    font-size: 0.875rem;
+  }
+  .testimonialSection {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .testimonialsGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .testimonialCard {
+    height: 16rem;
+  }
+  .quoteIcon {
+    font-size: 1.5rem;
+  }
+  .userInfo {
+    gap: 0.75rem;
+  }
+  .avatar {
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.25rem;
+  }
+  .userName {
+    font-size: 1rem;
+  }
+  .userRole {
+    font-size: 0.875rem;
+  }
+  .stars {
+    justify-content: center;
+  }
+  .testimonialText {
+    font-size: 1rem;
+    text-align: center;
+  }
+  .navButton {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+  }
+  .customerAvatar {
+    width: 3rem;
+    height: 3rem;
+    font-size: 1rem;
+  }
+  .imageSection {
+    width: 18rem;
+    height: 16rem;
+    order: -1;
+  }
+  .tourImageIcon {
+    font-size: 3rem;
+  }
+  .tourTitle {
+    font-size: 1rem;
+  }
+  .tourDescription {
+    font-size: 0.75rem;
+  }
+  .ctaSection {
+    margin-top: 3rem;
+  }
+  .loadingContainer {
+    min-height: 200px;
+  }
+  .spinner {
+    width: 40px;
+    height: 40px;
+  }
+  .loadingText {
+    font-size: 1rem;
+  }
+  .noReviewsContainer {
+    padding: 2rem;
+    margin: 1rem auto;
+  }
+  .noReviewsIcon {
+    font-size: 3rem;
+  }
+  .noReviewsTitle {
+    font-size: 1.25rem;
+  }
+  .noReviewsText {
+    font-size: 0.875rem;
+  }
+}

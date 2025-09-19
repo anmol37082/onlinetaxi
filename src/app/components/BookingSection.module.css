@@ -1,0 +1,237 @@
+.bookingSection {
+  background: white;
+  border-radius: 24px;
+  margin: -50px auto 80px;
+  max-width: 1100px;
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.bookingContainer {
+  padding: 50px;
+}
+
+.bookingHeader {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.bookingHeader h2 {
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #FF4500;
+  margin-bottom: 12px;
+}
+
+.bookingHeader p {
+  color: #64748b;
+  font-size: 18px;
+  font-family: var(--font-inter), 'Inter', sans-serif;
+  font-weight: 400;
+}
+
+.bookingForm {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup label {
+  font-family: var(--font-inter), 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #374151;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.inputWrapper,
+.selectWrapper {
+  position: relative;
+}
+
+.formGroup input,
+.formGroup select {
+  width: 100%;
+  padding: 18px 50px 18px 20px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 16px;
+  font-family: var(--font-inter), 'Inter', sans-serif;
+  background: #f9fafb;
+  color: #1f2937;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.formGroup input:focus,
+.formGroup select:focus {
+  outline: none;
+  border-color: #667eea;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+  transform: translateY(-2px);
+}
+
+.formGroup input:disabled,
+.formGroup select:disabled {
+  background: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.inputWrapper i,
+.selectWrapper i {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  pointer-events: none;
+  transition: color 0.3s ease;
+}
+
+.inputWrapper i {
+  color: #6b7280;
+}
+
+.selectWrapper i {
+  color: #6b7280;
+}
+
+.fromIcon {
+  color: #10b981 !important;
+}
+
+.toIcon {
+  color: #ef4444 !important;
+}
+
+.formGroup:focus-within .inputWrapper i,
+.formGroup:focus-within .selectWrapper i {
+  color: #667eea;
+}
+
+.formSubmit {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.submitBtn {
+  background: #ffb938;
+  color: white;
+  border: none;
+  padding: 20px 50px;
+  border-radius: 16px;
+  font-family: var(--font-inter), 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 250px;
+  justify-content: center;
+}
+
+.submitBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 185, 56, 0.4);
+}
+
+.submitBtn:active {
+  transform: translateY(-2px);
+}
+
+.formInfo {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 30px;
+  padding-top: 25px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-inter), 'Inter', sans-serif;
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.infoItem i {
+  color: #10b981;
+  font-size: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .bookingContainer {
+    padding: 30px 25px;
+  }
+
+  .bookingHeader h2 {
+    font-size: 2rem;
+  }
+
+  .formRow {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .submitBtn {
+    width: 100%;
+    padding: 18px;
+  }
+
+  .formInfo {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .bookingSection {
+    margin: -40px 15px 60px;
+  }
+
+  .bookingContainer {
+    padding: 25px 20px;
+  }
+
+  .bookingHeader h2 {
+    font-size: 1.8rem;
+  }
+
+  .formGroup input,
+  .formGroup select {
+    padding: 16px 45px 16px 16px;
+    font-size: 15px;
+  }
+
+  .submitBtn {
+    font-size: 16px;
+    padding: 16px;
+  }
+}

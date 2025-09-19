@@ -1,0 +1,835 @@
+/* TripPlanner.module.css - Fully Responsive */
+.tripPlanner {
+  background: #fff3db;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 80px 0;
+}
+
+.tripPlanner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 50%, rgba(255, 140, 0, 0.03) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(255, 165, 0, 0.02) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.navDots {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 10;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.activeDot {
+  background: #1a1a1a;
+  transform: scale(1.2);
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  min-height: 70vh;
+}
+
+.leftContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.textContent {
+  max-width: 500px;
+}
+
+.subtitle {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff8c00, #ffa500);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.subtitle::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, #ff8c00, #ffa500);
+  border-radius: 2px;
+}
+
+.title {
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-weight: 800;
+  color: #1a1a1a;
+  line-height: 1.1;
+  margin: 30px 0 40px 0;
+  letter-spacing: -2px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, #ff8c00, #ffa500);
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 16px 32px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 
+    0 8px 25px rgba(255, 140, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.ctaButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.ctaButton:hover::before {
+  left: 100%;
+}
+
+.ctaButton:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 
+    0 12px 35px rgba(255, 140, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.buttonIcon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.ctaButton:hover .buttonIcon {
+  transform: translateX(4px);
+}
+
+.rightContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.illustrationWrapper {
+  position: relative;
+  width: 500px;
+  height: 400px;
+  transform: scale(0.9);
+}
+
+/* Cityscape */
+.cityscape {
+  position: absolute;
+  bottom: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.building {
+  background: linear-gradient(180deg, #4a90e2, #357abd);
+  border-radius: 4px 4px 0 0;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.building::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 60%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.1) 0px,
+    rgba(255, 255, 255, 0.1) 8px,
+    transparent 8px,
+    transparent 16px
+  );
+}
+
+.building1 { width: 40px; height: 80px; }
+.building2 { width: 35px; height: 120px; }
+.building3 { width: 45px; height: 100px; background: linear-gradient(180deg, #5cb3cc, #4a90e2); }
+.building4 { width: 38px; height: 140px; }
+.building5 { width: 42px; height: 90px; }
+
+/* Phone */
+.phone {
+  position: absolute;
+  top: 50px;
+  right: 80px;
+  width: 120px;
+  height: 220px;
+  background: #1a1a1a;
+  border-radius: 20px;
+  padding: 8px;
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  animation: phoneFloat 3s ease-in-out infinite;
+}
+
+.phoneScreen {
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 12px;
+  position: relative;
+}
+
+.phoneHeader {
+  text-align: center;
+  font-weight: bold;
+  font-size: 12px;
+  color: #1a1a1a;
+  margin-bottom: 15px;
+}
+
+.phoneContent {
+  position: relative;
+  height: 150px;
+}
+
+.mapIcon {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 8px;
+  height: 8px;
+  background: #ff8c00;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.3);
+}
+
+.routeLine {
+  position: absolute;
+  top: 30px;
+  left: 15px;
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, #ff8c00, transparent);
+  border-radius: 2px;
+}
+
+/* Taxi */
+.taxi {
+  position: absolute;
+  bottom: 140px;
+  left: 80px;
+  animation: taxiMove 4s ease-in-out infinite;
+}
+
+.taxiBody {
+  width: 120px;
+  height: 60px;
+  background: linear-gradient(135deg, #ffd700, #ffb347);
+  border-radius: 8px 8px 4px 4px;
+  position: relative;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.taxiRoof {
+  position: absolute;
+  top: -15px;
+  left: 25px;
+  width: 70px;
+  height: 20px;
+  background: linear-gradient(135deg, #ffb347, #ffa500);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.taxiSign {
+  font-size: 8px;
+  font-weight: bold;
+  color: #1a1a1a;
+}
+
+.taxiWindows {
+  position: absolute;
+  top: 8px;
+  left: 15px;
+  width: 90px;
+  height: 25px;
+  background: linear-gradient(135deg, #87ceeb, #b0e0e6);
+  border-radius: 4px;
+}
+
+.taxiDoor {
+  position: absolute;
+  top: 35px;
+  right: 15px;
+  width: 2px;
+  height: 15px;
+  background: #ff8c00;
+  border-radius: 1px;
+}
+
+.taxiWheels {
+  position: absolute;
+  bottom: -15px;
+  width: 100%;
+}
+
+.wheel {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background: #1a1a1a;
+  border-radius: 50%;
+  border: 3px solid #4a4a4a;
+  animation: wheelSpin 1s linear infinite;
+}
+
+.frontWheel { left: 15px; }
+.rearWheel { right: 15px; }
+
+/* Person */
+.person {
+  position: absolute;
+  bottom: 140px;
+  right: 120px;
+  animation: personWave 2s ease-in-out infinite;
+}
+
+.personHead {
+  width: 25px;
+  height: 25px;
+  background: #ffdbac;
+  border-radius: 50%;
+  margin-bottom: 5px;
+  position: relative;
+}
+
+.personHead::before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 15px;
+  background: #ff8c00;
+  border-radius: 50% 50% 0 0;
+}
+
+.personBody {
+  width: 20px;
+  height: 40px;
+  background: #ff8c00;
+  border-radius: 10px 10px 4px 4px;
+}
+
+.personArm {
+  position: absolute;
+  top: 30px;
+  right: -8px;
+  width: 15px;
+  height: 3px;
+  background: #ff8c00;
+  border-radius: 2px;
+  transform-origin: left center;
+  animation: armWave 2s ease-in-out infinite;
+}
+
+/* Trees */
+.tree {
+  position: absolute;
+  bottom: 120px;
+}
+
+.tree1 { left: 50px; }
+.tree2 { right: 50px; }
+
+.treeTrunk {
+  width: 8px;
+  height: 30px;
+  background: #8b4513;
+  border-radius: 4px;
+  margin: 0 auto 5px;
+}
+
+.treeLeaves {
+  width: 25px;
+  height: 25px;
+  background: #228b22;
+  border-radius: 50%;
+  position: relative;
+}
+
+.treeLeaves::before,
+.treeLeaves::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #32cd32;
+  border-radius: 50%;
+}
+
+.treeLeaves::before {
+  top: -8px;
+  left: -5px;
+}
+
+.treeLeaves::after {
+  top: -8px;
+  right: -5px;
+}
+
+/* Animations */
+@keyframes phoneFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes taxiMove {
+  0%, 100% { transform: translateX(0px); }
+  50% { transform: translateX(10px); }
+}
+
+@keyframes personWave {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes armWave {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(15deg); }
+}
+
+@keyframes wheelSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 
+      0 8px 25px rgba(37, 211, 102, 0.4),
+      0 0 20px rgba(37, 211, 102, 0.2),
+      0 0 0 0 rgba(37, 211, 102, 0.7);
+  }
+  70% {
+    box-shadow: 
+      0 8px 25px rgba(37, 211, 102, 0.4),
+      0 0 20px rgba(37, 211, 102, 0.2),
+      0 0 0 10px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 
+      0 8px 25px rgba(37, 211, 102, 0.4),
+      0 0 20px rgba(37, 211, 102, 0.2),
+      0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+/* Enhanced Responsive Design */
+
+/* Extra Large Screens */
+@media (min-width: 1400px) {
+  .container {
+    padding: 0 40px;
+  }
+  
+  .content {
+    gap: 80px;
+  }
+  
+  .illustrationWrapper {
+    transform: scale(1.0);
+    width: 550px;
+    height: 450px;
+  }
+  
+  .title {
+    font-size: 4.5rem;
+  }
+}
+
+/* Large Desktop */
+@media (max-width: 1399px) {
+  .illustrationWrapper {
+    transform: scale(0.85);
+  }
+  
+  .content {
+    gap: 50px;
+  }
+}
+
+/* Desktop to Tablet */
+@media (max-width: 1200px) {
+  .container {
+    padding: 0 30px;
+  }
+  
+  .content {
+    gap: 40px;
+  }
+  
+  .illustrationWrapper {
+    transform: scale(0.75);
+    width: 450px;
+    height: 350px;
+  }
+  
+  .title {
+    font-size: 3.5rem;
+    letter-spacing: -1.5px;
+  }
+}
+
+/* Large Tablet */
+@media (max-width: 1024px) {
+  .tripPlanner {
+    padding: 70px 0;
+  }
+  
+  .content {
+    gap: 35px;
+  }
+  
+  .illustrationWrapper {
+    transform: scale(0.7);
+    width: 400px;
+    height: 320px;
+  }
+  
+  .title {
+    font-size: 3rem;
+    margin: 25px 0 35px 0;
+  }
+  
+  .subtitle {
+    font-size: 16px;
+    margin-bottom: 18px;
+  }
+  
+  .ctaButton {
+    font-size: 17px;
+    padding: 15px 30px;
+  }
+}
+
+/* Tablet Portrait / Mobile Landscape */
+@media (max-width: 768px) {
+  .tripPlanner {
+    padding: 60px 0;
+    min-height: auto;
+  }
+  
+  .container {
+    padding: 0 25px;
+  }
+  
+  .content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    text-align: center;
+  }
+  
+  .leftContent {
+    order: 2;
+    align-items: center;
+  }
+  
+  .rightContent {
+    order: 1;
+  }
+  
+  .textContent {
+    max-width: 600px;
+  }
+  
+  .illustrationWrapper {
+    transform: scale(0.65);
+    width: 350px;
+    height: 280px;
+  }
+  
+  .title {
+    font-size: 2.75rem;
+    line-height: 1.15;
+    margin: 20px 0 30px 0;
+  }
+  
+  .subtitle {
+    font-size: 15px;
+    margin-bottom: 16px;
+  }
+  
+  .subtitle::after {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+  }
+  
+  .navDots {
+    position: relative;
+    top: 0;
+    margin-bottom: 25px;
+    transform: none;
+    left: auto;
+    justify-content: center;
+  }
+  
+  .dot {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* Mobile Portrait */
+@media (max-width: 480px) {
+  .tripPlanner {
+    padding: 40px 0;
+  }
+  
+  .container {
+    padding: 0 15px;
+  }
+  
+  .content {
+    gap: 25px;
+  }
+  
+  .title {
+    font-size: 2.25rem;
+    line-height: 1.2;
+    margin: 18px 0 25px 0;
+    letter-spacing: -1px;
+  }
+  
+  .subtitle {
+    font-size: 14px;
+    margin-bottom: 14px;
+  }
+  
+  .subtitle::after {
+    width: 40px;
+  }
+  
+  .illustrationWrapper {
+    transform: scale(0.55);
+    width: 300px;
+    height: 240px;
+  }
+  
+  .ctaButton {
+    font-size: 16px;
+    padding: 14px 28px;
+    gap: 10px;
+  }
+  
+  .buttonIcon {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .navDots {
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  /* Adjust illustration elements for mobile */
+  .phone {
+    width: 100px;
+    height: 180px;
+    top: 40px;
+    right: 70px;
+  }
+  
+  .phoneHeader {
+    font-size: 10px;
+    margin-bottom: 12px;
+  }
+  
+  .taxi {
+    bottom: 120px;
+    left: 70px;
+  }
+  
+  .taxiBody {
+    width: 100px;
+    height: 50px;
+  }
+  
+  .taxiRoof {
+    left: 20px;
+    width: 60px;
+    height: 18px;
+    top: -12px;
+  }
+  
+  .taxiSign {
+    font-size: 7px;
+  }
+  
+  .taxiWindows {
+    width: 75px;
+    height: 20px;
+    top: 6px;
+    left: 12px;
+  }
+  
+  .wheel {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .person {
+    bottom: 120px;
+    right: 100px;
+  }
+  
+  .personHead {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .personBody {
+    width: 16px;
+    height: 32px;
+  }
+  
+  .building1 { width: 32px; height: 65px; }
+  .building2 { width: 28px; height: 100px; }
+  .building3 { width: 36px; height: 80px; }
+  .building4 { width: 30px; height: 115px; }
+  .building5 { width: 34px; height: 75px; }
+}
+
+/* Small Mobile */
+@media (max-width: 375px) {
+  .title {
+    font-size: 2rem;
+    line-height: 1.25;
+  }
+  
+  .subtitle {
+    font-size: 13px;
+  }
+  
+  .illustrationWrapper {
+    transform: scale(0.5);
+    width: 250px;
+    height: 200px;
+  }
+  
+  .ctaButton {
+    font-size: 15px;
+    padding: 13px 26px;
+  }
+  
+  .container {
+    padding: 0 12px;
+  }
+}
+
+/* Ultra Small Mobile */
+@media (max-width: 320px) {
+  .title {
+    font-size: 1.8rem;
+    line-height: 1.3;
+    margin: 16px 0 22px 0;
+  }
+  
+  .subtitle {
+    font-size: 12px;
+    margin-bottom: 12px;
+  }
+  
+  .subtitle::after {
+    width: 35px;
+  }
+  
+  .illustrationWrapper {
+    transform: scale(0.45);
+    width: 220px;
+    height: 180px;
+  }
+  
+  .ctaButton {
+    font-size: 14px;
+    padding: 12px 24px;
+    gap: 8px;
+  }
+  
+  .buttonIcon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .navDots {
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  
+  .dot {
+    width: 8px;
+    height: 8px;
+  }
+}

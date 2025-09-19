@@ -1,0 +1,767 @@
+/* Modern Orange Transparent Theme - Tour Detail Page */
+
+/* Global Styles with Orange Background */
+.tourSection {
+  min-height: 100vh;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(255, 107, 53, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 80% 60%, rgba(255, 140, 66, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 40% 90%, rgba(255, 165, 0, 0.1) 0%, transparent 60%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(254, 247, 230, 0.85) 100%);
+  padding: 2rem 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Floating particles animation */
+.tourSection::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 10% 10%, rgba(255, 107, 53, 0.03) 2px, transparent 2px),
+    radial-gradient(circle at 90% 30%, rgba(255, 140, 66, 0.04) 1px, transparent 1px),
+    radial-gradient(circle at 50% 80%, rgba(255, 165, 0, 0.02) 3px, transparent 3px);
+  background-size: 100px 100px, 150px 150px, 200px 200px;
+  animation: floatParticles 20s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes floatParticles {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+/* Main Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 30px;
+  box-shadow:
+    0 25px 80px rgba(255, 107, 53, 0.1),
+    0 15px 60px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Unique floating elements */
+.container::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(45deg, rgba(255, 107, 53, 0.1), rgba(255, 140, 66, 0.15));
+  border-radius: 50%;
+  animation: floatElement 8s ease-in-out infinite;
+  z-index: -1;
+}
+
+.container::after {
+  content: '';
+  position: absolute;
+  bottom: -30px;
+  left: -30px;
+  width: 150px;
+  height: 150px;
+  background: linear-gradient(-45deg, rgba(255, 165, 0, 0.08), rgba(255, 107, 53, 0.12));
+  border-radius: 50%;
+  animation: floatElement 6s ease-in-out infinite reverse;
+  z-index: -1;
+}
+
+@keyframes floatElement {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(180deg); }
+}
+
+/* Enhanced Back Link */
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem 2rem;
+  margin: 2rem 0 1rem;
+  background: #ffb938;
+  color: white;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow:
+    0 10px 30px rgba(255, 107, 53, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.backLink::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s ease;
+}
+
+.backLink:hover {
+  background: rgba(255, 140, 66, 0.95);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 
+    0 15px 40px rgba(255, 107, 53, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.backLink:hover::before {
+  left: 100%;
+}
+
+/* Modern Tour Title */
+.title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, 
+    rgba(255, 107, 53, 0.9) 0%, 
+    rgba(255, 140, 66, 0.8) 30%, 
+    rgba(255, 165, 0, 0.9) 70%, 
+    rgba(255, 179, 71, 0.8) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  margin: 2rem 0;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  position: relative;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 6px;
+  background: linear-gradient(90deg, 
+    rgba(255, 107, 53, 0.7), 
+    rgba(255, 140, 66, 0.5), 
+    rgba(255, 107, 53, 0.7)
+  );
+  border-radius: 3px;
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.7; transform: translateX(-50%) scaleX(1); }
+  50% { opacity: 1; transform: translateX(-50%) scaleX(1.1); }
+}
+
+/* Enhanced Image Container */
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  border-radius: 25px;
+  overflow: hidden;
+  margin: 2rem 0;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 25px 60px rgba(255, 107, 53, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.imageContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 107, 53, 0.1) 0%,
+    transparent 30%,
+    transparent 70%,
+    rgba(255, 140, 66, 0.1) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+  border-radius: 23px;
+}
+
+.imageContainer:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 35px 80px rgba(255, 107, 53, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 107, 53, 0.4);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: saturate(1.1) brightness(1.05);
+}
+
+.imageContainer:hover .image {
+  transform: scale(1.05);
+}
+
+/* Enhanced Description */
+.description {
+  font-size: 1.4rem;
+  line-height: 1.8;
+  color: rgba(55, 65, 81, 0.9);
+  margin: 2rem 0;
+  text-align: center;
+  padding: 2.5rem;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  font-weight: 500;
+  font-style: italic;
+  position: relative;
+  box-shadow:
+    0 15px 40px rgba(255, 107, 53, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.description::before,
+.description::after {
+  content: '"';
+  position: absolute;
+  font-size: 4rem;
+  color: rgba(255, 107, 53, 0.3);
+  font-family: serif;
+  font-weight: bold;
+}
+
+.description::before {
+  top: 10px;
+  left: 20px;
+}
+
+.description::after {
+  bottom: -10px;
+  right: 20px;
+  transform: rotate(180deg);
+}
+
+/* Tour Details Card */
+.tourDetailsCard {
+  margin: 2.5rem 0;
+  background: rgba(255, 255, 255, 0.25);
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow:
+    0 20px 50px rgba(255, 107, 53, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tourDetailsCard:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow:
+    0 25px 60px rgba(255, 107, 53, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  border-color: rgba(255, 107, 53, 0.3);
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.detailsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 0;
+}
+
+.detailItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.08);
+}
+
+.detailItem:hover {
+  background: rgba(255, 247, 237, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(255, 107, 53, 0.12);
+  border-color: rgba(255, 107, 53, 0.3);
+}
+
+.detailIcon {
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.8), rgba(255, 140, 66, 0.9));
+  border-radius: 50%;
+  color: white;
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+  animation: gentle-pulse 4s ease-in-out infinite;
+}
+
+.detailItem strong {
+  color: rgba(255, 107, 53, 0.9);
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+.detailItem p {
+  margin: 0;
+  color: rgba(55, 65, 81, 0.9);
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+/* Floating Info Sections */
+.summarySection, .travelTipsSection, .itinerarySection {
+  margin: 3rem 0;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 3rem;
+  border-radius: 25px;
+  box-shadow:
+    0 20px 60px rgba(255, 107, 53, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated top border */
+.summarySection::before, 
+.travelTipsSection::before, 
+.itinerarySection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, 
+    rgba(255, 107, 53, 0.7), 
+    rgba(255, 140, 66, 0.5), 
+    rgba(255, 165, 0, 0.7)
+  );
+  background-size: 200% 100%;
+  animation: slideGradient 4s ease infinite;
+  border-radius: 25px 25px 0 0;
+}
+
+@keyframes slideGradient {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.summarySection:hover, 
+.travelTipsSection:hover, 
+.itinerarySection:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 
+    0 30px 80px rgba(255, 107, 53, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  border-color: rgba(255, 107, 53, 0.3);
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: rgba(31, 41, 55, 0.9);
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.sectionTitle::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, 
+    rgba(255, 107, 53, 0.8), 
+    rgba(255, 140, 66, 0.6)
+  );
+  border-radius: 2px;
+  box-shadow: 0 2px 10px rgba(255, 107, 53, 0.3);
+}
+
+.sectionContent {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: rgba(75, 85, 99, 0.9);
+  text-align: justify;
+  font-weight: 400;
+}
+
+/* Enhanced Travel Tips List */
+.travelTipsList {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+}
+
+.travelTipsList li {
+  padding: 1.3rem 1.5rem 1.3rem 3rem;
+  margin: 1rem 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-left: 4px solid rgba(255, 107, 53, 0.7);
+  color: rgba(55, 65, 81, 0.9);
+  font-weight: 500;
+  font-size: 1.05rem;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.08);
+}
+
+.travelTipsList li::before {
+  content: '💡';
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  animation: twinkle 2s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.7; transform: translateY(-50%) scale(1); }
+  50% { opacity: 1; transform: translateY(-50%) scale(1.1); }
+}
+
+.travelTipsList li:hover {
+  background: rgba(255, 247, 237, 0.4);
+  transform: translateX(12px) translateY(-2px);
+  box-shadow: 0 12px 35px rgba(255, 107, 53, 0.15);
+  border-left-color: rgba(255, 140, 66, 0.8);
+}
+
+/* Enhanced Day Sections */
+.daySection {
+  margin: 2rem 0;
+  padding: 2.5rem;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  box-shadow:
+    0 15px 40px rgba(255, 107, 53, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.daySection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    rgba(255, 107, 53, 0.8), 
+    rgba(255, 140, 66, 0.6), 
+    rgba(255, 165, 0, 0.8)
+  );
+  background-size: 200% 100%;
+  animation: slideGradient 4s ease infinite;
+  border-radius: 20px 20px 0 0;
+}
+
+.daySection:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 
+    0 20px 50px rgba(255, 107, 53, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  border-color: rgba(255, 107, 53, 0.3);
+  background: rgba(255, 247, 237, 0.4);
+}
+
+.dayTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgba(255, 107, 53, 0.9);
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-left: 2.5rem;
+}
+
+.dayTitle::before {
+  content: '📅';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.8rem;
+  animation: bounce 3s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(-50%); }
+  50% { transform: translateY(-60%); }
+}
+
+.dayActivities {
+  display: grid;
+  gap: 1rem;
+}
+
+.activity {
+  padding: 1rem 1.5rem;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgba(55, 65, 81, 0.9);
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.06);
+}
+
+.activity:hover {
+  background: rgba(255, 247, 237, 0.5);
+  transform: translateX(8px);
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.12);
+  border-color: rgba(255, 107, 53, 0.3);
+}
+
+.activityIcon {
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  animation: gentle-pulse 4s ease-in-out infinite;
+}
+
+@keyframes gentle-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.activity strong {
+  color: rgba(255, 107, 53, 0.9);
+  font-weight: 700;
+  margin-right: 0.5rem;
+}
+
+/* Enhanced Closing Paragraph */
+.closingParagraph {
+  font-size: 1.3rem;
+  line-height: 1.8;
+  color: rgba(55, 65, 81, 0.9);
+  margin: 3rem 0 2rem;
+  text-align: center;
+  padding: 3rem;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  font-weight: 500;
+  font-style: italic;
+  position: relative;
+  box-shadow:
+    0 20px 50px rgba(255, 107, 53, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.closingParagraph::before {
+  content: '🌟';
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+/* Enhanced Loading and Error States */
+.loadingState, .errorState {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 25px;
+  box-shadow:
+    0 20px 60px rgba(255, 107, 53, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  margin: 2rem 0;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.errorState {
+  border-color: rgba(239, 68, 68, 0.3);
+  background: rgba(254, 242, 242, 0.3);
+}
+
+/* Mobile Responsive Enhancements */
+@media (max-width: 768px) {
+  .tourSection {
+    padding: 1rem 0;
+  }
+  
+  .container {
+    margin: 0 1rem;
+    padding: 0 1rem;
+    border-radius: 20px;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+    margin: 1.5rem 0;
+  }
+  
+  .imageContainer {
+    height: 300px;
+    margin-bottom: 1.5rem;
+    border-radius: 20px;
+  }
+  
+  .description {
+    font-size: 1.2rem;
+    padding: 2rem;
+  }
+  
+  .summarySection,
+  .travelTipsSection,
+  .itinerarySection {
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .sectionTitle {
+    font-size: 1.6rem;
+  }
+  
+  .sectionContent {
+    font-size: 1rem;
+  }
+  
+  .daySection {
+    padding: 2rem;
+  }
+  
+  .dayTitle {
+    font-size: 1.3rem;
+  }
+  
+  .activity {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .backLink {
+    margin: 1.5rem 0 1rem;
+    padding: 0.9rem 1.8rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    margin: 0 0.5rem;
+    border-radius: 16px;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+  
+  .summarySection,
+  .travelTipsSection,
+  .itinerarySection {
+    padding: 1.5rem;
+  }
+  
+  .daySection {
+    padding: 1.5rem;
+  }
+  
+  .sectionTitle {
+    font-size: 1.4rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .imageContainer {
+    height: 250px;
+  }
+}
+
+/* Enhanced Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.container > * {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.daySection:nth-child(odd) {
+  animation-delay: 0.1s;
+}
+
+.daySection:nth-child(even) {
+  animation-delay: 0.2s;
+}
+
+/* Smooth scrolling enhancement */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Focus states for accessibility */
+.backLink:focus,
+.daySection:focus,
+.activity:focus {
+  outline: 2px solid rgba(255, 107, 53, 0.5);
+  outline-offset: 2px;
+}

@@ -1,0 +1,760 @@
+/* EnhancedBanner.module.css - Fully Responsive */
+
+.bannerSection {
+  min-height: 100vh;
+  background: #fff3db;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 60px 0;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 70%, rgba(255, 149, 0, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.decorativeElements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.floatingCircle {
+  position: absolute;
+  top: 15%;
+  right: 10%;
+  width: 150px;
+  height: 150px;
+  border: 3px solid rgba(255, 149, 0, 0.3);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite;
+}
+
+.geometricShape {
+  position: absolute;
+  bottom: 25%;
+  left: 5%;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(45deg, rgba(255, 149, 0, 0.2), rgba(255, 123, 0, 0.1));
+  border-radius: 20px;
+  transform: rotate(45deg);
+  animation: rotate 10s linear infinite;
+}
+
+.gradientBlob {
+  position: absolute;
+  top: 40%;
+  left: -5%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255, 149, 0, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(40px);
+  animation: pulse 6s ease-in-out infinite;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.topContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 50px;
+  gap: 40px;
+}
+
+.brandSection {
+  flex: 1;
+}
+
+.brandTag {
+  display: inline-block;
+  background: rgba(255, 149, 0, 0.1);
+  color: #ff9500;
+  padding: 8px 20px;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  border: 2px solid rgba(255, 149, 0, 0.2);
+}
+
+.mainHeading {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #2d3748;
+  line-height: 1.1;
+  margin: 0 0 20px 0;
+  max-width: 800px;
+}
+
+.highlight {
+  background: linear-gradient(135deg, #ff9500, #ff7b00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.journeyText {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #718096;
+  font-style: italic;
+  margin-bottom: 20px;
+  min-height: 2em;
+  transition: all 0.5s ease;
+  opacity: 1;
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: #4a5568;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0;
+}
+
+.statsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 149, 0, 0.1);
+  box-shadow: 0 8px 25px rgba(255, 149, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.stat:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(255, 149, 0, 0.2);
+}
+
+.statIcon {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #ff9500, #ff7b00);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.statContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.statNumber {
+  font-size: 24px;
+  font-weight: 800;
+  color: #2d3748;
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 12px;
+  color: #718096;
+  font-weight: 500;
+}
+
+.featuresSection {
+  margin-bottom: 50px;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.featureCard {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(15px);
+  padding: 25px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 149, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(255, 149, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.featureCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(255, 149, 0, 0.2);
+}
+
+.featureIcon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #ff9500, #ff7b00);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.featureTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 8px;
+}
+
+.featureDescription {
+  font-size: 0.95rem;
+  color: #718096;
+  line-height: 1.5;
+}
+
+.ctaSection {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.ctaText {
+  font-size: 1.25rem;
+  color: #4a5568;
+  margin-bottom: 25px;
+  font-weight: 500;
+}
+
+.phoneNumber {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #ff9500;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.ctaSubtext {
+  font-size: 1rem;
+  color: #718096;
+}
+
+.scrollIndicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.scrollDot {
+  width: 6px;
+  height: 30px;
+  background: linear-gradient(180deg, #ff9500, transparent);
+  border-radius: 3px;
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes rotate {
+  0% { transform: rotate(45deg); }
+  100% { transform: rotate(405deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.1); }
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50% { transform: translateY(10px); opacity: 1; }
+}
+
+/* Enhanced Responsive Design */
+
+/* Extra Large Screens */
+@media (min-width: 1400px) {
+  .container {
+    padding: 0 40px;
+  }
+  
+  .topContent {
+    gap: 60px;
+  }
+  
+  .featuresGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Large Desktop */
+@media (max-width: 1399px) {
+  .mainHeading {
+    font-size: 3.25rem;
+  }
+  
+  .container {
+    padding: 0 30px;
+  }
+}
+
+/* Desktop to Tablet Transition */
+@media (max-width: 1200px) {
+  .topContent {
+    flex-direction: column;
+    gap: 40px;
+    text-align: center;
+    align-items: center;
+  }
+  
+  .brandSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .statsSection {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+    max-width: 800px;
+  }
+  
+  .mainHeading {
+    font-size: 3rem;
+    text-align: center;
+  }
+  
+  .subtitle {
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .journeyText {
+    text-align: center;
+  }
+  
+  .featuresGrid {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+  .bannerSection {
+    padding: 50px 0;
+  }
+  
+  .container {
+    padding: 0 25px;
+  }
+  
+  .mainHeading {
+    font-size: 2.75rem;
+  }
+  
+  .journeyText {
+    font-size: 1.4rem;
+  }
+  
+  .topContent {
+    margin-bottom: 40px;
+    gap: 35px;
+  }
+  
+  .featuresSection {
+    margin-bottom: 40px;
+  }
+  
+  .statsSection {
+    gap: 18px;
+  }
+  
+  .stat {
+    min-width: 160px;
+    padding: 18px;
+  }
+  
+  .floatingCircle {
+    width: 120px;
+    height: 120px;
+    right: 5%;
+  }
+  
+  .geometricShape {
+    width: 70px;
+    height: 70px;
+    left: 3%;
+  }
+  
+  .gradientBlob {
+    width: 180px;
+    height: 180px;
+  }
+}
+
+/* Mobile Landscape / Small Tablet */
+@media (max-width: 768px) {
+  .bannerSection {
+    padding: 40px 0;
+    min-height: auto;
+  }
+  
+  .container {
+    padding: 0 20px;
+  }
+  
+  .mainHeading {
+    font-size: 2.25rem;
+    line-height: 1.2;
+  }
+  
+  .journeyText {
+    font-size: 1.25rem;
+    margin-bottom: 16px;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  .topContent {
+    gap: 30px;
+    margin-bottom: 35px;
+  }
+  
+  .brandTag {
+    font-size: 13px;
+    padding: 7px 18px;
+    margin-bottom: 18px;
+  }
+  
+  .featuresGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 500px;
+  }
+  
+  .featureCard {
+    padding: 22px;
+    text-align: center;
+  }
+  
+  .featureIcon {
+    margin: 0 auto 15px;
+    width: 55px;
+    height: 55px;
+  }
+  
+  .featureTitle {
+    font-size: 1.15rem;
+  }
+  
+  .featureDescription {
+    font-size: 0.9rem;
+  }
+  
+  .statsSection {
+    gap: 15px;
+    max-width: 100%;
+  }
+  
+  .stat {
+    padding: 16px;
+    min-width: 140px;
+    flex: 1;
+    max-width: 180px;
+  }
+  
+  .statIcon {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .statNumber {
+    font-size: 22px;
+  }
+  
+  .statLabel {
+    font-size: 11px;
+  }
+  
+  .floatingCircle {
+    width: 100px;
+    height: 100px;
+    top: 10%;
+    right: 8%;
+  }
+  
+  .geometricShape {
+    width: 60px;
+    height: 60px;
+    bottom: 20%;
+    left: 8%;
+  }
+  
+  .gradientBlob {
+    width: 150px;
+    height: 150px;
+    top: 35%;
+    left: -8%;
+  }
+  
+  .ctaText {
+    font-size: 1.125rem;
+  }
+  
+  .phoneNumber {
+    font-size: 1.8rem;
+  }
+  
+  .ctaSubtext {
+    font-size: 0.9rem;
+  }
+  
+  .scrollIndicator {
+    bottom: 20px;
+  }
+}
+
+/* Mobile Portrait */
+@media (max-width: 480px) {
+  .bannerSection {
+    padding: 30px 0;
+  }
+  
+  .container {
+    padding: 0 15px;
+  }
+  
+  .mainHeading {
+    font-size: 1.95rem;
+    line-height: 1.25;
+    margin-bottom: 16px;
+  }
+  
+  .journeyText {
+    font-size: 1.125rem;
+    margin-bottom: 14px;
+    min-height: 1.5em;
+  }
+  
+  .subtitle {
+    font-size: 0.95rem;
+    max-width: 100%;
+  }
+  
+  .topContent {
+    gap: 25px;
+    margin-bottom: 30px;
+  }
+  
+  .brandTag {
+    font-size: 12px;
+    padding: 6px 16px;
+    margin-bottom: 16px;
+  }
+  
+  .statsSection {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  
+  .stat {
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
+    padding: 14px;
+  }
+  
+  .statIcon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .statNumber {
+    font-size: 20px;
+  }
+  
+  .statLabel {
+    font-size: 10px;
+  }
+  
+  .featuresGrid {
+    max-width: 100%;
+  }
+  
+  .featureCard {
+    padding: 20px 18px;
+  }
+  
+  .featureIcon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 12px;
+  }
+  
+  .featureTitle {
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+  }
+  
+  .featureDescription {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+  
+  .floatingCircle {
+    width: 80px;
+    height: 80px;
+    border-width: 2px;
+    top: 8%;
+    right: 10%;
+  }
+  
+  .geometricShape {
+    width: 50px;
+    height: 50px;
+    bottom: 18%;
+    left: 10%;
+  }
+  
+  .gradientBlob {
+    width: 120px;
+    height: 120px;
+    top: 30%;
+    left: -10%;
+  }
+  
+  .ctaText {
+    font-size: 1.05rem;
+  }
+  
+  .phoneNumber {
+    font-size: 1.65rem;
+    letter-spacing: 0.5px;
+  }
+  
+  .ctaSubtext {
+    font-size: 0.85rem;
+  }
+  
+  .scrollIndicator {
+    bottom: 15px;
+  }
+  
+  .scrollDot {
+    width: 5px;
+    height: 25px;
+  }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 375px) {
+  .container {
+    padding: 0 12px;
+  }
+  
+  .mainHeading {
+    font-size: 1.8rem;
+  }
+  
+  .journeyText {
+    font-size: 1rem;
+  }
+  
+  .subtitle {
+    font-size: 0.9rem;
+  }
+  
+  .featureCard {
+    padding: 18px 15px;
+  }
+  
+  .stat {
+    padding: 12px;
+  }
+  
+  .phoneNumber {
+    font-size: 1.5rem;
+  }
+}
+
+/* Ultra Small Screens */
+@media (max-width: 320px) {
+  .mainHeading {
+    font-size: 1.65rem;
+    line-height: 1.3;
+  }
+  
+  .journeyText {
+    font-size: 0.95rem;
+  }
+  
+  .subtitle {
+    font-size: 0.85rem;
+  }
+  
+  .brandTag {
+    font-size: 11px;
+    padding: 5px 14px;
+  }
+  
+  .featureCard {
+    padding: 16px 12px;
+  }
+  
+  .featureIcon {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .featureTitle {
+    font-size: 1rem;
+  }
+  
+  .featureDescription {
+    font-size: 0.8rem;
+  }
+}
