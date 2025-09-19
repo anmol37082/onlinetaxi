@@ -10,7 +10,7 @@
 
 ## Plan
 1. ✅ Remove the invalid `html { scroll-behavior: smooth; }` rule from `src/app/tours/[slug]/tours.module.css` since it's already present in `globals.css`.
-2. Verify the build passes after removal.
+2. ✅ Verify the build passes after removal.
 
 ## Followup Steps
 - Run `npm run build` to confirm the error is resolved.

@@ -732,9 +732,7 @@
 }
 
 /* Smooth scrolling enhancement */
-html {
-  scroll-behavior: smooth;
-}
+/* Removed invalid html selector to fix CSS module syntax error */
 
 /* Focus states for accessibility */
 .viewAllBtn:focus,
