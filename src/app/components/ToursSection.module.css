@@ -174,8 +174,8 @@
 }
 
 /* Swiper Customizations */
-:global(.swiper-button-next),
-:global(.swiper-button-prev) {
+.toursSection :global(.swiper-button-next),
+.toursSection :global(.swiper-button-prev) {
   color: #f97316 !important;
   background: white;
   border-radius: 50%;
@@ -185,18 +185,18 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-:global(.swiper-button-next:after),
-:global(.swiper-button-prev:after) {
+.toursSection :global(.swiper-button-next:after),
+.toursSection :global(.swiper-button-prev:after) {
   font-size: 18px !important;
   font-weight: 700;
 }
 
-:global(.swiper-pagination-bullet) {
+.toursSection :global(.swiper-pagination-bullet) {
   background: #cbd5e1 !important;
   opacity: 1 !important;
 }
 
-:global(.swiper-pagination-bullet-active) {
+.toursSection :global(.swiper-pagination-bullet-active) {
   background: #f97316 !important;
 }
 
