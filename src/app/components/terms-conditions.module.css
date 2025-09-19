@@ -560,7 +560,7 @@
 }
 
 /* Smooth scrolling enhancement */
-html {
+:global(html) {
   scroll-behavior: smooth;
 }
 
