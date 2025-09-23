@@ -60,7 +60,6 @@ BookingSchema.pre('save', function(next) {
 // Indexes for better query performance
 BookingSchema.index({ userId: 1, createdAt: -1 });
 BookingSchema.index({ status: 1 });
-BookingSchema.index({ bookingReference: 1 });
 BookingSchema.index({ travelDate: 1 });
 
 const Booking = mongoose.models.Booking || mongoose.model("Booking", BookingSchema);
