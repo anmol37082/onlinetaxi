@@ -1,50 +1,133 @@
-export default function AdminPanel() {
+"use client";
+import { useState } from "react";
+import styles from './AdminPanel.module.css';
+import ChangePasswordModal from '../components/ChangePasswordModal';
+import AdminAuthWrapper from '../components/AdminAuthWrapper';
+
+function AdminPanelContent() {
+  const [showChangePassword, setShowChangePassword] = useState(false);
+  const [adminInfo, setAdminInfo] = useState(null);
+
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/admin/logout', {
+        method: 'POST',
+        credentials: 'include'
+      });
+      window.location.href = '/admin/login';
+    } catch (error) {
+      console.error('Logout error:', error);
+      window.location.href = '/admin/login';
+    }
+  };
+
+  const handleChangePasswordSuccess = () => {
+    console.log('Password changed successfully');
+  };
+
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Admin Panel</h1>
+    <div className={styles.container}>
+      <div className={styles.heroBgPattern}></div>
+      <div className={styles.wrapper}>
+        {/* Admin Header */}
+        <div className={styles.adminHeader}>
+          <div className={styles.adminInfo}>
+            <h1 className={styles.title}>Admin Dashboard</h1>
+            {adminInfo && (
+              <p className={styles.welcomeMessage}>Welcome, {adminInfo.name}</p>
+            )}
+          </div>
+          <div className={styles.adminActions}>
+            <button
+              className={`${styles.actionButton} ${styles.changePasswordButton}`}
+              onClick={() => setShowChangePassword(true)}
+            >
+              Change Password
+            </button>
+            <button
+              className={`${styles.actionButton} ${styles.logoutButton}`}
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
+          </div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className={styles.grid}>
           {/* Dashboard Cards */}
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">Bookings</h2>
-            <p className="text-gray-600">Manage taxi bookings</p>
-            <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+          <div className={styles.card}>
+            <h2 className={styles.cardTitle}>Bookings</h2>
+            <p className={styles.cardDescription}>Manage and track all taxi bookings efficiently</p>
+            <a href="/admin/bookings" className={`${styles.cardButton} ${styles.bookingsButton}`}>
               View Bookings
-            </button>
+            </a>
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">Users</h2>
-            <p className="text-gray-600">Manage user accounts</p>
-            <button className="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+          <div className={styles.card}>
+            <h2 className={styles.cardTitle}>👥 Users</h2>
+            <p className={styles.cardDescription}>Manage user accounts and permissions</p>
+            <a href="/admin/users" className={`${styles.cardButton} ${styles.usersButton}`}>
               View Users
-            </button>
+            </a>
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">Routes</h2>
-            <p className="text-gray-600">Manage available routes</p>
-            <button className="mt-4 bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">
+          <div className={styles.card}>
+            <h2 className={styles.cardTitle}>🗺️ Top Routes</h2>
+            <p className={styles.cardDescription}>Monitor and manage popular travel routes</p>
+            <a href="/admin/toproutes" className={`${styles.cardButton} ${styles.routesButton}`}>
               View Routes
-            </button>
+            </a>
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">Contacts</h2>
-            <p className="text-gray-600">View contact form submissions</p>
-            <a href="/admin/contacts" className="mt-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 inline-block">
+          <div className={styles.card}>
+            <h2 className={styles.cardTitle}>🎯 Tours</h2>
+            <p className={styles.cardDescription}>Create and manage tour packages</p>
+            <a href="/admin/tours" className={`${styles.cardButton} ${styles.toursButton}`}>
+              View Tours
+            </a>
+          </div>
+
+          <div className={styles.card}>
+            <h2 className={styles.cardTitle}>⭐ Reviews</h2>
+            <p className={styles.cardDescription}>Monitor customer feedback and ratings</p>
+            <a href="/admin/reviews" className={`${styles.cardButton} ${styles.reviewsButton}`}>
+              View Reviews
+            </a>
+          </div>
+
+          <div className={styles.card}>
+            <h2 className={styles.cardTitle}>📞 Contacts</h2>
+            <p className={styles.cardDescription}>View and respond to contact inquiries</p>
+            <a href="/admin/contacts" className={`${styles.cardButton} ${styles.contactsButton}`}>
               View Contacts
             </a>
           </div>
         </div>
 
-        {/* Placeholder for future admin features */}
-        <div className="mt-8 bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">Analytics</h2>
-          <p className="text-gray-600">Coming soon: View booking analytics and reports</p>
+        {/* Analytics Section */}
+        <div className={styles.analyticsSection}>
+          <h2 className={styles.analyticsTitle}>📊 Analytics Dashboard</h2>
+          <p className={styles.analyticsDescription}>
+            Comprehensive analytics and reporting features coming soon. Track booking trends,
+            revenue insights, and customer behavior patterns all in one place.
+          </p>
         </div>
       </div>
+
+      {/* Change Password Modal */}
+      <ChangePasswordModal
+        isOpen={showChangePassword}
+        onClose={() => setShowChangePassword(false)}
+        onSuccess={handleChangePasswordSuccess}
+      />
     </div>
-  )
+  );
+}
+
+export default function AdminPanel() {
+  return (
+    <AdminAuthWrapper>
+      <AdminPanelContent />
+    </AdminAuthWrapper>
+  );
 }

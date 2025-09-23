@@ -34,6 +34,12 @@ const TopRouteSchema = new mongoose.Schema(
     attractions: [{ type: String }],
     bookingHeading: { type: String, default: "" },
     bookingParagraph: { type: String, default: "" },
+    carOptions: [{
+      name: { type: String, required: true },
+      luggage: { type: String, required: true },
+      price: { type: Number, required: true },
+      seats: { type: Number, required: true }
+    }],
   },
   { timestamps: true }
 );

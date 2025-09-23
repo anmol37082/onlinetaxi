@@ -741,3 +741,159 @@
   outline: 2px solid rgba(255, 107, 53, 0.5);
   outline-offset: 2px;
 }
+
+.carOptionsSection {
+  margin: 20px 0;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 165, 0, 0.3);
+  box-shadow: 0 8px 32px rgba(255, 165, 0, 0.1);
+}
+
+.carOptionsTitle {
+  color: #ff8c00;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(255, 140, 0, 0.3);
+}
+
+.tableContainer {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(255, 165, 0, 0.15);
+  border: 2px solid rgba(255, 165, 0, 0.2);
+}
+
+.carOptionsTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Arial', sans-serif;
+}
+
+.carOptionsTable thead {
+  background: linear-gradient(135deg, #ff8c00, #ffa500);
+  color: white;
+}
+
+.carOptionsTable th {
+  padding: 15px 12px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.carOptionsTable th:last-child {
+  border-right: none;
+}
+
+.carOptionRow {
+  background: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(255, 165, 0, 0.1);
+}
+
+.carOptionRow:hover {
+  background: rgba(255, 165, 0, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 165, 0, 0.2);
+}
+
+.carOptionRow:last-child {
+  border-bottom: none;
+}
+
+.carOptionsTable td {
+  padding: 15px 12px;
+  border-right: 1px solid rgba(255, 165, 0, 0.1);
+  font-size: 0.9rem;
+}
+
+.carOptionsTable td:last-child {
+  border-right: none;
+}
+
+.carName {
+  font-weight: 600;
+  color: #333;
+}
+
+.carLuggage, .carSeats {
+  color: #666;
+  font-weight: 500;
+}
+
+.carPrice {
+  font-weight: 700;
+  color: #ff8c00;
+  font-size: 1rem;
+}
+
+.actionCell {
+  text-align: center;
+  padding: 12px 8px;
+}
+
+.bookNowBtn {
+  background: linear-gradient(135deg, #ff8c00, #ffa500);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.bookNowBtn:hover {
+  background: linear-gradient(135deg, #e67e00, #ff8c00);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 140, 0, 0.4);
+}
+
+.bookNowBtn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(255, 140, 0, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .carOptionsSection {
+    padding: 15px;
+    margin: 15px 0;
+  }
+  
+  .carOptionsTitle {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+  }
+  
+  .carOptionsTable th,
+  .carOptionsTable td {
+    padding: 10px 8px;
+    font-size: 0.85rem;
+  }
+  
+  .tableContainer {
+    overflow-x: auto;
+  }
+  
+  .carOptionsTable {
+    min-width: 500px;
+  }
+  
+  .bookNowBtn {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
+}

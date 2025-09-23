@@ -6,6 +6,8 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from './toproutes.module.css';
 import TermsConditions from '../../components/TermsConditions';
+import BookNowButton from '../../components/BookNowButton';
+import BookingReceipt from '../../components/BookingReceipt';
 
 const RouteDetailPage = () => {
   const router = useRouter();
@@ -16,6 +18,8 @@ const RouteDetailPage = () => {
   const [error, setError] = useState(null);
   const [imageLoading, setImageLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
+  const [selectedCar, setSelectedCar] = useState(null);
+  const [showBookingReceipt, setShowBookingReceipt] = useState(false);
 
   const fetchRoute = useCallback(async () => {
     if (!slug) return;
@@ -70,6 +74,16 @@ const RouteDetailPage = () => {
   const calculateSavings = (original, current) => {
     if (!original || !current || original <= current) return null;
     return original - current;
+  };
+
+  const handleBookCar = (car, index) => {
+    setSelectedCar(car);
+    setShowBookingReceipt(true);
+  };
+
+  const handleCloseBookingReceipt = () => {
+    setShowBookingReceipt(false);
+    setSelectedCar(null);
   };
 
   // Enhanced Loading Component
@@ -187,7 +201,7 @@ const RouteDetailPage = () => {
   // Enhanced Info Section Component
   const InfoSection = ({ heading, content, children, icon = "📄" }) => {
     if (!heading || (!content && !children)) return null;
-    
+
     return (
       <section className={styles.infoSection}>
         <h2 className={styles.heading}>
@@ -203,7 +217,7 @@ const RouteDetailPage = () => {
   // Enhanced List Component
   const ListSection = ({ heading, items, icon = "📝" }) => {
     if (!heading || !items || items.length === 0) return null;
-    
+
     return (
       <InfoSection heading={heading} icon={icon}>
         <ul className={styles.list}>
@@ -402,6 +416,52 @@ const RouteDetailPage = () => {
         </div>
         </div>
 
+        {/* Book Now Button using the new component */}
+        <BookNowButton
+          itemData={route}
+          bookingType="route"
+          buttonText="🚗 Book Now"
+        />
+
+        {/* Car Options Section */}
+{route.carOptions && route.carOptions.length > 0 && (
+  <div className={styles.carOptionsSection}>
+    <h3 className={styles.carOptionsTitle}>🚗 Available Car Options</h3>
+    <div className={styles.tableContainer}>
+      <table className={styles.carOptionsTable}>
+        <thead>
+          <tr>
+            <th>Car Type</th>
+            <th>Luggage</th>
+            <th>Seats</th>
+            <th>Price</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {route.carOptions.map((car, index) => (
+            <tr key={index} className={styles.carOptionRow}>
+              <td className={styles.carName}>{car.name}</td>
+              <td className={styles.carLuggage}>🛄 {car.luggage}</td>
+              <td className={styles.carSeats}>👥 {car.seats}</td>
+              <td className={styles.carPrice}>💰 {formatPrice(car.price)}</td>
+              <td className={styles.actionCell}>
+                <button 
+                  className={styles.bookNowBtn}
+                  onClick={() => handleBookCar(car, index)}
+                >
+                  Book Now
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+)}
+
+
         {/* Enhanced Features */}
         {route.features && route.features.length > 0 && (
           <div className={styles.routeFeaturesList} style={{ animationDelay: '0.6s' }}>
@@ -417,72 +477,101 @@ const RouteDetailPage = () => {
         )}
 
         {/* Dynamic Info Sections with Icons */}
-        <InfoSection 
-          heading={route.introHeading} 
+        <InfoSection
+          heading={route.introHeading}
           content={route.introParagraph}
           icon="🚀"
         />
 
-        <InfoSection 
-          heading={route.overviewHeading} 
+        <InfoSection
+          heading={route.overviewHeading}
           content={route.overviewParagraph}
           icon="🗺️"
         />
 
-        <InfoSection 
-          heading={route.aboutHeading} 
+        <InfoSection
+          heading={route.aboutHeading}
           content={route.aboutParagraph}
           icon="ℹ️"
         />
 
-        <InfoSection 
-          heading={route.journeyHeading} 
+        <InfoSection
+          heading={route.journeyHeading}
           content={route.journeyParagraph}
           icon="🛣️"
         />
 
-        <InfoSection 
-          heading={route.destinationHeading} 
+        <InfoSection
+          heading={route.destinationHeading}
           content={route.destinationParagraph}
           icon="📍"
         />
 
         {/* Enhanced Lists with Icons */}
-        <ListSection 
-          heading="Sightseeing Highlights" 
+        <ListSection
+          heading="Sightseeing Highlights"
           items={route.sightseeing}
           icon="🏛️"
         />
 
-        <ListSection 
-          heading={route.whyHeading || "Why Choose This Route"} 
+        <ListSection
+          heading={route.whyHeading || "Why Choose This Route"}
           items={route.whyPoints}
           icon="⭐"
         />
 
-        <InfoSection 
-          heading={route.discoverHeading} 
+        <InfoSection
+          heading={route.discoverHeading}
           content={route.discoverParagraph}
           icon="🔍"
         />
 
-        <ListSection 
-          heading="Top Attractions" 
+        <ListSection
+          heading="Top Attractions"
           items={route.attractions}
           icon="🎯"
         />
 
-        <InfoSection 
-          heading={route.bookingHeading} 
+        <InfoSection
+          heading={route.bookingHeading}
           content={route.bookingParagraph}
           icon="📞"
         />
 
-      
-
         {/* Terms and Conditions Section */}
         <TermsConditions />
       </div>
+
+      {/* Booking Receipt Modal */}
+      {showBookingReceipt && selectedCar && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 1000,
+          padding: '1rem'
+        }}>
+          <div style={{
+            position: 'relative',
+            width: '100%',
+            maxWidth: '800px',
+            maxHeight: '90vh',
+            overflow: 'auto'
+          }}>
+            <BookingReceipt
+              selectedCar={selectedCar}
+              routeData={route}
+              onClose={handleCloseBookingReceipt}
+            />
+          </div>
+        </div>
+      )}
 
       {/* Enhanced CSS Animations */}
       <style jsx>{`
@@ -490,17 +579,17 @@ const RouteDetailPage = () => {
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
         }
-        
+
         @keyframes twinkle {
           0%, 100% { opacity: 0.3; transform: scale(1); }
           50% { opacity: 1; transform: scale(1.2); }
         }
-        
+
         @keyframes floatElement {
           0%, 100% { transform: translateY(0px) rotate(0deg); }
           50% { transform: translateY(-10px) rotate(180deg); }
         }
-        
+
         @keyframes fadeInUp {
           from {
             opacity: 0;

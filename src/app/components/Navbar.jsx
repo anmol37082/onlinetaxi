@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter, usePathname } from 'next/navigation'
+import { cookieUtils } from '../../lib/cookies'
 import styles from './Navbar.module.css'
 
 const Navbar = () => {
@@ -18,7 +19,7 @@ const Navbar = () => {
   useEffect(() => {
     setIsMounted(true)
     if (typeof window !== 'undefined') {
-      setToken(localStorage.getItem('token'))
+      setToken(cookieUtils.getToken())
     }
   }, [])
 
@@ -80,6 +81,20 @@ const Navbar = () => {
     }
   }
 
+  const handleLogout = () => {
+    // Remove authentication token
+    cookieUtils.removeToken()
+
+    // Update local token state to trigger re-render
+    setToken(null)
+
+    // Close profile dropdown
+    setIsProfileDropdownOpen(false)
+
+    // Redirect to home page
+    router.push('/')
+  }
+
   return (
     <header
       className={styles.header}
@@ -126,7 +141,7 @@ const Navbar = () => {
                       Settings
                     </Link>
                     <hr className={styles.dropdownDivider} />
-                    <button className={styles.dropdownItem}>
+                    <button className={styles.dropdownItem} onClick={handleLogout}>
                       <i className="fas fa-sign-out-alt"></i>
                       Logout
                     </button>

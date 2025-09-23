@@ -1,6 +1,8 @@
 'use client'
 import { useState, useEffect } from 'react'
 import styles from './AdminTours.module.css'
+import AdminAuthWrapper from '../../components/AdminAuthWrapper'
+import ImageUpload from '../../../components/ImageUpload'
 
 export default function AdminTours() {
   const [tours, setTours] = useState([])
@@ -8,6 +10,7 @@ export default function AdminTours() {
     title: '',
     description: '',
     image: '',
+    imagePublicId: '',
     tag: '',
     duration: '',
     price: '',
@@ -51,6 +54,11 @@ export default function AdminTours() {
     setForm(updatedForm)
   }
 
+  // Handle image upload
+  const handleImageUpload = (imageUrl, publicId) => {
+    setForm({ ...form, image: imageUrl, imagePublicId: publicId })
+  }
+
   // Add new day in itinerary
   const handleAddDay = () => {
     const newDay = {
@@ -80,23 +88,24 @@ export default function AdminTours() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
-    
+
     try {
       const url = '/api/tours'
       const method = editingId ? 'PUT' : 'POST'
-      const res = await fetch(url, { 
-        method, 
-        headers: { 'Content-Type': 'application/json' }, 
-        body: JSON.stringify({ ...form, id: editingId }) 
+      const res = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...form, id: editingId })
       })
       const data = await res.json()
-      
+
       if (res.ok) {
         fetchTours()
         setForm({
           title: '',
           description: '',
           image: '',
+          imagePublicId: '',
           tag: '',
           duration: '',
           price: '',
@@ -121,122 +130,131 @@ export default function AdminTours() {
 
   // Edit tour
   const handleEdit = (tour) => {
-    setForm({ ...tour })
+    setForm({ 
+      ...tour,
+      imagePublicId: tour.imagePublicId || ''
+    })
     setEditingId(tour._id)
   }
 
   // Delete tour
-  const handleDelete = async (id) => { 
-    if (confirm('Are you sure you want to delete this tour?')) { 
+  const handleDelete = async (id) => {
+    if (confirm('Are you sure you want to delete this tour?')) {
       try {
         await fetch(`/api/tours?id=${id}`, { method: 'DELETE' })
         fetchTours()
       } catch (error) {
         alert('Error deleting tour. Please try again.')
       }
-    } 
+    }
   }
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>Admin: Manage Tours</h1>
-      
-      <div className={styles.formSection}>
-        <form onSubmit={handleSubmit} className={styles.form}>
-          {/* Basic Info */}
-          <input className={styles.input} type="text" placeholder="Tour Title" value={form.title} onChange={e => handleInputChange('title', e.target.value)} required />
-          <input className={styles.input} type="text" placeholder="Tour Tag" value={form.tag} onChange={e => handleInputChange('tag', e.target.value)} required />
-          <textarea className={`${styles.input} ${styles.textarea}`} placeholder="Tour Description" value={form.description} onChange={e => handleInputChange('description', e.target.value)} required />
-          <input className={styles.input} type="text" placeholder="Image URL" value={form.image} onChange={e => handleInputChange('image', e.target.value)} required />
-          <input className={styles.input} type="text" placeholder="Duration (e.g., 3 days)" value={form.duration} onChange={e => handleInputChange('duration', e.target.value)} required />
-          <input className={styles.input} type="number" placeholder="Price" value={form.price} onChange={e => handleInputChange('price', e.target.value)} required />
-          <input className={styles.input} type="number" placeholder="Rating (1-5)" min="1" max="5" value={form.rating} onChange={e => handleInputChange('rating', e.target.value)} required />
+    <AdminAuthWrapper>
+      <div className={styles.container}>
+        <h1 className={styles.title}>Admin: Manage Tours</h1>
 
-          {/* Days Dynamic Section */}
-          <h3>Itinerary Days</h3>
-          {form.days.map((day, index) => (
-            <div key={index} className={styles.dayBox}>
-              <input
-                className={styles.input}
-                type="text"
-                placeholder="Day Title (e.g., Day 1: Arrival in Delhi)"
-                value={day.dayTitle}
-                onChange={(e) => handleDayChange(index, 'dayTitle', e.target.value)}
-              />
-              <input
-                className={styles.input}
-                type="text"
-                placeholder="Morning Plan"
-                value={day.morning}
-                onChange={(e) => handleDayChange(index, 'morning', e.target.value)}
-              />
-              <input
-                className={styles.input}
-                type="text"
-                placeholder="Afternoon Plan"
-                value={day.afternoon}
-                onChange={(e) => handleDayChange(index, 'afternoon', e.target.value)}
-              />
-              <input
-                className={styles.input}
-                type="text"
-                placeholder="Evening Plan"
-                value={day.evening}
-                onChange={(e) => handleDayChange(index, 'evening', e.target.value)}
-              />
-              <input
-                className={styles.input}
-                type="text"
-                placeholder="Night Plan"
-                value={day.night}
-                onChange={(e) => handleDayChange(index, 'night', e.target.value)}
-              />
-              <button type="button" onClick={() => handleRemoveDay(index)} className={styles.deleteButton}>
-                Remove Day
-              </button>
-            </div>
-          ))}
-          <button type="button" onClick={handleAddDay} className={styles.addDayButton}>+ Add Day</button>
+        <div className={styles.formSection}>
+          <form onSubmit={handleSubmit} className={styles.form}>
+            {/* Basic Info */}
+            <input className={styles.input} type="text" placeholder="Tour Title" value={form.title} onChange={e => handleInputChange('title', e.target.value)} required />
+            <input className={styles.input} type="text" placeholder="Tour Tag" value={form.tag} onChange={e => handleInputChange('tag', e.target.value)} required />
+            <textarea className={`${styles.input} ${styles.textarea}`} placeholder="Tour Description" value={form.description} onChange={e => handleInputChange('description', e.target.value)} required />
+            <ImageUpload 
+              onImageUpload={handleImageUpload} 
+              currentImage={form.image} 
+              label="Tour Image" 
+            />
+            <input className={styles.input} type="text" placeholder="Duration (e.g., 3 days)" value={form.duration} onChange={e => handleInputChange('duration', e.target.value)} required />
+            <input className={styles.input} type="number" placeholder="Price" value={form.price} onChange={e => handleInputChange('price', e.target.value)} required />
+            <input className={styles.input} type="number" placeholder="Rating (1-5)" min="1" max="5" value={form.rating} onChange={e => handleInputChange('rating', e.target.value)} required />
 
-          {/* Extra Sections */}
-          <textarea className={`${styles.input} ${styles.textarea}`} placeholder="Summary of the Itinerary" value={form.summaryText} onChange={e => handleInputChange('summaryText', e.target.value)} />
-          <textarea className={`${styles.input} ${styles.textarea}`} placeholder="Travel Tips (one per line)" value={form.travelTips.join('\n')} onChange={e => handleInputChange('travelTips', e.target.value.split('\n'))} />
-          <textarea className={`${styles.input} ${styles.textarea}`} placeholder="Closing Paragraph" value={form.closingParagraph} onChange={e => handleInputChange('closingParagraph', e.target.value)} />
-
-          {/* Submit */}
-          <button type="submit" className={`${styles.submitButton} ${isSubmitting ? styles.loading : ''}`} disabled={isSubmitting}>
-            {isSubmitting ? 'Saving...' : (editingId ? 'Update Tour' : 'Add New Tour')}
-          </button>
-        </form>
-      </div>
-
-      {/* Show Tours */}
-      <div className={styles.toursSection}>
-        <h2 className={styles.sectionTitle}>All Tours ({tours.length})</h2>
-        {tours.length === 0 ? (
-          <div className={styles.emptyState}>No tours available. Add your first tour above!</div>
-        ) : (
-          <ul className={styles.toursList}>
-            {tours.map(tour => (
-              <li key={tour._id} className={styles.tourItem}>
-                <div className={styles.tourInfo}>
-                  <h3 className={styles.tourTitle}>{tour.title}</h3>
-                  <div className={styles.tourDetails}>
-                    <span className={styles.tourTag}>{tour.tag}</span>
-                    <span className={styles.tourPrice}>₹{tour.price}</span>
-                    <span className={styles.tourRating}>⭐ {tour.rating}</span>
-                    <span className={styles.tourDuration}>🕒 {tour.duration}</span>
-                  </div>
-                </div>
-                <div className={styles.buttonGroup}>
-                  <button onClick={() => handleEdit(tour)} className={styles.editButton}>Edit</button>
-                  <button onClick={() => handleDelete(tour._id)} className={styles.deleteButton}>Delete</button>
-                </div>
-              </li>
+            {/* Days Dynamic Section */}
+            <h3>Itinerary Days</h3>
+            {form.days.map((day, index) => (
+              <div key={index} className={styles.dayBox}>
+                <input
+                  className={styles.input}
+                  type="text"
+                  placeholder="Day Title (e.g., Day 1: Arrival in Delhi)"
+                  value={day.dayTitle}
+                  onChange={(e) => handleDayChange(index, 'dayTitle', e.target.value)}
+                />
+                <input
+                  className={styles.input}
+                  type="text"
+                  placeholder="Morning Plan"
+                  value={day.morning}
+                  onChange={(e) => handleDayChange(index, 'morning', e.target.value)}
+                />
+                <input
+                  className={styles.input}
+                  type="text"
+                  placeholder="Afternoon Plan"
+                  value={day.afternoon}
+                  onChange={(e) => handleDayChange(index, 'afternoon', e.target.value)}
+                />
+                <input
+                  className={styles.input}
+                  type="text"
+                  placeholder="Evening Plan"
+                  value={day.evening}
+                  onChange={(e) => handleDayChange(index, 'evening', e.target.value)}
+                />
+                <input
+                  className={styles.input}
+                  type="text"
+                  placeholder="Night Plan"
+                  value={day.night}
+                  onChange={(e) => handleDayChange(index, 'night', e.target.value)}
+                />
+                <button type="button" onClick={() => handleRemoveDay(index)} className={styles.deleteButton}>
+                  Remove Day
+                </button>
+              </div>
             ))}
-          </ul>
-        )}
+            <button type="button" onClick={handleAddDay} className={styles.addDayButton}>+ Add Day</button>
+
+            {/* Extra Sections */}
+            <textarea className={`${styles.input} ${styles.textarea}`} placeholder="Summary of the Itinerary" value={form.summaryText} onChange={e => handleInputChange('summaryText', e.target.value)} />
+            <textarea className={`${styles.input} ${styles.textarea}`} placeholder="Travel Tips (one per line)" value={form.travelTips.join('\n')} onChange={e => handleInputChange('travelTips', e.target.value.split('\n'))} />
+            <textarea className={`${styles.input} ${styles.textarea}`} placeholder="Closing Paragraph" value={form.closingParagraph} onChange={e => handleInputChange('closingParagraph', e.target.value)} />
+
+            {/* Submit */}
+            <button type="submit" className={`${styles.submitButton} ${isSubmitting ? styles.loading : ''}`} disabled={isSubmitting}>
+              {isSubmitting ? 'Saving...' : (editingId ? 'Update Tour' : 'Add New Tour')}
+            </button>
+          </form>
+        </div>
+
+        {/* Show Tours */}
+        <div className={styles.toursSection}>
+          <h2 className={styles.sectionTitle}>All Tours ({tours.length})</h2>
+          {tours.length === 0 ? (
+            <div className={styles.emptyState}>No tours available. Add your first tour above!</div>
+          ) : (
+            <ul className={styles.toursList}>
+              {tours.map(tour => (
+                <li key={tour._id} className={styles.tourItem}>
+                  <div className={styles.tourInfo}>
+                    <h3 className={styles.tourTitle}>{tour.title}</h3>
+                    <div className={styles.tourDetails}>
+                      <span className={styles.tourTag}>{tour.tag}</span>
+                      <span className={styles.tourPrice}>₹{tour.price}</span>
+                      <span className={styles.tourRating}>⭐ {tour.rating}</span>
+                      <span className={styles.tourDuration}>🕒 {tour.duration}</span>
+                    </div>
+                  </div>
+                  <div className={styles.buttonGroup}>
+                    <button onClick={() => handleEdit(tour)} className={styles.editButton}>Edit</button>
+                    <button onClick={() => handleDelete(tour._id)} className={styles.deleteButton}>Delete</button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       </div>
-    </div>
+    </AdminAuthWrapper>
   )
 }

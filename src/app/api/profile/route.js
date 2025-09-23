@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import connectDB from "../../../lib/mongodb";
-import User from "../../../models/User";
+import connectDB from "@/lib/mongodb";
+import User from "@/models/User";
 import jwt from "jsonwebtoken";
 
 async function getUserFromCookie(req) {

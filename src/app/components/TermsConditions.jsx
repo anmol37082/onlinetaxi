@@ -107,48 +107,6 @@ const TermsConditions = () => {
           </div>
         </div>
 
-        {/* Call to Action */}
-        <div className={styles.ctaSection}>
-          <div className={styles.ctaDecorative}>✨</div>
-          <div className={styles.ctaDecorative2}>🌟</div>
-          
-          <h3 className={styles.ctaTitle}>
-            Ready to Book Your Ride?
-          </h3>
-          <p className={styles.ctaText}>
-            Contact us now to enjoy our reliable taxi services with complete transparency!
-          </p>
-          <div className={styles.ctaButtons}>
-            <button
-              className={styles.ctaBtn}
-              onMouseOver={(e) => {
-                e.target.style.transform = 'translateY(-3px) scale(1.05)';
-                e.target.style.boxShadow = '0 15px 40px rgba(255, 255, 255, 0.4)';
-              }}
-              onMouseOut={(e) => {
-                e.target.style.transform = 'translateY(0) scale(1)';
-                e.target.style.boxShadow = '0 8px 30px rgba(255, 255, 255, 0.3)';
-              }}
-            >
-              📞 Book Now
-            </button>
-            <button
-              className={styles.ctaBtnSecondary}
-              onMouseOver={(e) => {
-                e.target.style.background = 'rgba(255, 255, 255, 0.2)';
-                e.target.style.borderColor = 'rgba(255, 255, 255, 0.8)';
-                e.target.style.transform = 'translateY(-3px)';
-              }}
-              onMouseOut={(e) => {
-                e.target.style.background = 'transparent';
-                e.target.style.borderColor = 'rgba(255, 255, 255, 0.5)';
-                e.target.style.transform = 'translateY(0)';
-              }}
-            >
-              💬 Get Quote
-            </button>
-          </div>
-        </div>
       </div>
 
       {/* Enhanced CSS Animations */}

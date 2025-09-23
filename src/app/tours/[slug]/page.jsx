@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from './tours.module.css';
 import TermsConditions from '../../components/TermsConditions';
+import BookingForm from '../../components/BookingForm';
 
 const TourDetailPage = () => {
   const router = useRouter();
@@ -16,6 +17,7 @@ const TourDetailPage = () => {
   const [error, setError] = useState(null);
   const [imageLoading, setImageLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
+  const [showBookingForm, setShowBookingForm] = useState(false);
 
   const fetchTour = useCallback(async () => {
     if (!slug) return;
@@ -113,44 +115,44 @@ const TourDetailPage = () => {
   // Enhanced Error Component
   const ErrorMessage = ({ message, onRetry }) => (
     <div className={styles.errorState}>
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: '1.5rem'
+      <div style={{ 
+        display: 'flex', 
+        flexDirection: 'column', 
+        alignItems: 'center', 
+        gap: '1.5rem' 
       }}>
-        <div style={{
-          fontSize: '3rem',
-          color: 'rgba(255, 107, 53, 0.6)',
-          marginBottom: '1rem'
+        <div style={{ 
+          fontSize: '3rem', 
+          color: 'rgba(255, 107, 53, 0.6)', 
+          marginBottom: '1rem' 
         }}>🚫</div>
-        <h2 style={{
-          color: 'rgba(31, 41, 55, 0.9)',
-          marginBottom: '0.5rem'
+        <h2 style={{ 
+          color: 'rgba(31, 41, 55, 0.9)', 
+          marginBottom: '0.5rem' 
         }}>Oops! Something went wrong</h2>
-        <p style={{
-          color: 'rgba(75, 85, 99, 0.8)',
-          marginBottom: '2rem'
+        <p style={{ 
+          color: 'rgba(75, 85, 99, 0.8)', 
+          marginBottom: '2rem' 
         }}>Error: {message}</p>
         <div style={{ 
           display: 'flex', 
           gap: '1rem', 
-          justifyContent: 'center',
-          flexWrap: 'wrap'
+          justifyContent: 'center', 
+          flexWrap: 'wrap' 
         }}>
           <button
             onClick={onRetry}
-            style={{
-              padding: '1rem 2rem',
-              background: '#ffb938',
-              color: 'white',
-              border: 'none',
-              borderRadius: '25px',
-              cursor: 'pointer',
-              fontWeight: '600',
-              fontSize: '1rem',
-              transition: 'all 0.3s ease',
-              boxShadow: '0 8px 25px rgba(255, 107, 53, 0.3)'
+            style={{ 
+              padding: '1rem 2rem', 
+              background: '#ffb938', 
+              color: 'white', 
+              border: 'none', 
+              borderRadius: '25px', 
+              cursor: 'pointer', 
+              fontWeight: '600', 
+              fontSize: '1rem', 
+              transition: 'all 0.3s ease', 
+              boxShadow: '0 8px 25px rgba(255, 107, 53, 0.3)' 
             }}
             onMouseOver={(e) => {
               e.target.style.transform = 'translateY(-2px)';
@@ -163,9 +165,9 @@ const TourDetailPage = () => {
           >
             🔄 Try Again
           </button>
-              <Link href="/" className={styles.backLink}>
-                🏠 Back to Tours
-              </Link>
+          <Link href="/" className={styles.backLink}>
+            🏠 Back to Tours
+          </Link>
         </div>
       </div>
     </div>
@@ -196,18 +198,18 @@ const TourDetailPage = () => {
       <section className={styles.tourSection}>
         <div className={styles.container}>
           <div className={styles.errorState}>
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '1.5rem'
+            <div style={{ 
+              display: 'flex', 
+              flexDirection: 'column', 
+              alignItems: 'center', 
+              gap: '1.5rem' 
             }}>
               <div style={{ fontSize: '3rem' }}>🔍</div>
               <h2>Tour Not Found</h2>
               <p>The tour you're looking for doesn't exist or has been removed.</p>
-          <Link href="/" className={styles.backLink}>
-            🏠 Back to Tours
-          </Link>
+              <Link href="/" className={styles.backLink}>
+                🏠 Back to Tours
+              </Link>
             </div>
           </div>
         </div>
@@ -231,15 +233,15 @@ const TourDetailPage = () => {
         {/* Enhanced Tour Image */}
         <div className={styles.imageContainer} style={{ animationDelay: '0.3s' }}>
           {imageLoading && (
-            <div style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              zIndex: 2,
-              background: 'rgba(255, 255, 255, 0.9)',
-              padding: '2rem',
-              borderRadius: '15px'
+            <div style={{ 
+              position: 'absolute', 
+              top: '50%', 
+              left: '50%', 
+              transform: 'translate(-50%, -50%)', 
+              zIndex: 2, 
+              background: 'rgba(255, 255, 255, 0.9)', 
+              padding: '2rem', 
+              borderRadius: '15px' 
             }}>
               <LoadingSpinner />
             </div>
@@ -366,12 +368,69 @@ const TourDetailPage = () => {
           </p>
         )}
 
-        {/* Enhanced Call to Action */}
-      
+        {/* Book Now Button and Booking Form Modal */}
+        <div style={{
+          textAlign: 'center',
+          margin: '2rem 0',
+          animationDelay: '0.95s'
+        }}>
+          <button
+            onClick={() => setShowBookingForm(true)}
+            style={{
+              padding: '1rem 3rem',
+              background: 'linear-gradient(45deg, #ff6b35, #ffb938)',
+              color: 'white',
+              border: 'none',
+              borderRadius: '30px',
+              cursor: 'pointer',
+              fontWeight: '700',
+              fontSize: '1.2rem',
+              transition: 'all 0.3s ease',
+              boxShadow: '0 10px 30px rgba(255, 107, 53, 0.4)',
+              position: 'relative',
+              overflow: 'hidden'
+            }}
+            onMouseOver={(e) => {
+              e.target.style.transform = 'translateY(-3px)';
+              e.target.style.boxShadow = '0 15px 40px rgba(255, 107, 53, 0.5)';
+            }}
+            onMouseOut={(e) => {
+              e.target.style.transform = 'translateY(0)';
+              e.target.style.boxShadow = '0 10px 30px rgba(255, 107, 53, 0.4)';
+            }}
+          >
+            <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              🏛️ Book Tour Now
+            </span>
+          </button>
+        </div>
 
         {/* Terms and Conditions */}
         <TermsConditions />
       </div>
+
+      {/* Booking Form Modal */}
+      {showBookingForm && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'rgba(0, 0, 0, 0.5)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 1000,
+          padding: '1rem'
+        }}>
+          <BookingForm
+            bookingType="tour"
+            itemData={tour}
+            onClose={() => setShowBookingForm(false)}
+          />
+        </div>
+      )}
 
       {/* Enhanced CSS Animations */}
       <style jsx>{`

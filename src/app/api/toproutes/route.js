@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import connectDB from "../../../lib/mongodb";
-import TopRoute from "../../../models/TopRoute";
+import connectDB from "@/lib/mongodb";
+import TopRoute from "@/models/TopRoute";
 
 export async function GET(req) {
   try {
@@ -28,14 +28,14 @@ export async function GET(req) {
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { title, slug, image, imageAlt, distance, duration, carType, currentPrice, originalPrice, discount, description, features, fromCity, toCity, introHeading, introParagraph, overviewHeading, overviewParagraph, aboutHeading, aboutParagraph, journeyHeading, journeyParagraph, destinationHeading, destinationParagraph, sightseeing, whyHeading, whyPoints, discoverHeading, discoverParagraph, attractions, bookingHeading, bookingParagraph } = body;
+    const { title, slug, image, imageAlt, distance, duration, carType, currentPrice, originalPrice, discount, description, features, fromCity, toCity, introHeading, introParagraph, overviewHeading, overviewParagraph, aboutHeading, aboutParagraph, journeyHeading, journeyParagraph, destinationHeading, destinationParagraph, sightseeing, whyHeading, whyPoints, discoverHeading, discoverParagraph, attractions, bookingHeading, bookingParagraph, carOptions } = body;
 
     if (!title || !slug || !image || !imageAlt || !distance || !duration || !carType || !currentPrice || !originalPrice || !discount || !description || !features) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
     await connectDB();
-    const toproute = await TopRoute.create({ title, slug, image, imageAlt, distance, duration, carType, currentPrice, originalPrice, discount, description, features, fromCity, toCity, introHeading, introParagraph, overviewHeading, overviewParagraph, aboutHeading, aboutParagraph, journeyHeading, journeyParagraph, destinationHeading, destinationParagraph, sightseeing, whyHeading, whyPoints, discoverHeading, discoverParagraph, attractions, bookingHeading, bookingParagraph });
+    const toproute = await TopRoute.create({ title, slug, image, imageAlt, distance, duration, carType, currentPrice, originalPrice, discount, description, features, fromCity, toCity, introHeading, introParagraph, overviewHeading, overviewParagraph, aboutHeading, aboutParagraph, journeyHeading, journeyParagraph, destinationHeading, destinationParagraph, sightseeing, whyHeading, whyPoints, discoverHeading, discoverParagraph, attractions, bookingHeading, bookingParagraph, carOptions });
 
     return NextResponse.json({ success: true, toproute });
   } catch (err) {
@@ -47,7 +47,7 @@ export async function POST(req) {
 export async function PUT(req) {
   try {
     const body = await req.json();
-    const { id, title, slug, image, imageAlt, distance, duration, carType, currentPrice, originalPrice, discount, description, features, fromCity, toCity, introHeading, introParagraph, overviewHeading, overviewParagraph, aboutHeading, aboutParagraph, journeyHeading, journeyParagraph, destinationHeading, destinationParagraph, sightseeing, whyHeading, whyPoints, discoverHeading, discoverParagraph, attractions, bookingHeading, bookingParagraph } = body;
+    const { id, title, slug, image, imageAlt, distance, duration, carType, currentPrice, originalPrice, discount, description, features, fromCity, toCity, introHeading, introParagraph, overviewHeading, overviewParagraph, aboutHeading, aboutParagraph, journeyHeading, journeyParagraph, destinationHeading, destinationParagraph, sightseeing, whyHeading, whyPoints, discoverHeading, discoverParagraph, attractions, bookingHeading, bookingParagraph, carOptions } = body;
 
     if (!id) return NextResponse.json({ error: "TopRoute ID required" }, { status: 400 });
 
@@ -87,6 +87,7 @@ export async function PUT(req) {
     toproute.attractions = attractions ?? toproute.attractions;
     toproute.bookingHeading = bookingHeading ?? toproute.bookingHeading;
     toproute.bookingParagraph = bookingParagraph ?? toproute.bookingParagraph;
+    toproute.carOptions = carOptions ?? toproute.carOptions;
 
     await toproute.save();
     return NextResponse.json({ success: true, toproute });

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import connectDB from "../../../../lib/mongodb";
-import Otp from "../../../../models/Otp";
-import User from "../../../../models/User";
+import connectDB from "@/lib/mongodb";
+import Otp from "@/models/Otp";
+import User from "@/models/User";
 import jwt from "jsonwebtoken";
 
 export async function POST(req) {
@@ -35,11 +35,11 @@ export async function POST(req) {
       user: { email: user.email, name: user.name, phone: user.phone, address: user.address }
     });
 
-    // ✅ Cookie me JWT set karo
+    // ✅ Cookie me JWT set karo (for both server and client authentication)
     res.cookies.set({
       name: "token",
       value: token,
-      httpOnly: true,
+      httpOnly: false, // Allow JavaScript to read the cookie
       path: "/",
       maxAge: 60 * 60 * 24 * 7 // 7 din
     });

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import connectDB from "../../../../lib/mongodb";
-import Otp from "../../../../models/Otp";
-import { sendOtpEmail } from "../../../../lib/mail";
+import connectDB from "@/lib/mongodb";
+import Otp from "@/models/Otp";
+import { sendOtpEmail } from "@/lib/mail";
 
 function generateOtp() {
   return Math.floor(100000 + Math.random() * 900000).toString(); // 6-digit

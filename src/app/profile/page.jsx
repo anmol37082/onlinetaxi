@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./ProfilePage.module.css";
+import LoginHistory from "../components/LoginHistory";
 
 export default function ProfilePage() {
   const [email, setEmail] = useState(""); // email show karne ke liye
@@ -10,7 +11,8 @@ export default function ProfilePage() {
   const [phone, setPhone] = useState("");
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(true);
-  const [saved, setSaved] = useState(false); // form hide/show 
+  const [saved, setSaved] = useState(false); // form hide/show
+  const [activeTab, setActiveTab] = useState("profile"); // Tab management
 
   const router = useRouter();
 
@@ -75,70 +77,104 @@ export default function ProfilePage() {
     }
   };
 
+  const tabs = [
+    { id: "profile", label: "Profile", icon: "👤" },
+    { id: "history", label: "Login History", icon: "🔐" }
+  ];
+
   if (loading) return <div className={styles.loading}>Loading...</div>;
 
   return (
     <div className={styles.container}>
-      {!saved ? (
-        <>
-          <h2 className={styles.title}>Create Your Profile</h2>
-          <form onSubmit={saveProfile} className={styles.form}>
-            <div className={styles.inputGroup}>
-              <input
-                type="text"
-                placeholder="Full Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-                className={styles.input}
-              />
-            </div>
-            <div className={styles.inputGroup}>
-              <input
-                type="text"
-                placeholder="Address"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                required
-                className={styles.input}
-              />
-            </div>
-            <div className={styles.inputGroup}>
-              <input
-                type="text"
-                placeholder="Phone Number"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                required
-                className={styles.input}
-              />
-            </div>
-            <button type="submit" className={styles.submitButton}>
-              Save Profile
-            </button>
-          </form>
-        </>
-      ) : (
-        <div className={styles.profileSection}>
-          <h2 className={styles.profileTitle}>Your Profile</h2>
-          <div className={styles.profileItem}>
-            <span className={styles.profileLabel}>Email:</span>
-            <span className={styles.profileValue}>{email}</span>
+      {/* Tab Navigation */}
+      <div className={styles.tabNavigation}>
+        {tabs.map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id)}
+            className={`${styles.tabButton} ${activeTab === tab.id ? styles.activeTab : ""}`}
+          >
+            <span className={styles.tabIcon}>{tab.icon}</span>
+            <span className={styles.tabLabel}>{tab.label}</span>
+          </button>
+        ))}
+      </div>
+
+      {/* Tab Content */}
+      <div className={styles.tabContent}>
+        {activeTab === "profile" && (
+          <div className={styles.profileTab}>
+            {!saved ? (
+              <>
+                <h2 className={styles.title}>Create Your Profile</h2>
+                <form onSubmit={saveProfile} className={styles.form}>
+                  <div className={styles.inputGroup}>
+                    <input
+                      type="text"
+                      placeholder="Full Name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      required
+                      className={styles.input}
+                    />
+                  </div>
+                  <div className={styles.inputGroup}>
+                    <input
+                      type="text"
+                      placeholder="Address"
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
+                      required
+                      className={styles.input}
+                    />
+                  </div>
+                  <div className={styles.inputGroup}>
+                    <input
+                      type="text"
+                      placeholder="Phone Number"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      required
+                      className={styles.input}
+                    />
+                  </div>
+                  <button type="submit" className={styles.submitButton}>
+                    Save Profile
+                  </button>
+                </form>
+              </>
+            ) : (
+              <div className={styles.profileSection}>
+                <h2 className={styles.profileTitle}>Your Profile</h2>
+                <div className={styles.profileItem}>
+                  <span className={styles.profileLabel}>Email:</span>
+                  <span className={styles.profileValue}>{email}</span>
+                </div>
+                <div className={styles.profileItem}>
+                  <span className={styles.profileLabel}>Name:</span>
+                  <span className={styles.profileValue}>{name}</span>
+                </div>
+                <div className={styles.profileItem}>
+                  <span className={styles.profileLabel}>Address:</span>
+                  <span className={styles.profileValue}>{address}</span>
+                </div>
+                <div className={styles.profileItem}>
+                  <span className={styles.profileLabel}>Phone:</span>
+                  <span className={styles.profileValue}>{phone}</span>
+                </div>
+              </div>
+            )}
           </div>
-          <div className={styles.profileItem}>
-            <span className={styles.profileLabel}>Name:</span>
-            <span className={styles.profileValue}>{name}</span>
+        )}
+
+        {activeTab === "history" && (
+          <div className={styles.historyTab}>
+            <LoginHistory />
           </div>
-          <div className={styles.profileItem}>
-            <span className={styles.profileLabel}>Address:</span>
-            <span className={styles.profileValue}>{address}</span>
-          </div>
-          <div className={styles.profileItem}>
-            <span className={styles.profileLabel}>Phone:</span>
-            <span className={styles.profileValue}>{phone}</span>
-          </div>
-        </div>
-      )}
+        )}
+
+
+      </div>
 
       {status && <div className={getStatusClassName()}>{status}</div>}
     </div>
