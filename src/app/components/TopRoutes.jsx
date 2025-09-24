@@ -6,30 +6,35 @@ import Link from "next/link";
 import { Heart, Clock, Route, Car, Phone, MessageCircle } from "lucide-react";
 import styles from "./TopRoutes.module.css";
 
-const TopRoutes = ({ showViewAll = true, maxRoutes }) => {
+const TopRoutes = ({ showViewAll = true, maxRoutes, initialRoutes = [] }) => {
   const [favorites, setFavorites] = useState(new Set());
-  const [routesData, setRoutesData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [routesData, setRoutesData] = useState(initialRoutes);
+  const [loading, setLoading] = useState(initialRoutes.length === 0);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchTopRoutes = async () => {
-      try {
-        const res = await fetch('/api/toproutes');
-        if (!res.ok) throw new Error('Failed to fetch routes');
-        const data = await res.json();
-        console.log('Top routes fetched:', data); // Debug log
-        setRoutesData(data.toproutes || []);
-      } catch (err) {
-        console.error('Error fetching top routes:', err);
-        setError('Failed to load routes. Please try again later.');
-      } finally {
-        setLoading(false);
-      }
-    };
+    // Only fetch if no initial data provided
+    if (initialRoutes.length === 0) {
+      const fetchTopRoutes = async () => {
+        try {
+          const res = await fetch('/api/toproutes');
+          if (!res.ok) throw new Error('Failed to fetch routes');
+          const data = await res.json();
+          console.log('Top routes fetched:', data);
+          setRoutesData(data.toproutes || []);
+        } catch (err) {
+          console.error('Error fetching top routes:', err);
+          setError('Failed to load routes. Please try again later.');
+        } finally {
+          setLoading(false);
+        }
+      };
 
-    fetchTopRoutes();
-  }, []);
+      fetchTopRoutes();
+    } else {
+      setLoading(false);
+    }
+  }, [initialRoutes]);
 
   const toggleFavorite = (routeId) => {
     const newFavorites = new Set(favorites);

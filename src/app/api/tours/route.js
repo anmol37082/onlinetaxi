@@ -20,10 +20,18 @@ export async function GET(req) {
       if (!tours) {
         return NextResponse.json({ error: "Tour not found" }, { status: 404 });
       }
-      return NextResponse.json({ tour: tours });
+      return NextResponse.json({ tour: tours }, {
+        headers: {
+          'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600'
+        }
+      });
     } else {
       tours = await Tour.find().sort({ createdAt: -1 });
-      return NextResponse.json({ tours });
+      return NextResponse.json({ tours }, {
+        headers: {
+          'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600'
+        }
+      });
     }
   } catch (err) {
     console.error("GET /api/tours error", err);

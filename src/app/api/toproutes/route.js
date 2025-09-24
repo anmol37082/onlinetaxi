@@ -14,10 +14,18 @@ export async function GET(req) {
       if (!toproute) {
         return NextResponse.json({ error: "TopRoute not found" }, { status: 404 });
       }
-      return NextResponse.json({ toproute });
+      return NextResponse.json({ toproute }, {
+        headers: {
+          'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600'
+        }
+      });
     } else {
       const toproutes = await TopRoute.find().sort({ createdAt: -1 });
-      return NextResponse.json({ toproutes });
+      return NextResponse.json({ toproutes }, {
+        headers: {
+          'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600'
+        }
+      });
     }
   } catch (err) {
     console.error("GET /api/toproutes error", err);

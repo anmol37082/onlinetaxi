@@ -1,4 +1,5 @@
-'use client'
+"use client";
+
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -8,34 +9,37 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import styles from './ToursSection.module.css'
 
-const ToursSection = () => {
+const ToursSection = ({ initialTours = [] }) => {
   const router = useRouter()
-  const [tourPackages, setTourPackages] = useState([])
+  const [tourPackages, setTourPackages] = useState(initialTours)
   const [isLoading, setIsLoading] = useState({})
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(initialTours.length === 0)
 
   useEffect(() => {
-    // Fetch tours from API
-    const fetchTours = async () => {
-      try {
-        const res = await fetch('/api/tours')
-        const data = await res.json()
-        if (res.ok) {
-          // Remove .slice(0, 3) to show ALL tours
-          setTourPackages(data.tours || [])
-          console.log('Tours fetched:', data.tours?.length || 0) // Debug log
-        } else {
-          console.error('Failed to load tours', data?.error)
+    // Only fetch if no initial data provided
+    if (initialTours.length === 0) {
+      const fetchTours = async () => {
+        try {
+          const res = await fetch('/api/tours')
+          const data = await res.json()
+          if (res.ok) {
+            setTourPackages(data.tours || [])
+            console.log('Tours fetched:', data.tours?.length || 0)
+          } else {
+            console.error('Failed to load tours', data?.error)
+          }
+        } catch (err) {
+          console.error('Error fetching tours', err)
+        } finally {
+          setLoading(false)
         }
-      } catch (err) {
-        console.error('Error fetching tours', err)
-      } finally {
-        setLoading(false)
       }
-    }
 
-    fetchTours()
-  }, [])
+      fetchTours()
+    } else {
+      setLoading(false)
+    }
+  }, [initialTours])
 
   const handleLearnMore = (tour) => {
     setIsLoading(prev => ({ ...prev, [tour._id]: true }))
