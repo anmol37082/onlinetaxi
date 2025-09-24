@@ -3,6 +3,8 @@ import dbConnect from '@/lib/mongodb';
 import Booking from '@/models/Booking';
 import User from '@/models/User';
 import Profile from '@/models/Profile';
+import TopRoute from '@/models/TopRoute';
+import Tour from '@/models/Tour';
 import jwt from 'jsonwebtoken';
 
 // GET /api/bookings - Get user's bookings
@@ -17,11 +19,19 @@ export async function GET(request) {
     if (authHeader && authHeader.startsWith('Bearer ')) {
       token = authHeader.substring(7); // Remove 'Bearer ' prefix
     } else {
+      // Try multiple ways to get the token from cookies
       token = request.cookies.get('token')?.value;
+
+      // If not found, try parsing the cookie header manually
+      if (!token) {
+        const cookieHeader = request.headers.get('cookie') || '';
+        const tokenMatch = cookieHeader.match(/token=([^;]+)/);
+        token = tokenMatch ? tokenMatch[1] : null;
+      }
     }
 
     if (!token) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: 'Unauthorized - No token found' }, { status: 401 });
     }
 
     let decoded;
@@ -61,11 +71,19 @@ export async function POST(request) {
     if (authHeader && authHeader.startsWith('Bearer ')) {
       token = authHeader.substring(7); // Remove 'Bearer ' prefix
     } else {
+      // Try multiple ways to get the token from cookies
       token = request.cookies.get('token')?.value;
+
+      // If not found, try parsing the cookie header manually
+      if (!token) {
+        const cookieHeader = request.headers.get('cookie') || '';
+        const tokenMatch = cookieHeader.match(/token=([^;]+)/);
+        token = tokenMatch ? tokenMatch[1] : null;
+      }
     }
 
     if (!token) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: 'Unauthorized - No token found' }, { status: 401 });
     }
 
     let decoded;

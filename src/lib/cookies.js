@@ -27,7 +27,7 @@ export const cookieUtils = {
       path = '/',
       maxAge = 60 * 60 * 24 * 7, // 7 days
       secure = process.env.NODE_ENV === 'production',
-      sameSite = 'strict'
+      sameSite = 'lax'
     } = options;
 
     let cookieString = `${name}=${value}; path=${path}; max-age=${maxAge}`;
@@ -61,7 +61,7 @@ export const cookieUtils = {
       path: '/',
       maxAge: 60 * 60 * 24 * 7, // 7 days
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict'
+      sameSite: 'lax'
     });
   },
 
@@ -70,6 +70,10 @@ export const cookieUtils = {
    */
   removeToken: () => {
     cookieUtils.removeCookie('token', '/');
+    // Dispatch logout event for cross-tab synchronization
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('auth-logout'));
+    }
   },
 
   /**
@@ -87,7 +91,7 @@ export const cookieUtils = {
       path: '/',
       maxAge: 60 * 60 * 24 * 7, // 7 days
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict'
+      sameSite: 'lax'
     });
   },
 
@@ -96,6 +100,10 @@ export const cookieUtils = {
    */
   removeAdminToken: () => {
     cookieUtils.removeCookie('adminToken', '/');
+    // Dispatch logout event for cross-tab synchronization
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('admin-logout'));
+    }
   }
 };
 

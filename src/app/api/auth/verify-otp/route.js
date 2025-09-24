@@ -39,9 +39,11 @@ export async function POST(req) {
     res.cookies.set({
       name: "token",
       value: token,
-      httpOnly: false, // Allow JavaScript to read the cookie
+      httpOnly: false, // Allow JavaScript to read the cookie for cross-tab sync
+      secure: process.env.NODE_ENV === 'production', // HTTPS only in production
+      sameSite: 'lax', // Allow cross-site requests for better UX
       path: "/",
-      maxAge: 60 * 60 * 24 * 7 // 7 din
+      maxAge: 60 * 60 * 24 * 7 // 7 days
     });
 
     return res;

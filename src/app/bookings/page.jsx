@@ -15,25 +15,48 @@ const MyBookingsPage = () => {
   const [filter, setFilter] = useState('all');
   const [cancellingBooking, setCancellingBooking] = useState(null);
 
+  // Cross-tab logout synchronization
   useEffect(() => {
-    fetchBookings();
+    const handleLogout = () => {
+      setBookings([]);
+      setError('You have been logged out');
+      setLoading(false);
+    };
+
+    window.addEventListener('auth-logout', handleLogout);
+    return () => window.removeEventListener('auth-logout', handleLogout);
   }, []);
 
-  const fetchBookings = async () => {
+  useEffect(() => {
+    checkAuthAndFetchBookings();
+  }, []);
+
+  const checkAuthAndFetchBookings = async () => {
     try {
       setLoading(true);
       setError('');
-      const token = cookieUtils.getToken();
 
-      if (!token) {
-        setError('Please login to view your bookings');
-        setLoading(false);
-        return;
+      // First check if user is authenticated
+      const authResponse = await fetch('/api/auth/check-auth', {
+        credentials: 'include'
+      });
+
+      if (!authResponse.ok) {
+        if (authResponse.status === 401) {
+          setError('Please login to view your bookings');
+          setLoading(false);
+          return;
+        } else {
+          setError('Authentication check failed. Please try again.');
+          setLoading(false);
+          return;
+        }
       }
 
+      // If authenticated, fetch bookings
       const response = await fetch('/api/bookings', {
+        credentials: 'include',
         headers: {
-          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
       });
@@ -243,7 +266,7 @@ const MyBookingsPage = () => {
               <h2>Authentication Required</h2>
               <p style={{ textAlign: 'center', color: 'rgba(0,0,0,0.7)' }}>{error}</p>
               <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                <button onClick={fetchBookings} className={styles.retryBtn}>
+                <button onClick={checkAuthAndFetchBookings} className={styles.retryBtn}>
                   Try Again
                 </button>
                 <button
