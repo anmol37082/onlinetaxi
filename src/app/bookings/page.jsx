@@ -13,6 +13,7 @@ const MyBookingsPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [filter, setFilter] = useState('all');
+  const [cancellingBooking, setCancellingBooking] = useState(null);
 
   useEffect(() => {
     fetchBookings();
@@ -93,6 +94,80 @@ const MyBookingsPage = () => {
     if (filter === 'all') return true;
     return booking.status === filter;
   });
+
+  const cancelBooking = async (bookingId) => {
+    try {
+      setCancellingBooking(bookingId);
+      const token = cookieUtils.getToken();
+
+      if (!token) {
+        setError('Please login to cancel bookings');
+        return;
+      }
+
+      const response = await fetch(`/api/bookings/${bookingId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        // Update the booking status locally
+        setBookings(prevBookings =>
+          prevBookings.map(booking =>
+            booking._id === bookingId
+              ? { ...booking, status: 'cancelled' }
+              : booking
+          )
+        );
+        setError(''); // Clear any existing errors
+        alert(data.message || 'Booking cancelled successfully!');
+      } else if (response.status === 401) {
+        cookieUtils.removeToken();
+        setError('Your session has expired. Please login again.');
+      } else {
+        // Handle error response without trying to parse JSON directly
+        let errorMessage = 'Failed to cancel booking. Please try again.';
+        try {
+          // Clone the response to avoid consuming it twice
+          const responseClone = response.clone();
+          const contentType = response.headers.get('content-type');
+
+          if (contentType && contentType.includes('application/json')) {
+            try {
+              const errorData = await response.json();
+              errorMessage = errorData.message || errorMessage;
+            } catch (jsonError) {
+              console.error('Error parsing JSON response:', jsonError);
+              // Fallback to text if JSON parsing fails
+              const textContent = await responseClone.text();
+              if (textContent) {
+                errorMessage = textContent;
+              }
+            }
+          } else {
+            // Try to get text content if not JSON
+            const textContent = await response.text();
+            if (textContent) {
+              errorMessage = textContent;
+            }
+          }
+        } catch (parseError) {
+          console.error('Error handling response:', parseError);
+          // Use default error message if all parsing fails
+        }
+        setError(errorMessage);
+      }
+    } catch (err) {
+      console.error('Error cancelling booking:', err);
+      setError('Network error. Please check your connection and try again.');
+    } finally {
+      setCancellingBooking(null);
+    }
+  };
 
   const LoadingSpinner = () => (
     <div className={styles.loadingState}>
@@ -233,6 +308,7 @@ const MyBookingsPage = () => {
                       width={300}
                       height={200}
                       className={styles.image}
+                      style={{ width: 'auto', height: 'auto' }}
                     />
                   </div>
                   <div className={styles.bookingInfo}>
@@ -330,8 +406,12 @@ const MyBookingsPage = () => {
                   </div>
                   <div className={styles.actions}>
                     {booking.status === 'pending' && (
-                      <button className={styles.cancelBtn}>
-                        Cancel
+                      <button
+                        className={styles.cancelBtn}
+                        onClick={() => cancelBooking(booking._id)}
+                        disabled={cancellingBooking === booking._id}
+                      >
+                        {cancellingBooking === booking._id ? 'Cancelling...' : 'Cancel'}
                       </button>
                     )}
                     <Link href={`/bookings/${booking._id}`} className={styles.viewBtn}>

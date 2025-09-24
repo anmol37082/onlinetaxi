@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import Booking from '@/models/Booking';
 import User from '@/models/User';
-import { sendBookingConfirmationEmail, sendTripStartedEmail, sendTripCompletedEmail } from '@/lib/mail';
+import { sendBookingConfirmationEmail, sendTripStartedEmail, sendTripCompletedEmail, sendBookingCancellationEmail } from '@/lib/mail';
 import { verifyAdminToken } from '@/lib/cookies';
 
 // GET /api/admin/bookings - Get all bookings (admin only)
@@ -155,6 +155,21 @@ export async function PUT(request) {
         console.log(`Trip completed email sent to ${booking.userEmail}`);
       } catch (emailError) {
         console.error('Error sending trip completed email:', emailError);
+        // Don't fail the request if email fails, just log the error
+      }
+    } else if (status === 'cancelled') {
+      try {
+        await sendBookingCancellationEmail({
+          userEmail: booking.userEmail,
+          userName: booking.userName,
+          bookingReference: booking.bookingReference,
+          title: booking.title,
+          travelDate: booking.travelDate,
+          cancelledAt: booking.cancelledAt
+        });
+        console.log(`Booking cancellation email sent to ${booking.userEmail}`);
+      } catch (emailError) {
+        console.error('Error sending booking cancellation email:', emailError);
         // Don't fail the request if email fails, just log the error
       }
     }

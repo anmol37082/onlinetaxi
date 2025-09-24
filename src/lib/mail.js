@@ -20,6 +20,85 @@ export async function sendOtpEmail(toEmail, code) {
   return transporter.sendMail(mailOptions);
 }
 
+export async function sendBookingCancellationEmail(bookingData) {
+  const { userEmail, userName, bookingReference, title, travelDate, cancelledAt } = bookingData;
+
+  const formattedDate = new Date(travelDate).toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+
+  const formattedCancelledDate = new Date(cancelledAt).toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: userEmail,
+    subject: `Booking Cancelled - ${bookingReference}`,
+    text: `
+Dear ${userName},
+
+We regret to inform you that your booking has been cancelled.
+
+Booking Details:
+- Reference: ${bookingReference}
+- Service: ${title}
+- Original Travel Date: ${formattedDate}
+- Cancelled At: ${formattedCancelledDate}
+
+Reason: Your booking has been cancelled because it's not available. We sincerely apologize for any inconvenience this may have caused.
+
+Please book for another date that suits your schedule. We would be happy to assist you with new booking arrangements.
+
+If you have any questions or need assistance with rebooking, please don't hesitate to contact us. We're here to help!
+
+We apologize again for the inconvenience.
+
+Best regards,
+Online Taxi Team
+    `,
+    html: `
+<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+  <h2 style="color: #e74c3c;">❌ Booking Cancelled</h2>
+  <p>Dear ${userName},</p>
+
+  <p>We regret to inform you that your booking has been cancelled.</p>
+
+  <div style="background-color: #fff5f5; padding: 15px; border-radius: 5px; margin: 20px 0; border-left: 4px solid #e74c3c;">
+    <h3 style="margin-top: 0; color: #333;">Booking Details:</h3>
+    <p><strong>Reference:</strong> ${bookingReference}</p>
+    <p><strong>Service:</strong> ${title}</p>
+    <p><strong>Original Travel Date:</strong> ${formattedDate}</p>
+    <p><strong>Cancelled At:</strong> ${formattedCancelledDate}</p>
+  </div>
+
+  <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin: 20px 0;">
+    <h3 style="margin-top: 0; color: #e74c3c;">Reason for Cancellation:</h3>
+    <p style="margin-bottom: 0;">Your booking has been cancelled because it's not available. We sincerely apologize for any inconvenience this may have caused.</p>
+  </div>
+
+  <p><strong>Please book for another date</strong> that suits your schedule. We would be happy to assist you with new booking arrangements.</p>
+
+  <p>If you have any questions or need assistance with rebooking, please don't hesitate to contact us. We're here to help!</p>
+
+  <p>We apologize again for the inconvenience.</p>
+
+  <p>Best regards,<br><strong>Online Taxi Team</strong></p>
+</div>
+    `,
+  };
+
+  return transporter.sendMail(mailOptions);
+}
+
 export async function sendTripStartedEmail(bookingData) {
   const { userEmail, userName, bookingReference, title, travelDate, driverName, driverPhone } = bookingData;
 
