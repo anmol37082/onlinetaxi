@@ -162,6 +162,16 @@ export default function AdminTopRoutes() {
   const handleInputChange = (field, value) => {
     const updatedForm = { ...form, [field]: value }
 
+    // Auto-generate slug from title
+    if (field === 'title') {
+      updatedForm.slug = value
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, '') // Remove special characters
+        .replace(/\s+/g, '-') // Replace spaces with hyphens
+        .replace(/-+/g, '-') // Replace multiple hyphens with single
+        .trim()
+    }
+
     // Auto-calculate discount when original price or current price changes
     if (field === 'originalPrice' || field === 'currentPrice') {
       const originalPrice = field === 'originalPrice' ? parseFloat(value) || 0 : parseFloat(form.originalPrice) || 0
@@ -238,11 +248,26 @@ export default function AdminTopRoutes() {
               <input
                 className={styles.input}
                 type="text"
-                placeholder="Slug (e.g., chandigarh-to-amritsar)"
+                placeholder="Slug (auto-generated from title)"
                 value={form.slug}
                 onChange={e => handleInputChange('slug', e.target.value)}
                 required
+                readOnly
+                style={{
+                  backgroundColor: '#f5f5f5',
+                  cursor: 'not-allowed',
+                  color: '#666'
+                }}
+                title="Slug is automatically generated from the title"
               />
+              <small style={{
+                color: '#666',
+                fontSize: '0.8rem',
+                marginTop: '0.25rem',
+                display: 'block'
+              }}>
+                💡 Auto-generated: Converts title to lowercase, replaces spaces with hyphens, removes special characters
+              </small>
             </div>
 
             <ImageUpload
