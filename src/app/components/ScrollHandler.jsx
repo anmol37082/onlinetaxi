@@ -24,6 +24,14 @@ function ScrollHandlerInner() {
           toursSection.scrollIntoView({ behavior: 'smooth' })
         }
       }, 100)
+    } else if (scrollTo === 'taxi-services') {
+      // Small delay to ensure DOM is ready
+      setTimeout(() => {
+        const taxiServicesSection = document.getElementById('taxi-services')
+        if (taxiServicesSection) {
+          taxiServicesSection.scrollIntoView({ behavior: 'smooth' })
+        }
+      }, 100)
     }
   }, [searchParams])
 

@@ -2,12 +2,16 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 import { Phone, Mail, MapPin, Clock, Star, Car, Shield, Users, Facebook, Twitter, Instagram, Youtube, Linkedin } from 'lucide-react';
 import styles from './footer.module.css';
 
 const EnhancedFooter = () => {
   const [isClient, setIsClient] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     setIsClient(true);
@@ -20,6 +24,28 @@ const EnhancedFooter = () => {
 
     checkScreenSize();
   }, []);
+
+  const handleBookNowClick = () => {
+    if (pathname === '/') {
+      const bookingSection = document.getElementById('booking');
+      if (bookingSection) {
+        bookingSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      router.push('/?scrollTo=booking');
+    }
+  };
+
+  const handleOurServicesClick = () => {
+    if (pathname === '/') {
+      const taxiServicesSection = document.getElementById('taxi-services');
+      if (taxiServicesSection) {
+        taxiServicesSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      router.push('/?scrollTo=taxi-services');
+    }
+  };
 
   const footerData = {
     company: {
@@ -36,7 +62,7 @@ const EnhancedFooter = () => {
     quickLinks: [
       { name: "Home", href: "/" },
       { name: "About Us", href: "/about" },
-      { name: "Our Services", href: "/services" },
+      { name: "Our Services.", href: "/services" },
       { name: "Book Now", href: "/book" },
       { name: "Reviews", href: "/reviews" },
       { name: "Contact", href: "/contact" },
@@ -168,13 +194,38 @@ const EnhancedFooter = () => {
               <ul className={styles.linksList}>
                 {footerData.quickLinks.map((link, index) => (
                   <li key={index} className={styles.linkItem}>
-                    <a 
-                      href={link.href} 
-                      className={styles.link}
-                    >
-                      <span style={{ color: '#10b981', fontSize: '0.75rem' }}>▶</span>
-                      {link.name}
-                    </a>
+                    {link.name === "Terms & Conditions" ? (
+                      <Link href={link.href} className={styles.link}>
+                        <span style={{ color: '#10b981', fontSize: '0.75rem' }}>▶</span>
+                        {link.name}
+                      </Link>
+                    ) : link.name === "Book Now" ? (
+                      <button 
+                        onClick={handleBookNowClick} 
+                        className={styles.link}
+                        style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+                      >
+                        <span style={{ color: '#10b981', fontSize: '0.75rem' }}>▶</span>
+                        {link.name}
+                      </button>
+                    ) : link.name === "Our Services." ? (
+                      <button 
+                        onClick={handleOurServicesClick} 
+                        className={styles.link}
+                        style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+                      >
+                        <span style={{ color: '#10b981', fontSize: '0.75rem' }}>▶</span>
+                        {link.name}
+                      </button>
+                    ) : (
+                      <a 
+                        href={link.href} 
+                        className={styles.link}
+                      >
+                        <span style={{ color: '#10b981', fontSize: '0.75rem' }}>▶</span>
+                        {link.name}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>

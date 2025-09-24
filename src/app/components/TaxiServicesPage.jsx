@@ -317,7 +317,7 @@ const TaxiServicesPage = () => {
         }
       `}</style>
       
-      <div className="services-wrapper">
+      <div className="services-wrapper" id="taxi-services">
         {/* Decorative Background Elements */}
         <div className="decorative-bg-1" aria-hidden="true"></div>
         <div className="decorative-bg-2" aria-hidden="true"></div>

@@ -40,7 +40,7 @@ const ContactSection = () => {
               </div>
               <div className={styles.contactText}>
                 <div className={styles.contactLabel}>Email Us</div>
-                <div className={styles.contactValue}>onlinetaxi08@gmail.com</div>
+                <div className={styles.contactValue}>onlinetaxi09@gmail.com</div>
               </div>
             </div>
             
