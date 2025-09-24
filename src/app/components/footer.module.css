@@ -357,6 +357,38 @@
   transform: translateX(5px);
 }
 
+/* Fix for button elements in Quick Links */
+.linksList button.link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .linksList button.link {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .linksList button.link {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
 /* Services Section */
 .serviceItem {
   margin-bottom: 1rem;
