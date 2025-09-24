@@ -150,3 +150,59 @@
 - **Improved Readability**: Users can easily scan and compare bookings
 - **Mobile Friendly**: Responsive sizing works well on all devices
 - **Brand Consistency**: Maintains professional appearance throughout the application
+
+---
+
+## ✅ [2024-01-XX] Fix Authentication Error in My Bookings Page
+**Status**: ✅ COMPLETED
+
+**Description**: Fixed authentication error that was causing "Authentication Required" message to appear when customers tried to view their bookings, even when they were logged in.
+
+**Problem Identified**:
+- **Root Cause**: Frontend was not sending authentication token in the correct format
+- **Issue**: Backend expected `Authorization: Bearer <token>` header, but frontend was only sending token via cookies
+- **Result**: Backend couldn't authenticate requests, showing 401 error and triggering error state
+- **User Experience**: Customers saw confusing "Authentication Required" screen instead of their bookings
+
+**Changes Made**:
+
+1. **Updated `src/app/bookings/page.jsx`**:
+   - **Fixed fetchBookings()**: Added proper `Authorization: Bearer ${token}` header to API requests
+   - **Fixed cancelBooking()**: Ensured consistent token handling for booking cancellation
+   - **Added Content-Type**: Added `'Content-Type': 'application/json'` header for better API compatibility
+   - **Maintained existing cookie-based token retrieval**: Used `cookieUtils.getToken()` as before
+
+**Technical Details**:
+- **Before**: Frontend relied only on cookies for authentication
+- **After**: Frontend sends token in Authorization header (industry standard)
+- **Compatibility**: Backend already supported both methods, but header method is more reliable
+- **Security**: No security changes - same token validation logic
+
+**API Request Flow**:
+```
+Frontend → API: Authorization: Bearer <jwt_token>
+Backend ← Validates token from header
+Returns bookings data successfully
+```
+
+**Error Handling**:
+- ✅ **401 Response**: Properly handled with "session expired" message
+- ✅ **Network Errors**: Graceful fallback with retry option
+- ✅ **Token Refresh**: Automatic token cleanup on authentication failure
+- ✅ **User Guidance**: Clear "Login" button when authentication fails
+
+**Testing Status**: ✅ Ready for testing
+- Verify users can now view their bookings without authentication errors
+- Test booking cancellation functionality
+- Check error handling for expired sessions
+- Ensure login flow works properly when needed
+
+**Files Modified**:
+- `src/app/bookings/page.jsx` - Fixed authentication header handling
+
+**Benefits**:
+- **Seamless User Experience**: Customers can view bookings without authentication issues
+- **Proper Error Handling**: Clear messaging when authentication actually fails
+- **Industry Standard**: Uses proper Authorization header format
+- **Better Reliability**: More consistent authentication across different scenarios
+- **User Trust**: Eliminates confusing error states for logged-in users
