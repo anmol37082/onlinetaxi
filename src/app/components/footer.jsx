@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useEffect } from 'react';
@@ -66,7 +67,7 @@ const EnhancedFooter = () => {
       { name: "Book Now", href: "/book" },
       { name: "Reviews", href: "/reviews" },
       { name: "Contact", href: "/contact" },
-      { name: "Privacy Policy", href: "/privacy" },
+      { name: "Privacy Policy", href: "/privacy-policy" },
       { name: "Terms & Conditions", href: "/terms" }
     ],
     services: [
@@ -208,7 +209,7 @@ const EnhancedFooter = () => {
                         <span style={{ color: '#10b981', fontSize: '0.75rem' }}>▶</span>
                         {link.name}
                       </button>
-                    ) : link.name === "Our Services." ? (
+                    ) : link.name === "Our Services" ? (
                       <button 
                         onClick={handleOurServicesClick} 
                         className={styles.link}
@@ -323,9 +324,9 @@ const EnhancedFooter = () => {
             © 2024 OnlineTaxi. All rights reserved. | Made with ❤️ for better transportation
           </div>
           <div className={styles.bottomLinks} style={{ flexWrap: isMobile ? 'wrap' : 'nowrap', justifyContent: isMobile ? 'center' : 'flex-end' }}>
-            <span>Privacy Policy</span>
+            <Link href="/privacy-policy" className={styles.bottomLink}>Privacy Policy</Link>
             <span>•</span>
-            <span>Terms of Service</span>
+            <Link href="/terms" className={styles.bottomLink}>Terms of Service</Link>
             <span>•</span>
             <span>Cookie Policy</span>
           </div>
