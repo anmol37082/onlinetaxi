@@ -242,16 +242,7 @@ const Navbar = () => {
                 </a>
               </li>
               {/* Profile options in mobile menu */}
-              <li className={styles.navMenuItem}>
-                <a href={token ? "/profile" : "/login"} className={styles.navLink} onClick={toggleMobileMenu}>
-                  <i className="fas fa-user-circle"></i> Profile
-                </a>
-              </li>
-              <li className={styles.navMenuItem}>
-                <Link href="/bookings" className={styles.navLink} onClick={toggleMobileMenu}>
-                  <i className="fas fa-calendar-alt"></i> My Bookings
-                </Link>
-              </li>
+             
             </ul>
           )}
         </div>
