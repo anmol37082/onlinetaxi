@@ -125,6 +125,20 @@ const TestimonialsSection = () => {
     ));
   };
 
+  const handleBookNowClick = (e) => {
+    e.preventDefault();
+    if (pathname === '/') {
+      // On home page, scroll to booking section
+      const bookingSection = document.getElementById('booking');
+      if (bookingSection) {
+        bookingSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // On other pages, navigate to home with scrollTo param
+      router.push('/?scrollTo=booking');
+    }
+  };
+
   // Loading Component
   const LoadingComponent = () => (
     <div className={styles.loadingContainer}>
@@ -143,7 +157,7 @@ const TestimonialsSection = () => {
       <p className={styles.noReviewsText}>
         Be the first to share your experience with our service!
       </p>
-      <button className={styles.ctaButton} style={{ marginTop: '1rem' }}>
+      <button className={styles.ctaButton} style={{ marginTop: '1rem' }} onClick={handleBookNowClick}>
         <span>📞</span>
         Book Your Ride Now
       </button>
@@ -412,7 +426,7 @@ const TestimonialsSection = () => {
 
             {/* CTA Section */}
             <div className={styles.ctaSection}>
-              <button className={styles.ctaButton}>
+              <button className={styles.ctaButton} onClick={handleBookNowClick}>
                 <span>📞</span>
                 Book Your Ride Now
               </button>
