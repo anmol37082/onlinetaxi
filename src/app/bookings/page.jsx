@@ -308,7 +308,6 @@ const MyBookingsPage = () => {
                       width={300}
                       height={200}
                       className={styles.image}
-                      style={{ width: 'auto', height: 'auto' }}
                     />
                   </div>
                   <div className={styles.bookingInfo}>
