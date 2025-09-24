@@ -54,11 +54,11 @@ const TopRoutes = ({ showViewAll = true, maxRoutes }) => {
     const message = encodeURIComponent(
       `Hi! I want to book a taxi for ${route.title}. Price: ₹${route.currentPrice}. Please confirm availability.`
     );
-    window.open(`https://wa.me/1234567890?text=${message}`, "_blank");
+    window.open(`https://wa.me/+919988222283?text=${message}`, "_blank");
   };
 
   const handleCallNow = () => {
-    window.location.href = "tel:+911234567890";
+    window.location.href = "tel:+919988222283";
   };
 
   // Loading state
