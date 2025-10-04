@@ -12,7 +12,7 @@ export async function POST(req) {
     if (!email) return NextResponse.json({ error: "Email required" }, { status: 400 });
 
     const client = await dbConnect();
-    const db = client.db("Onlinetaxi");
+    const db = client.connection.db;
 
     const code = generateOtp();
     const expiresAt = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes
