@@ -9,7 +9,7 @@ export async function POST(req) {
     if (!email || !code) return NextResponse.json({ error: "Email and code required" }, { status: 400 });
 
     const client = await dbConnect();
-    const db = client.db("Onlinetaxi");
+    const db = client.connection.db;
 
     const otpDoc = await db.collection("otps").findOne({ email, code });
     if (!otpDoc) return NextResponse.json({ error: "Invalid OTP" }, { status: 400 });

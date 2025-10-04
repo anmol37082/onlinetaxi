@@ -4,7 +4,7 @@ export async function POST(req) {
   try {
     const { from, to } = await req.json(); // user input
     const client = await dbConnect();
-    const db = client.db("Onlinetaxi");
+    const db = client.connection.db;
 
     const cabs = await db
       .collection("roundtrips")

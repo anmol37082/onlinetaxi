@@ -10,7 +10,7 @@ async function getUserFromCookie(req) {
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRET);
     const client = await dbConnect();
-    const db = client.db("Onlinetaxi");
+    const db = client.connection.db;
     const user = await db.collection("users").findOne({ _id: new ObjectId(payload.userId) });
     return user;
   } catch (err) {
@@ -41,7 +41,7 @@ export async function POST(req) {
     const { name, phone, address } = body;
 
     const client = await dbConnect();
-    const db = client.db("Onlinetaxi");
+    const db = client.connection.db;
     const updatedUser = {
       name: name ?? user.name,
       phone: phone ?? user.phone,

@@ -3,7 +3,7 @@ import dbConnect from "@/lib/mongodb";
 export async function GET(req) {
   try {
     const client = await dbConnect();
-    const db = client.db("Onlinetaxi");
+    const db = client.connection.db;
     const collection = db.collection("hourlytrips");
 
     const hours = await collection
