@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import connectDB from '@/lib/mongodb';
+import dbConnect from '@/lib/mongodb';
 import User from '@/models/User';
 import jwt from 'jsonwebtoken';
 
@@ -9,7 +9,7 @@ async function getUserFromCookie(req) {
 
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRET);
-    await connectDB();
+    await dbConnect();
     const user = await User.findById(payload.userId);
     return user;
   } catch (err) {

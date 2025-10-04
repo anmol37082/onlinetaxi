@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
-import connectDB from "@/lib/mongodb";
-import Otp from "@/models/Otp";
-import User from "@/models/User";
+import dbConnect from "@/lib/mongodb";
+import { ObjectId } from "mongodb";
 import jwt from "jsonwebtoken";
 
 export async function POST(req) {
@@ -9,41 +8,44 @@ export async function POST(req) {
     const { email, code } = await req.json();
     if (!email || !code) return NextResponse.json({ error: "Email and code required" }, { status: 400 });
 
-    await connectDB();
+    const client = await dbConnect();
+    const db = client.db("Onlinetaxi");
 
-    const otpDoc = await Otp.findOne({ email, code });
+    const otpDoc = await db.collection("otps").findOne({ email, code });
     if (!otpDoc) return NextResponse.json({ error: "Invalid OTP" }, { status: 400 });
     if (new Date() > new Date(otpDoc.expiresAt)) {
-      await Otp.deleteMany({ email });
+      await db.collection("otps").deleteMany({ email });
       return NextResponse.json({ error: "OTP expired" }, { status: 400 });
     }
 
-    await Otp.deleteMany({ email });
+    await db.collection("otps").deleteMany({ email });
 
-    let user = await User.findOne({ email });
-    if (!user) user = await User.create({ email });
+    let user = await db.collection("users").findOne({ email });
+    if (!user) {
+      const insertResult = await db.collection("users").insertOne({ email });
+      user = { _id: insertResult.insertedId, email };
+    }
 
     if (!process.env.JWT_SECRET) {
       console.error("JWT_SECRET environment variable is not set");
       return NextResponse.json({ error: "Server configuration error" }, { status: 500 });
     }
 
-    const token = jwt.sign({ userId: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: "7d" });
+    const token = jwt.sign({ userId: user._id.toString(), email: user.email }, process.env.JWT_SECRET, { expiresIn: "7d" });
 
     const res = NextResponse.json({
       success: true,
       user: { email: user.email, name: user.name, phone: user.phone, address: user.address }
     });
 
-    // ✅ Cookie me JWT set karo (for both server and client authentication)
     res.cookies.set({
       name: "token",
       value: token,
-      httpOnly: false, // Allow JavaScript to read the cookie for cross-tab sync
-      secure: process.env.NODE_ENV === 'production', // HTTPS only in production
-      sameSite: 'lax', // Allow cross-site requests for better UX
+      httpOnly: false,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
       path: "/",
-      maxAge: 60 * 60 * 24 * 7 // 7 days
+      maxAge: 60 * 60 * 24 * 7
     });
 
     return res;

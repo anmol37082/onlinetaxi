@@ -1,0 +1,433 @@
+.container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: rgba(255, 165, 0, 0.1); /* light orange transparent */
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  font-family: var(--font-poppins);
+  color: var(--text-dark);
+}
+
+.tabs {
+  display: flex;
+  margin-bottom: 20px;
+  border-bottom: 2px solid rgba(255, 165, 0, 0.4);
+  overflow-x: auto;
+}
+
+.tab {
+  padding: 12px 24px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
+  color: var(--text-dark);
+  font-weight: 600;
+  transition: background 0.3s, color 0.3s;
+  white-space: nowrap;
+}
+
+.tab:hover {
+  background: rgba(255, 165, 0, 0.2);
+}
+
+.tab.active {
+  background: linear-gradient(135deg, #ffb347 0%, #ffcc33 100%);
+  color: white;
+  box-shadow: 0 4px 10px rgba(255, 165, 0, 0.4);
+}
+
+.form {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 25px;
+  border-radius: var(--border-radius-lg);
+  margin-bottom: 30px;
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(10px);
+}
+
+.row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.row input, .row select {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1.5px solid rgba(255, 165, 0, 0.6);
+  border-radius: var(--border-radius-md);
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.row input:focus, .row select:focus {
+  outline: none;
+  border-color: #ff9900;
+  box-shadow: 0 0 8px rgba(255, 165, 0, 0.5);
+}
+
+.buttonRow {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.buttonRow button {
+  padding: 12px 28px;
+  border: none;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: background 0.3s, box-shadow 0.3s;
+  flex: 1 1 150px;
+}
+
+.buttonRow button[type="submit"] {
+  background: linear-gradient(135deg, #ff9900 0%, #ffb347 100%);
+  color: white;
+  box-shadow: 0 6px 15px rgba(255, 165, 0, 0.5);
+}
+
+.buttonRow button[type="submit"]:hover {
+  background: linear-gradient(135deg, #ffb347 0%, #ffcc33 100%);
+  box-shadow: 0 8px 20px rgba(255, 165, 0, 0.7);
+}
+
+.buttonRow button[type="button"] {
+  background: #ff6f00;
+  color: white;
+  box-shadow: 0 6px 15px rgba(255, 111, 0, 0.5);
+}
+
+.buttonRow button[type="button"]:hover {
+  background: #ff8f00;
+  box-shadow: 0 8px 20px rgba(255, 143, 0, 0.7);
+}
+
+.updateImage {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 25px;
+  border-radius: var(--border-radius-lg);
+  margin-bottom: 30px;
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 15px;
+}
+
+.updateImage h2 {
+  flex-basis: 100%;
+  color: #ff9900;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.updateImage select {
+  flex: 1 1 200px;
+  padding: 10px 12px;
+  border: 1.5px solid rgba(255, 165, 0, 0.6);
+  border-radius: var(--border-radius-md);
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.updateImage select:focus {
+  outline: none;
+  border-color: #ff9900;
+  box-shadow: 0 0 8px rgba(255, 165, 0, 0.5);
+}
+
+.updateImage button {
+  padding: 12px 28px;
+  background: linear-gradient(135deg, #ff9900 0%, #ffb347 100%);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: 0 6px 15px rgba(255, 165, 0, 0.5);
+  transition: background 0.3s, box-shadow 0.3s;
+  flex: 1 1 150px;
+}
+
+.updateImage button:disabled {
+  background: rgba(255, 165, 0, 0.4);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.updateImage button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #ffb347 0%, #ffcc33 100%);
+  box-shadow: 0 8px 20px rgba(255, 165, 0, 0.7);
+}
+
+.cabsList {
+  margin-top: 20px;
+}
+
+.cabCard {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 15px;
+  border: 1px solid rgba(255, 165, 0, 0.3);
+  border-radius: var(--border-radius-md);
+  margin-bottom: 15px;
+  box-shadow: var(--shadow-sm);
+  flex-wrap: wrap;
+}
+
+.cabCard img {
+  width: 120px;
+  height: 80px;
+  object-fit: cover;
+  margin-right: 15px;
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--shadow-md);
+}
+
+.cardActions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.cardActions button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.cardActions button:first-child {
+  background: #ffb347;
+  color: #4a2c00;
+  box-shadow: 0 4px 10px rgba(255, 179, 71, 0.5);
+}
+
+.cardActions button:first-child:hover {
+  background: #ffcc33;
+  box-shadow: 0 6px 15px rgba(255, 204, 51, 0.7);
+}
+
+.cardActions button:nth-child(2) {
+  background: #ff6f00;
+  color: white;
+  box-shadow: 0 4px 10px rgba(255, 111, 0, 0.5);
+}
+
+.cardActions button:nth-child(2):hover {
+  background: #ff8f00;
+  box-shadow: 0 6px 15px rgba(255, 143, 0, 0.7);
+}
+
+.loadMore {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.loadMore button {
+  padding: 12px 28px;
+  background: linear-gradient(135deg, #ff9900 0%, #ffb347 100%);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: 0 6px 15px rgba(255, 165, 0, 0.5);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.loadMore button:hover {
+  background: linear-gradient(135deg, #ffb347 0%, #ffcc33 100%);
+  box-shadow: 0 8px 20px rgba(255, 165, 0, 0.7);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  .tabs {
+    margin-bottom: 15px;
+  }
+
+  .tab {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+
+  .form {
+    padding: 20px;
+  }
+
+  .row {
+    gap: 10px;
+  }
+
+  .buttonRow {
+    gap: 10px;
+  }
+
+  .buttonRow button {
+    flex: 1 1 100%;
+  }
+
+  .updateImage {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .updateImage select,
+  .updateImage button {
+    flex: 1 1 100%;
+  }
+
+  .cabCard {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cabCard img {
+    margin-bottom: 10px;
+    width: 100%;
+    height: auto;
+  }
+
+  .cardActions {
+    margin-top: 10px;
+  }
+
+  .loadMore {
+    margin-top: 20px;
+  }
+}
+
+.incrementSection {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.incrementRow {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: var(--border-radius-lg);
+  border: 2px solid rgba(255, 165, 0, 0.3);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.incrementRow:hover {
+  border-color: rgba(255, 165, 0, 0.6);
+  box-shadow: 0 8px 25px rgba(255, 165, 0, 0.2);
+}
+
+.incrementRow label {
+  font-weight: 700;
+  color: #ff9900;
+  font-size: 1.1rem;
+  min-width: 140px;
+  text-align: left;
+}
+
+.incrementInput {
+  width: 100px;
+  padding: 12px 16px;
+  border: 2px solid rgba(255, 165, 0, 0.4);
+  border-radius: var(--border-radius-md);
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--text-dark);
+  transition: all 0.3s ease;
+}
+
+.incrementInput:focus {
+  outline: none;
+  border-color: #ff9900;
+  box-shadow: 0 0 12px rgba(255, 165, 0, 0.4);
+  background: white;
+  transform: scale(1.02);
+}
+
+.incrementRow span {
+  font-weight: 700;
+  color: #ff9900;
+  font-size: 1.2rem;
+  margin: 0 5px;
+}
+
+.incrementButton {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #ff9900 0%, #ffb347 100%);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: 0 6px 15px rgba(255, 165, 0, 0.5);
+  transition: all 0.3s ease;
+  min-width: 100px;
+}
+
+.incrementButton:hover:not(:disabled) {
+  background: linear-gradient(135deg, #ffb347 0%, #ffcc33 100%);
+  box-shadow: 0 8px 20px rgba(255, 165, 0, 0.7);
+  transform: translateY(-2px);
+}
+
+.incrementButton:disabled {
+  background: rgba(255, 165, 0, 0.4);
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.incrementButton:active {
+  transform: translateY(0);
+}
+
+/* Responsive adjustments for increment section */
+@media (max-width: 768px) {
+  .incrementRow {
+    flex-direction: column;
+    gap: 12px;
+    padding: 15px;
+  }
+
+  .incrementRow label {
+    min-width: auto;
+    text-align: center;
+  }
+
+  .incrementInput {
+    width: 120px;
+  }
+
+  .incrementButton {
+    width: 100%;
+    max-width: 150px;
+  }
+}

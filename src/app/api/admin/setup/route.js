@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
-import connectDB from "@/lib/mongodb";
+import dbConnect from "@/lib/mongodb";
 import Admin from "@/models/Admin";
 
 export async function POST(req) {
   try {
-    await connectDB();
+    await dbConnect();
 
     // Check if admin already exists
     const existingAdmin = await Admin.findOne({ adminId: 'admin' });
@@ -15,10 +15,10 @@ export async function POST(req) {
       });
     }
 
-    // Create default admin user
+    // Create default admin user (password will be hashed by pre-save hook)
     const admin = new Admin({
       adminId: 'admin',
-      password: 'admin123', // This will be hashed by the pre-save hook
+      password: 'admin123',
       role: 'admin',
       isActive: true
     });

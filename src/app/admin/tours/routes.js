@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
-import connectDB from "../../../../lib/mongodb";
+import dbConnect from "../../../../lib/mongodb";
 import Tour from "../../../../models/Tour";
 
 export async function POST(req) {
   const body = await req.json();
   try {
-    await connectDB();
+    await dbConnect();
     const tour = await Tour.create(body);
     return NextResponse.json({ success: true, tour });
   } catch (err) {
@@ -17,7 +17,7 @@ export async function POST(req) {
 export async function PUT(req) {
   const { id, ...data } = await req.json();
   try {
-    await connectDB();
+    await dbConnect();
     const tour = await Tour.findByIdAndUpdate(id, data, { new: true });
     return NextResponse.json({ success: true, tour });
   } catch (err) {
@@ -29,7 +29,7 @@ export async function PUT(req) {
 export async function DELETE(req) {
   const { id } = await req.json();
   try {
-    await connectDB();
+    await dbConnect();
     await Tour.findByIdAndDelete(id);
     return NextResponse.json({ success: true });
   } catch (err) {

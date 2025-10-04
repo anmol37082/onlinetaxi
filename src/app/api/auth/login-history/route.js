@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server';
-import { connectDB } from '@/lib/mongodb';
+import dbConnect from '@/lib/mongodb';
 import LoginHistory from '@/models/LoginHistory';
 import { verifyToken } from '@/lib/cookies';
 
 export async function GET(request) {
   try {
-    await connectDB();
+    await dbConnect();
 
     // Verify user authentication
     const tokenData = verifyToken(request);

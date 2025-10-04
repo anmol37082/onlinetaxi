@@ -8,8 +8,8 @@ const BookingSchema = new mongoose.Schema({
   userPhone: { type: String, required: true },
   userAddress: { type: String },
 
-  // Route/Tour Information
-  bookingType: { type: String, enum: ['route', 'tour'], required: true },
+  // Route/Tour/Cab Information
+  bookingType: { type: String, enum: ['route', 'tour', 'cab'], required: true },
   routeId: { type: mongoose.Schema.Types.ObjectId, ref: 'TopRoute' },
   tourId: { type: mongoose.Schema.Types.ObjectId, ref: 'Tour' },
   title: { type: String, required: true },

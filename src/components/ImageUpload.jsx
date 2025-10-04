@@ -2,7 +2,7 @@
 import { useState, useRef } from 'react'
 import styles from './ImageUpload.module.css'
 
-export default function ImageUpload({ onImageUpload, currentImage, label = "Upload Image" }) {
+export default function ImageUpload({ onImageUpload, onUploadSuccess, currentImage, label = "Upload Image", onCancel }) {
   const [uploading, setUploading] = useState(false)
   const [preview, setPreview] = useState(currentImage || '')
   const [error, setError] = useState('')
@@ -47,7 +47,11 @@ export default function ImageUpload({ onImageUpload, currentImage, label = "Uplo
       const result = await response.json()
 
       if (response.ok) {
-        onImageUpload(result.data.url, result.data.public_id)
+        if (onUploadSuccess) {
+          onUploadSuccess(result.data.url)
+        } else if (onImageUpload) {
+          onImageUpload(result.data.url, result.data.public_id)
+        }
       } else {
         setError(result.error || 'Upload failed')
         setPreview(currentImage || '')
@@ -62,7 +66,11 @@ export default function ImageUpload({ onImageUpload, currentImage, label = "Uplo
 
   const handleRemoveImage = () => {
     setPreview('')
-    onImageUpload('', '')
+    if (onUploadSuccess) {
+      onUploadSuccess('')
+    } else if (onImageUpload) {
+      onImageUpload('', '')
+    }
     if (fileInputRef.current) {
       fileInputRef.current.value = ''
     }

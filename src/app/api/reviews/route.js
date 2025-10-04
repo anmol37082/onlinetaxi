@@ -1,11 +1,13 @@
 import { NextResponse } from "next/server";
-import connectDB from "@/lib/mongodb";
-import Review from "@/models/Review";
+import dbConnect from "@/lib/mongodb";
+import mongoose from "mongoose";
+import { ObjectId } from "mongodb";
 
 export async function GET() {
   try {
-    await connectDB();
-    const reviews = await Review.find().sort({ createdAt: -1 });
+    await dbConnect();
+    const db = mongoose.connection.db;
+    const reviews = await db.collection("reviews").find().sort({ createdAt: -1 }).toArray();
     return NextResponse.json({ reviews });
   } catch (err) {
     console.error("GET /api/reviews error", err);
@@ -22,8 +24,9 @@ export async function POST(req) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    await connectDB();
-    const review = await Review.create({ name, role, rating, text, tourType, tourDescription });
+    await dbConnect();
+    const db = mongoose.connection.db;
+    const review = await db.collection("reviews").insertOne({ name, role, rating, text, tourType, tourDescription, createdAt: new Date() });
 
     return NextResponse.json({ success: true, review });
   } catch (err) {
@@ -39,22 +42,25 @@ export async function PUT(req) {
 
     if (!id) return NextResponse.json({ error: "Review ID required" }, { status: 400 });
 
-    await connectDB();
-    const review = await Review.findById(id);
+    await dbConnect();
+    const db = mongoose.connection.db;
+    const review = await db.collection("reviews").findOne({ _id: new ObjectId(id) });
     if (!review) return NextResponse.json({ error: "Review not found" }, { status: 404 });
 
-    review.name = name ?? review.name;
-    review.role = role ?? review.role;
-    review.avatar = avatar ?? review.avatar;
-    review.rating = rating ?? review.rating;
-    review.text = text ?? review.text;
-    review.tourType = tourType ?? review.tourType;
-    review.tourDescription = tourDescription ?? review.tourDescription;
-    review.tourImage = tourImage ?? review.tourImage;
-    review.gradientColor = gradientColor ?? review.gradientColor;
+    const updatedReview = {
+      name: name ?? review.name,
+      role: role ?? review.role,
+      avatar: avatar ?? review.avatar,
+      rating: rating ?? review.rating,
+      text: text ?? review.text,
+      tourType: tourType ?? review.tourType,
+      tourDescription: tourDescription ?? review.tourDescription,
+      tourImage: tourImage ?? review.tourImage,
+      gradientColor: gradientColor ?? review.gradientColor,
+    };
 
-    await review.save();
-    return NextResponse.json({ success: true, review });
+    await db.collection("reviews").updateOne({ _id: new ObjectId(id) }, { $set: updatedReview });
+    return NextResponse.json({ success: true, review: updatedReview });
   } catch (err) {
     console.error("PUT /api/reviews error", err);
     return NextResponse.json({ error: "Failed to update review" }, { status: 500 });
@@ -67,8 +73,9 @@ export async function DELETE(req) {
     const id = searchParams.get("id");
     if (!id) return NextResponse.json({ error: "Review ID required" }, { status: 400 });
 
-    await connectDB();
-    await Review.findByIdAndDelete(id);
+    await dbConnect();
+    const db = mongoose.connection.db;
+    await db.collection("reviews").deleteOne({ _id: new ObjectId(id) });
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error("DELETE /api/reviews error", err);

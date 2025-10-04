@@ -1,32 +1,31 @@
 import { NextResponse } from "next/server";
-import connectDB from "@/lib/mongodb";
+import dbConnect from "@/lib/mongodb";
 import Tour from "@/models/Tour";
+import { ObjectId } from "mongodb";
 
 export async function GET(req) {
   try {
-    await connectDB();
+    await dbConnect();
     const { searchParams } = new URL(req.url);
     const slug = searchParams.get("slug");
-    let tours;
+    let tour;
     if (slug) {
-      // Try to find by slug first, then by _id if slug is not found
-      tours = await Tour.findOne({ slug });
-      if (!tours) {
-        // Only try findById if slug is a valid ObjectId
+      tour = await Tour.findOne({ slug });
+      if (!tour) {
         if (/^[0-9a-fA-F]{24}$/.test(slug)) {
-          tours = await Tour.findById(slug);
+          tour = await Tour.findById(slug);
         }
       }
-      if (!tours) {
+      if (!tour) {
         return NextResponse.json({ error: "Tour not found" }, { status: 404 });
       }
-      return NextResponse.json({ tour: tours }, {
+      return NextResponse.json({ tour }, {
         headers: {
           'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600'
         }
       });
     } else {
-      tours = await Tour.find().sort({ createdAt: -1 });
+      const tours = await Tour.find().sort({ createdAt: -1 });
       return NextResponse.json({ tours }, {
         headers: {
           'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600'
@@ -48,8 +47,9 @@ export async function POST(req) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    await connectDB();
-    const tour = await Tour.create({ title, description, image, tag, duration, price, rating, days, summaryTitle, summaryText, travelTipsTitle, travelTips, closingParagraph, slug });
+    await dbConnect();
+    const tour = new Tour({ title, description, image, tag, duration, price, rating, days, summaryTitle, summaryText, travelTipsTitle, travelTips, closingParagraph, slug });
+    await tour.save();
 
     return NextResponse.json({ success: true, tour });
   } catch (err) {
@@ -65,7 +65,7 @@ export async function PUT(req) {
 
     if (!id) return NextResponse.json({ error: "Tour ID required" }, { status: 400 });
 
-    await connectDB();
+    await dbConnect();
     const tour = await Tour.findById(id);
     if (!tour) return NextResponse.json({ error: "Tour not found" }, { status: 404 });
 
@@ -98,7 +98,7 @@ export async function DELETE(req) {
     const id = searchParams.get("id");
     if (!id) return NextResponse.json({ error: "Tour ID required" }, { status: 400 });
 
-    await connectDB();
+    await dbConnect();
     await Tour.findByIdAndDelete(id);
     return NextResponse.json({ success: true });
   } catch (err) {

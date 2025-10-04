@@ -102,6 +102,14 @@ function AdminPanelContent() {
               View Contacts
             </a>
           </div>
+
+          <div className={styles.card}>
+            <h2 className={styles.cardTitle}>🚖 Cabs</h2>
+            <p className={styles.cardDescription}>Manage cab listings and pricing</p>
+            <a href="/admin/cabs" className={`${styles.cardButton} ${styles.cabsButton}`}>
+              View Cabs
+            </a>
+          </div>
         </div>
 
         {/* Analytics Section */}

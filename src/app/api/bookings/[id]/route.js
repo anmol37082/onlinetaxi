@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken';
 // GET /api/bookings/[id] - Get single booking by ID
 export async function GET(request, { params }) {
   try {
+    const { id } = await params;
     await dbConnect();
 
     // Check for token in Authorization header first, then in cookies
@@ -31,7 +32,7 @@ export async function GET(request, { params }) {
     }
 
     const booking = await Booking.findOne({
-      _id: params.id,
+      _id: id,
       userId: decoded.userId
     })
     .populate('routeId', 'title image fromCity toCity distance duration carType carOptions')
@@ -51,6 +52,7 @@ export async function GET(request, { params }) {
 // DELETE /api/bookings/[id] - Cancel booking by ID
 export async function DELETE(request, { params }) {
   try {
+    const { id } = await params;
     await dbConnect();
 
     // Check for token in Authorization header first, then in cookies
@@ -77,7 +79,7 @@ export async function DELETE(request, { params }) {
 
     // Find the booking
     const booking = await Booking.findOne({
-      _id: params.id,
+      _id: id,
       userId: decoded.userId
     });
 

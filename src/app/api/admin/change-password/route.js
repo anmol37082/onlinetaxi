@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import connectDB from "@/lib/mongodb";
+import dbConnect from "@/lib/mongodb";
 import Admin from "@/models/Admin";
 import jwt from "jsonwebtoken";
 
@@ -50,7 +50,7 @@ export async function POST(req) {
       );
     }
 
-    await connectDB();
+    await dbConnect();
 
     // Find admin
     const admin = await Admin.findOne({ adminId: decoded.adminId });
@@ -72,9 +72,8 @@ export async function POST(req) {
       );
     }
 
-    // Update password
+    // Update password (the pre-save hook will hash it)
     admin.password = newPassword;
-    admin.updatedAt = new Date();
     await admin.save();
 
     return NextResponse.json({

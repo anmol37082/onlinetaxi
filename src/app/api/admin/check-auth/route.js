@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
-import connectDB from "@/lib/mongodb";
+import dbConnect from "@/lib/mongodb";
 import Admin from "@/models/Admin";
 
 export async function GET(req) {
@@ -26,7 +26,7 @@ export async function GET(req) {
       );
     }
 
-    await connectDB();
+    await dbConnect();
 
     // Find admin
     const admin = await Admin.findOne({ adminId: decoded.adminId });

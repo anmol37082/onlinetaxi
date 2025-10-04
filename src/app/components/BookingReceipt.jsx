@@ -87,23 +87,24 @@ const BookingReceipt = ({ selectedCar, routeData, onClose }) => {
       }
 
       // Create booking payload with car-specific data
+      const isCabBooking = !!selectedCar;
       const bookingPayload = {
-        bookingType: 'route',
-        title: routeData?.title || '',
-        image: routeData?.image || '',
-        price: selectedCar?.price || 0,
+        bookingType: isCabBooking ? 'cab' : 'route',
+        title: routeData?.title || selectedCar?.Car || '',
+        image: isCabBooking ? (selectedCar.Imgg || selectedCar.imgg || '') : (routeData?.image || ''),
+        price: selectedCar?.Price || selectedCar?.price || 0,
         travelDate: formData.date,
         time: formData.time,
         specialRequests: formData.message,
         pickupLocation: formData.address,
         userPhone: formData.phone,
         routeId: routeData?._id,
-        carDetails: {
-          name: selectedCar?.name,
-          luggage: selectedCar?.luggage,
-          seats: selectedCar?.seats,
-          price: selectedCar?.price
-        }
+        carDetails: isCabBooking ? {
+          name: selectedCar?.Car || selectedCar?.name,
+          luggage: selectedCar?.Luggage || selectedCar?.luggage,
+          seats: selectedCar?.Seats || selectedCar?.seats,
+          price: selectedCar?.Price || selectedCar?.price
+        } : undefined
       };
 
       const response = await fetch('/api/bookings', {
@@ -252,6 +253,27 @@ const BookingReceipt = ({ selectedCar, routeData, onClose }) => {
           fontWeight: '700'
         }}>📋 Booking Details</h3>
 
+        {/* Cab Image */}
+        {selectedCar?.Imgg && (
+          <div style={{
+            textAlign: 'center',
+            marginBottom: '1.5rem'
+          }}>
+            <img
+              src={selectedCar.Imgg.startsWith('http') ? selectedCar.Imgg : `/images/${selectedCar.Imgg}`}
+              alt={selectedCar.Car || selectedCar.name}
+              style={{
+                width: '100%',
+                maxWidth: '300px',
+                height: '200px',
+                objectFit: 'cover',
+                borderRadius: '10px',
+                boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
+              }}
+            />
+          </div>
+        )}
+
         <div style={{
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
@@ -261,19 +283,19 @@ const BookingReceipt = ({ selectedCar, routeData, onClose }) => {
           <div>
             <strong style={{ color: '#555' }}>Going From:</strong>
             <p style={{ margin: '0.5rem 0', fontSize: '1.1rem' }}>
-              {routeData?.fromCity || 'N/A'}
+              {routeData?.fromCity || selectedCar?.From || 'N/A'}
             </p>
           </div>
           <div>
             <strong style={{ color: '#555' }}>Going To:</strong>
             <p style={{ margin: '0.5rem 0', fontSize: '1.1rem' }}>
-              {routeData?.toCity || 'N/A'}
+              {routeData?.toCity || selectedCar?.To || selectedCar?.City || 'N/A'}
             </p>
           </div>
           <div>
             <strong style={{ color: '#555' }}>Selected Car:</strong>
             <p style={{ margin: '0.5rem 0', fontSize: '1.1rem' }}>
-              {selectedCar?.name || 'N/A'}
+              {selectedCar?.Car || selectedCar?.name || 'N/A'}
             </p>
           </div>
           <div>
@@ -284,7 +306,7 @@ const BookingReceipt = ({ selectedCar, routeData, onClose }) => {
               color: '#ff6b35',
               fontWeight: '700'
             }}>
-              {formatPrice(selectedCar?.price || 0)}
+              {formatPrice(selectedCar?.Price || selectedCar?.price || 0)}
             </p>
           </div>
         </div>
@@ -314,7 +336,7 @@ const BookingReceipt = ({ selectedCar, routeData, onClose }) => {
               <div>
                 <strong style={{ color: '#333', fontSize: '0.9rem' }}>Seats:</strong>
                 <p style={{ margin: 0, color: '#666', fontSize: '0.85rem' }}>
-                  {selectedCar?.seats || 'N/A'}
+                  {selectedCar?.Seats || selectedCar?.seats || 'N/A'}
                 </p>
               </div>
             </div>
@@ -344,7 +366,7 @@ const BookingReceipt = ({ selectedCar, routeData, onClose }) => {
               <div>
                 <strong style={{ color: '#333', fontSize: '0.9rem' }}>Luggage:</strong>
                 <p style={{ margin: 0, color: '#666', fontSize: '0.85rem' }}>
-                  {selectedCar?.luggage || 'N/A'}
+                  {selectedCar?.Luggage || selectedCar?.luggage || 'N/A'}
                 </p>
               </div>
             </div>

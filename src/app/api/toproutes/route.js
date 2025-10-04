@@ -1,13 +1,13 @@
 import { NextResponse } from "next/server";
-import connectDB from "@/lib/mongodb";
+import dbConnect from "@/lib/mongodb";
 import TopRoute from "@/models/TopRoute";
+import { ObjectId } from "mongodb";
 
 export async function GET(req) {
   try {
+    await dbConnect();
     const { searchParams } = new URL(req.url);
     const slug = searchParams.get("slug");
-
-    await connectDB();
 
     if (slug) {
       const toproute = await TopRoute.findOne({ slug });
@@ -42,8 +42,9 @@ export async function POST(req) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    await connectDB();
-    const toproute = await TopRoute.create({ title, slug, image, imageAlt, distance, duration, carType, currentPrice, originalPrice, discount, description, features, fromCity, toCity, introHeading, introParagraph, overviewHeading, overviewParagraph, aboutHeading, aboutParagraph, journeyHeading, journeyParagraph, destinationHeading, destinationParagraph, sightseeing, whyHeading, whyPoints, discoverHeading, discoverParagraph, attractions, bookingHeading, bookingParagraph, carOptions });
+    await dbConnect();
+    const toproute = new TopRoute({ title, slug, image, imageAlt, distance, duration, carType, currentPrice, originalPrice, discount, description, features, fromCity, toCity, introHeading, introParagraph, overviewHeading, overviewParagraph, aboutHeading, aboutParagraph, journeyHeading, journeyParagraph, destinationHeading, destinationParagraph, sightseeing, whyHeading, whyPoints, discoverHeading, discoverParagraph, attractions, bookingHeading, bookingParagraph, carOptions });
+    await toproute.save();
 
     return NextResponse.json({ success: true, toproute });
   } catch (err) {
@@ -59,7 +60,7 @@ export async function PUT(req) {
 
     if (!id) return NextResponse.json({ error: "TopRoute ID required" }, { status: 400 });
 
-    await connectDB();
+    await dbConnect();
     const toproute = await TopRoute.findById(id);
     if (!toproute) return NextResponse.json({ error: "TopRoute not found" }, { status: 404 });
 
@@ -111,7 +112,7 @@ export async function DELETE(req) {
     const id = searchParams.get("id");
     if (!id) return NextResponse.json({ error: "TopRoute ID required" }, { status: 400 });
 
-    await connectDB();
+    await dbConnect();
     await TopRoute.findByIdAndDelete(id);
     return NextResponse.json({ success: true });
   } catch (err) {

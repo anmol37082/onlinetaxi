@@ -327,7 +327,15 @@ const MyBookingsPage = () => {
                 <div className={styles.bookingHeader}>
                   <div className={styles.bookingImage}>
                     <Image
-                      src={booking.image || "/api/placeholder/300/200"}
+                      src={
+                        booking.bookingType === 'route'
+                          ? booking.routeId?.image || "/api/placeholder/300/200"
+                          : booking.bookingType === 'tour'
+                          ? booking.tourId?.image || "/api/placeholder/300/200"
+                          : booking.bookingType === 'cab'
+                          ? booking.image || "/api/placeholder/300/200"
+                          : "/api/placeholder/300/200"
+                      }
                       alt={booking.title}
                       width={300}
                       height={200}
@@ -341,7 +349,7 @@ const MyBookingsPage = () => {
                         #{booking.bookingReference}
                       </span>
                       <span className={styles.bookingType}>
-                        {booking.bookingType === 'route' ? '🚗 Route' : '🏛️ Tour'}
+                        {booking.bookingType === 'route' ? '🚗 Route' : booking.bookingType === 'cab' ? '🚗 Cab' : '🏛️ Tour'}
                       </span>
                     </div>
                   </div>

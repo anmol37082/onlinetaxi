@@ -1,5 +1,5 @@
- import { NextResponse } from "next/server";
-import connectDB from "@/lib/mongodb";
+import { NextResponse } from "next/server";
+import dbConnect from "@/lib/mongodb";
 import Admin from "@/models/Admin";
 import jwt from "jsonwebtoken";
 
@@ -14,7 +14,7 @@ export async function POST(req) {
       );
     }
 
-    await connectDB();
+    await dbConnect();
 
     // Find admin by adminId
     const admin = await Admin.findOne({ adminId: adminId.toLowerCase() });
@@ -45,7 +45,10 @@ export async function POST(req) {
     }
 
     // Update last login
-    await admin.updateLastLogin();
+    await Admin.findByIdAndUpdate(
+      admin._id,
+      { $set: { lastLogin: new Date() } }
+    );
 
     // Generate JWT token
     if (!process.env.JWT_SECRET) {
@@ -60,7 +63,7 @@ export async function POST(req) {
       {
         adminId: admin.adminId,
         role: admin.role,
-        id: admin._id
+        id: admin._id.toString()
       },
       process.env.JWT_SECRET,
       { expiresIn: "7d" }

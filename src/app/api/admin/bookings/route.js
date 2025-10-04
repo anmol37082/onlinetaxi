@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import connectDB from '@/lib/mongodb';
+import dbConnect from '@/lib/mongodb';
 import Booking from '@/models/Booking';
 import User from '@/models/User';
 import { sendBookingConfirmationEmail, sendTripStartedEmail, sendTripCompletedEmail, sendBookingCancellationEmail } from '@/lib/mail';
@@ -8,7 +8,7 @@ import { verifyAdminToken } from '@/lib/cookies';
 // GET /api/admin/bookings - Get all bookings (admin only)
 export async function GET(request) {
   try {
-    await connectDB();
+    await dbConnect();
 
     // Check for admin authentication
     const adminData = verifyAdminToken(request);
@@ -67,7 +67,7 @@ export async function GET(request) {
 // PUT /api/admin/bookings - Update booking status (admin only)
 export async function PUT(request) {
   try {
-    await connectDB();
+    await dbConnect();
 
     // Check for admin authentication
     const adminData = verifyAdminToken(request);

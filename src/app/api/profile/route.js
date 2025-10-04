@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import connectDB from "@/lib/mongodb";
-import User from "@/models/User";
+import dbConnect from "@/lib/mongodb";
 import jwt from "jsonwebtoken";
+import { ObjectId } from "mongodb";
 
 async function getUserFromCookie(req) {
   const token = req.cookies.get("token")?.value;
@@ -9,8 +9,9 @@ async function getUserFromCookie(req) {
 
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRET);
-    await connectDB();
-    const user = await User.findById(payload.userId);
+    const client = await dbConnect();
+    const db = client.db("Onlinetaxi");
+    const user = await db.collection("users").findOne({ _id: new ObjectId(payload.userId) });
     return user;
   } catch (err) {
     return null;
@@ -39,12 +40,17 @@ export async function POST(req) {
     const body = await req.json();
     const { name, phone, address } = body;
 
-    user.name = name ?? user.name;
-    user.phone = phone ?? user.phone;
-    user.address = address ?? user.address;
-    await user.save();
+    const client = await dbConnect();
+    const db = client.db("Onlinetaxi");
+    const updatedUser = {
+      name: name ?? user.name,
+      phone: phone ?? user.phone,
+      address: address ?? user.address,
+    };
 
-    return NextResponse.json({ success: true, user });
+    await db.collection("users").updateOne({ _id: new ObjectId(user._id) }, { $set: updatedUser });
+
+    return NextResponse.json({ success: true, user: updatedUser });
   } catch (err) {
     console.error("profile update error", err);
     return NextResponse.json(

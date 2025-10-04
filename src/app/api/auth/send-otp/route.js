@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import connectDB from "@/lib/mongodb";
-import Otp from "@/models/Otp";
+import dbConnect from "@/lib/mongodb";
 import { sendOtpEmail } from "@/lib/mail";
 
 function generateOtp() {
@@ -12,14 +11,15 @@ export async function POST(req) {
     const { email } = await req.json();
     if (!email) return NextResponse.json({ error: "Email required" }, { status: 400 });
 
-    await connectDB();
+    const client = await dbConnect();
+    const db = client.db("Onlinetaxi");
 
     const code = generateOtp();
     const expiresAt = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes
 
     // Save OTP (upsert: remove older for same email)
-    await Otp.deleteMany({ email });
-    await Otp.create({ email, code, expiresAt });
+    await db.collection("otps").deleteMany({ email });
+    await db.collection("otps").insertOne({ email, code, expiresAt });
 
     // Send email (fire-and-forget but await for easier debugging)
     await sendOtpEmail(email, code);
