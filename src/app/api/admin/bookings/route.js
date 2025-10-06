@@ -38,6 +38,25 @@ export async function GET(request) {
 
     const skip = (page - 1) * limit;
 
+    // Get status counts
+    const statusCounts = {};
+    const statuses = ['all', 'pending', 'confirmed', 'in-progress', 'completed', 'cancelled'];
+    for (const s of statuses) {
+      let countQuery = {};
+      if (search) {
+        countQuery.$or = [
+          { bookingReference: { $regex: search, $options: 'i' } },
+          { userName: { $regex: search, $options: 'i' } },
+          { userEmail: { $regex: search, $options: 'i' } },
+          { title: { $regex: search, $options: 'i' } }
+        ];
+      }
+      if (s !== 'all') {
+        countQuery.status = s;
+      }
+      statusCounts[s] = await Booking.countDocuments(countQuery);
+    }
+
     const [bookings, total] = await Promise.all([
       Booking.find(query)
         .sort({ createdAt: -1 })
@@ -55,7 +74,8 @@ export async function GET(request) {
         current: page,
         total: Math.ceil(total / limit),
         count: total
-      }
+      },
+      counts: statusCounts
     });
 
   } catch (error) {

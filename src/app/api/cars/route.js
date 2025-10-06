@@ -111,7 +111,7 @@ export async function PUT(req) {
       for (const collectionName of collections) {
         const result = await db.collection(collectionName).updateMany(
           { Car: car },
-          { $set: { Imgg: imgg } }  // Fixed field name casing to match BookingSection usage
+      { $set: { Imgg: imgg } }  // Fixed field name casing to match BookingSection usage
         );
         totalModified += result.modifiedCount;
       }

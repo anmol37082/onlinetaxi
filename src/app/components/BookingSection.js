@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { cookieUtils } from '../../lib/cookies'
@@ -38,6 +38,7 @@ const BookingSection = () => {
   const [hourlyHours, setHourlyHours] = useState([])
   const [showBookingModal, setShowBookingModal] = useState(false)
   const [selectedCab, setSelectedCab] = useState(null)
+  const [showResults, setShowResults] = useState(false)
 
 
 
@@ -129,6 +130,7 @@ const BookingSection = () => {
   const handleGetQuote = async (e) => {
     e.preventDefault()
     setResults([])
+    setShowResults(false)
 
     try {
       let api = ''
@@ -162,11 +164,20 @@ const BookingSection = () => {
         const data = await res.json()
         setResults(data)
         setAvailableCabs(data) // Keep for backward compatibility
+        setShowResults(true)
+        // Scroll to results table
+        setTimeout(() => {
+          const resultsElement = document.querySelector(`.${styles.results}`)
+          if (resultsElement) {
+            resultsElement.scrollIntoView({ behavior: 'smooth' })
+          }
+        }, 100)
       }
     } catch (error) {
       console.error('Error fetching results:', error)
       setResults([])
       setAvailableCabs([])
+      setShowResults(false)
     }
   }
 
@@ -181,30 +192,7 @@ const BookingSection = () => {
     setShowBookingModal(true);
   }
 
-  const fetchAvailableCabs = useCallback(async () => {
-    if (formData.from_location && formData.to_location) {
-      try {
-        const api = formData.trip_type === 'oneway' ? '/api/cars' : '/api/roundtrips'
-        const res = await fetch(api, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ from: formData.from_location, to: formData.to_location }),
-        })
-        const data = await res.json()
-        setAvailableCabs(data)
-      } catch (error) {
-        console.error('Error fetching available cabs:', error)
-        setAvailableCabs([])
-      }
-    } else {
-      setAvailableCabs([])
-    }
-  }, [formData.from_location, formData.to_location, formData.trip_type])
 
-  // Fetch available cabs when from_location or to_location changes
-  useEffect(() => {
-    fetchAvailableCabs()
-  }, [fetchAvailableCabs])
 
   return (
     <section id="booking" className={styles.bookingSection}>
@@ -296,22 +284,26 @@ const BookingSection = () => {
                         required
                       />
                       <i className="fas fa-map-marker-alt from-icon"></i>
-                      {showFromDropdown && filteredFrom.length > 0 && (
+                      {showFromDropdown && (
                         <ul className={styles.dropdown}>
-                          {filteredFrom.map((loc) => (
-                            <li
-                              key={loc}
-                              className={styles.listGroupItem}
-                              onMouseDown={() => {
-                                handleInputChange('from_location', loc)
-                                setShowFromDropdown(false)
-                                handleInputChange('to_location', '')
-                                setShowToDropdown(false)
-                              }}
-                            >
-                              {loc}
-                            </li>
-                          ))}
+                          {filteredFrom.length > 0 ? (
+                            filteredFrom.map((loc) => (
+                              <li
+                                key={loc}
+                                className={styles.listGroupItem}
+                                onMouseDown={() => {
+                                  handleInputChange('from_location', loc)
+                                  setShowFromDropdown(false)
+                                  handleInputChange('to_location', '')
+                                  setShowToDropdown(false)
+                                }}
+                              >
+                                {loc}
+                              </li>
+                            ))
+                          ) : (
+                            <li className={styles.noResults}>No locations available</li>
+                          )}
                         </ul>
                       )}
                     </div>
@@ -334,20 +326,24 @@ const BookingSection = () => {
                         required
                       />
                       <i className="fas fa-map-marker-alt to-icon"></i>
-                      {showToDropdown && filteredTo.length > 0 && (
+                      {showToDropdown && (
                         <ul className={styles.dropdown}>
-                          {filteredTo.map((loc) => (
-                            <li
-                              key={loc}
-                              className={styles.listGroupItem}
-                              onMouseDown={() => {
-                                handleInputChange('to_location', loc)
-                                setShowToDropdown(false)
-                              }}
-                            >
-                              {loc}
-                            </li>
-                          ))}
+                          {filteredTo.length > 0 ? (
+                            filteredTo.map((loc) => (
+                              <li
+                                key={loc}
+                                className={styles.listGroupItem}
+                                onMouseDown={() => {
+                                  handleInputChange('to_location', loc)
+                                  setShowToDropdown(false)
+                                }}
+                              >
+                                {loc}
+                              </li>
+                            ))
+                          ) : (
+                            <li className={styles.noResults}>No locations available</li>
+                          )}
                         </ul>
                       )}
                     </div>
@@ -428,37 +424,7 @@ const BookingSection = () => {
               )}
             </div>
 
-            {/* Contact Row */}
-            <div className={styles.formRow}>
-              <div className={styles.formGroup}>
-                <label>Phone Number</label>
-                <div className={styles.inputWrapper}>
-                  <input 
-                    type="tel"
-                    placeholder="Enter 10-digit mobile number"
-                    value={formData.customer_phone}
-                    onChange={(e) => handleInputChange('customer_phone', e.target.value)}
-                    pattern="[0-9]{10}"
-                    maxLength="10"
-                    required
-                  />
-                  <i className="fas fa-phone"></i>
-                </div>
-              </div>
 
-              <div className={styles.formGroup}>
-                <label>Email (Optional)</label>
-                <div className={styles.inputWrapper}>
-                  <input 
-                    type="email"
-                    placeholder="Enter your email"
-                    value={formData.customer_email}
-                    onChange={(e) => handleInputChange('customer_email', e.target.value)}
-                  />
-                  <i className="fas fa-envelope"></i>
-                </div>
-              </div>
-            </div>
 
             {/* Submit Button */}
             <div className={styles.formSubmit}>
@@ -486,63 +452,50 @@ const BookingSection = () => {
           </form>
 
           {/* Available Cabs Display */}
-          {availableCabs.length > 0 && (
+          {showResults && availableCabs.length > 0 && (
             <div className={styles.results}>
               <h3>Available Cabs</h3>
-              <div className={styles.resultsGrid}>
-                {availableCabs.map((cab) => (
-                  <div className={styles.resultCard} key={cab._id}>
-                    <Image
-                      src={cab.imgg || cab.Imgg}
-                      alt={cab.Car}
-                      width={300}
-                      height={200}
-                      className={styles.cardImg}
-                    />
-                    <div className={styles.cardBody}>
-                      <h5 className={styles.cardTitle}>{cab.Car}</h5>
-
-                      <div className={styles.cardRoute}>
-                        <div className={styles.routeItem}>
-                          <i className="fas fa-map-marker-alt"></i>
-                          <span>{cab.City ? cab.City : cab.From}</span>
-                        </div>
-                        <div className={styles.routeArrow}>
-                          <i className="fas fa-arrow-right"></i>
-                        </div>
-                        <div className={styles.routeItem}>
-                          <i className="fas fa-map-marker-alt"></i>
-                          <span>{cab.Hours ? `${cab.Hours} Hours` : cab.To}</span>
-                        </div>
-                      </div>
-
-                      <div className={styles.cardDetails}>
-                        <div className={styles.detailItem}>
-                          <i className="fas fa-users"></i>
-                          <span>{cab.Seats} Seats</span>
-                        </div>
-                        <div className={styles.detailItem}>
-                          <i className="fas fa-suitcase"></i>
-                          <span>{cab.Luggage} </span>
-                        </div>
-                      </div>
-
-                      <div className={styles.cardPrice}>
-                        <div className={styles.priceLabel}>Starting from</div>
-                        <div className={styles.priceValue}>₹{getAdjustedPrice(cab)}</div>
-                      </div>
-
-                      <button
-                        className={styles.bookNowBtn}
-                        onClick={() => handleBookNow(cab)}
-                      >
-                        <i className="fas fa-calendar-check"></i>
-                        Book Now
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <table className={styles.cabsTable}>
+                <thead>
+                  <tr>
+                    <th>Image</th>
+                    <th>Car</th>
+                    <th>Route</th>
+                    <th>Seats</th>
+                    <th>Luggage</th>
+                    <th>Price</th>
+                    <th>Book</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {availableCabs.map((cab) => (
+                    <tr key={cab._id}>
+                      <td>
+                        <img
+                          src={cab.Imgg}
+                          alt={cab.Car}
+                          className={styles.tableImg}
+                        />
+                      </td>
+                      <td>{cab.Car}</td>
+                      <td>
+                        {cab.City ? cab.City : cab.From} &rarr; {cab.Hours ? `${cab.Hours} Hours` : cab.To}
+                      </td>
+                      <td>{cab.Seats}</td>
+                      <td>{cab.Luggage}</td>
+                      <td>₹{getAdjustedPrice(cab)}</td>
+                      <td>
+                        <button
+                          className={styles.bookNowBtn}
+                          onClick={() => handleBookNow(cab)}
+                        >
+                          Book Now
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           )}
 

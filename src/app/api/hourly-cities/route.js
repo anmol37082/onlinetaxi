@@ -1,19 +1,13 @@
 import dbConnect from "@/lib/mongodb";
+import HourlyTrip from "@/models/HourlyTrip";
 
 export async function GET(req) {
   try {
-    const client = await dbConnect();
-    const db = client.db("Onlinetaxi");
-    const collection = db.collection("hourlytrips");
+    await dbConnect();
 
-    const cities = await collection
-      .find({})
-      .project({ City: 1, _id: 0 })
-      .toArray();
+    const cities = await HourlyTrip.distinct("City");
 
-    const uniqueCities = Array.from(new Set(cities.map((c) => c.City)));
-
-    return new Response(JSON.stringify({ cities: uniqueCities }), {
+    return new Response(JSON.stringify({ cities }), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });

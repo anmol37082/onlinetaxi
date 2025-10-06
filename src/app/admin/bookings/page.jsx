@@ -8,6 +8,16 @@ import styles from './AdminBookings.module.css';
 
 const AdminBookingsPage = () => {
   const router = useRouter();
+
+  const isValidUrl = (string) => {
+    if (!string || typeof string !== 'string') return false;
+    try {
+      new URL(string);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  };
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -16,6 +26,14 @@ const AdminBookingsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [pagination, setPagination] = useState(null);
+  const [statusCounts, setStatusCounts] = useState({
+    all: 0,
+    pending: 0,
+    confirmed: 0,
+    'in-progress': 0,
+    completed: 0,
+    cancelled: 0
+  });
 
   useEffect(() => {
     fetchBookings();
@@ -42,6 +60,9 @@ const AdminBookingsPage = () => {
         setBookings(data.bookings || []);
         setPagination(data.pagination);
         setTotalPages(data.pagination.total);
+        if (data.counts) {
+          setStatusCounts(data.counts);
+        }
       } else if (response.status === 401) {
         router.push('/admin/login');
       } else {
@@ -232,18 +253,21 @@ const AdminBookingsPage = () => {
           </div>
 
           <div className={styles.filterTabs}>
-            {['all', 'pending', 'confirmed', 'in-progress', 'completed', 'cancelled'].map(status => (
-              <button
-                key={status}
-                onClick={() => setFilter(status)}
-                className={`${styles.filterTab} ${filter === status ? styles.active : ''}`}
-              >
-                {status === 'all' ? 'All' : getStatusText(status)}
-                <span className={styles.count}>
-                  ({bookings.filter(b => status === 'all' ? true : b.status === status).length})
-                </span>
-              </button>
-            ))}
+          {['all', 'pending', 'confirmed', 'in-progress', 'completed', 'cancelled'].map(status => (
+            <button
+              key={status}
+              onClick={() => {
+                setFilter(status);
+                setCurrentPage(1);
+              }}
+              className={`${styles.filterTab} ${filter === status ? styles.active : ''}`}
+            >
+              {status === 'all' ? 'All' : getStatusText(status)}
+              <span className={styles.count}>
+                ({statusCounts[status] || 0})
+              </span>
+            </button>
+          ))}
           </div>
         </div>
 
@@ -257,7 +281,7 @@ const AdminBookingsPage = () => {
                 <div className={styles.bookingHeader}>
                   <div className={styles.bookingImage}>
                     <Image
-                      src={booking.image || "/api/placeholder/300/200"}
+                      src={booking.image && booking.image.trim() && isValidUrl(booking.image) ? booking.image : "https://picsum.photos/300/200"}
                       alt={booking.title}
                       width={300}
                       height={200}
@@ -271,7 +295,7 @@ const AdminBookingsPage = () => {
                         #{booking.bookingReference}
                       </span>
                       <span className={styles.bookingType}>
-                        {booking.bookingType === 'route' ? '🚗 Route' : '🏛️ Tour'}
+                        {booking.bookingType === 'route' ? '🚗 Route' : booking.bookingType === 'cab' ? '🚗 Cab' : '🏛️ Tour'}
                       </span>
                     </div>
                     <div className={styles.userInfo}>

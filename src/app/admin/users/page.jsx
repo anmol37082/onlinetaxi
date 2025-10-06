@@ -4,13 +4,11 @@ import { useState, useEffect } from 'react';
 import styles from './AdminUsers.module.css';
 import AdminAuthWrapper from '../../components/AdminAuthWrapper';
 
-
 export default function AdminUsers() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
-
 
   useEffect(() => {
     fetchUsers();
@@ -34,8 +32,6 @@ export default function AdminUsers() {
       setLoading(false);
     }
   };
-
-
 
   const filteredUsers = users.filter(user =>
     user.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -115,67 +111,55 @@ export default function AdminUsers() {
           </div>
         </div>
 
-        <div className={styles.usersGrid}>
-          {filteredUsers.length === 0 ? (
-            <div className={styles.noUsers}>
-              <i className="fas fa-users"></i>
-              <h3>No users found</h3>
-              <p>
-                {searchTerm
-                  ? `No users match your search "${searchTerm}"`
-                  : 'No users have registered yet'
-                }
-              </p>
-            </div>
-          ) : (
-            filteredUsers.map((user) => (
-              <div key={user._id} className={styles.userCard}>
-                <div className={styles.userHeader}>
-                  <div className={styles.userAvatar}>
-                    <i className="fas fa-user"></i>
-                  </div>
-                  <div className={styles.userInfo}>
-                    <h3 className={styles.userName}>
-                      {user.name || 'No name provided'}
-                    </h3>
-                    <p className={styles.userEmail}>{user.email}</p>
-                  </div>
-                </div>
-
-                <div className={styles.userDetails}>
-                  <div className={styles.detailRow}>
-                    <i className="fas fa-phone"></i>
-                    <span>{user.phone || 'No phone provided'}</span>
-                  </div>
-
-                  <div className={styles.detailRow}>
-                    <i className="fas fa-map-marker-alt"></i>
-                    <span>{user.address || 'No address provided'}</span>
-                  </div>
-
-                  <div className={styles.detailRow}>
-                    <i className="fas fa-calendar"></i>
-                    <span>Joined: {formatDate(user.createdAt)}</span>
-                  </div>
-                </div>
-
-                <div className={styles.userActions}>
-                  <button className={styles.viewButton}>
-                    <i className="fas fa-eye"></i>
-                    View Details
-                  </button>
-                  <button className={styles.editButton}>
-                    <i className="fas fa-edit"></i>
-                    Edit
-                  </button>
-
-                </div>
-              </div>
-            ))
-          )}
-        </div>
-
-
+        {filteredUsers.length === 0 ? (
+          <div className={styles.noUsers}>
+            <i className="fas fa-users"></i>
+            <h3>No users found</h3>
+            <p>
+              {searchTerm
+                ? `No users match your search "${searchTerm}"`
+                : 'No users have registered yet'
+              }
+            </p>
+          </div>
+        ) : (
+          <table className={styles.usersTable}>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Joined</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredUsers.map((user) => (
+                <tr key={user._id}>
+                  <td className={styles.userNameCell}>
+                    <div className={styles.userAvatarTable}>
+                      <i className="fas fa-user"></i>
+                    </div>
+                    {user.name || 'No name provided'}
+                  </td>
+                  <td className={styles.userEmailCell}>{user.email}</td>
+                  <td>{user.phone || 'No phone provided'}</td>
+                  <td>{user.address || 'No address provided'}</td>
+                  <td>{formatDate(user.createdAt)}</td>
+                  <td className={styles.userActionsCell}>
+                    <button className={styles.viewButton}>
+                      <i className="fas fa-eye"></i> View
+                    </button>
+                    <button className={styles.editButton}>
+                      <i className="fas fa-edit"></i> Edit
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </AdminAuthWrapper>
   );
