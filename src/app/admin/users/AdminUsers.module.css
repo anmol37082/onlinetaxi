@@ -446,92 +446,26 @@
   font-size: 1rem;
 }
 
-/* Mobile Responsive */
-@media (max-width: 767px) {
-  .container {
-    padding: 1rem;
-  }
-
-  .title {
-    font-size: 2rem;
-    padding: 0.75rem 1rem;
-  }
-
-  .controls {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 1rem;
-  }
-
-  .searchContainer {
-    max-width: none;
-  }
-
-  .stats {
-    justify-content: center;
-  }
-
-  .usersGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .userCard {
-    padding: 1.5rem;
-  }
-
-  .userHeader {
-    flex-direction: column;
-    text-align: center;
-    gap: 1rem;
-  }
-
-  .userActions {
-    flex-direction: column;
-  }
-
-  .viewButton,
-  .editButton,
-  .messageButton {
-    width: 100%;
-  }
-
-  /* Table responsive */
-  .usersTable {
-    font-size: 12px;
-  }
-
-  .usersTable th,
-  .usersTable td {
-    padding: 8px 10px;
-  }
-
-  .userAvatarTable {
-    width: 40px;
-    height: 40px;
-    font-size: 1rem;
-  }
-
-  .userActionsCell {
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .viewButton,
-  .editButton {
-    padding: 4px 8px;
-    font-size: 11px;
-  }
+/* Table Container for Responsive Scrolling */
+.tableContainer {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+  z-index: 2;
 }
 
 /* Users Table Styles */
 .usersTable {
   width: 100%;
+  min-width: 800px;
   border-collapse: collapse;
   border: 2px solid #e5e7eb;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(10px);
 }
@@ -599,42 +533,161 @@
   gap: 0.5rem;
 }
 
-.viewButton,
-.editButton {
-  padding: 6px 12px;
-  border: none;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 12px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.25rem;
+/* Mobile Responsive */
+@media (max-width: 767px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 2rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+  }
+
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .searchContainer {
+    max-width: none;
+  }
+
+  .stats {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    padding: 0.75rem 1rem;
+  }
+
+  .statNumber {
+    font-size: 1.25rem;
+  }
+
+  .statLabel {
+    font-size: 0.75rem;
+  }
+
+  .usersGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .userCard {
+    padding: 1.5rem;
+  }
+
+  .userHeader {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .userActions {
+    flex-direction: column;
+  }
+
+  .viewButton,
+  .editButton,
+  .messageButton {
+    width: 100%;
+  }
+
+  /* Table responsive */
+  .tableContainer {
+    margin-top: 15px;
+    border-radius: 8px;
+  }
+
+  .usersTable {
+    min-width: 650px;
+    font-size: 12px;
+  }
+
+  .usersTable th,
+  .usersTable td {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  .usersTable th {
+    font-size: 11px;
+    padding: 10px 8px;
+  }
+
+  .userAvatarTable {
+    width: 35px;
+    height: 35px;
+    font-size: 0.9rem;
+    margin-right: 8px;
+  }
+
+  .userActionsCell {
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 80px;
+  }
+
+  .viewButton,
+  .editButton {
+    padding: 5px 8px;
+    font-size: 10px;
+    white-space: nowrap;
+  }
+
+  .noUsers {
+    padding: 2rem 1rem;
+  }
+
+  .noUsers i {
+    font-size: 3rem;
+  }
+
+  .noUsers h3 {
+    font-size: 1.25rem;
+  }
+
+  .noUsers p {
+    font-size: 0.9rem;
+  }
 }
 
-.viewButton {
-  background: rgba(255, 255, 255, 0.9);
-  color: #ffb938;
-  border: 1px solid rgba(255, 185, 56, 0.3);
+/* Tablet Responsive */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  .title {
+    font-size: 2.25rem;
+  }
+
+  .tableContainer {
+    overflow-x: auto;
+  }
+
+  .usersTable {
+    min-width: 700px;
+  }
+
+  .controls {
+    gap: 1.5rem;
+  }
 }
 
-.viewButton:hover {
-  background: #ffb938;
-  color: white;
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(255, 185, 56, 0.3);
-}
+/* Large Desktop */
+@media (min-width: 1440px) {
+  .container {
+    padding: 3rem;
+  }
 
-.editButton {
-  background: #ffb938;
-  color: white;
-  box-shadow: 0 2px 8px rgba(255, 185, 56, 0.25);
-}
-
-.editButton:hover {
-  background: rgba(255, 140, 0, 0.9);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(255, 185, 56, 0.4);
+  .usersGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }

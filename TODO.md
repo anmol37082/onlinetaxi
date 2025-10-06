@@ -1,3 +1,5 @@
 - [x] Modify BookingSection.js to show "No locations available" message when no matches in from/to city dropdowns
 - [x] Add CSS for the no results message in BookingSection.module.css
-- [ ] Test the changes
+- [x] Make the booking section's table responsive
+- [x] Make the admin panel's users page table responsive
+- [x] Test the changes

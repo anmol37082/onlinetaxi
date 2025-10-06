@@ -53,6 +53,7 @@ export default function AdminUsers() {
     return (
       <AdminAuthWrapper>
         <div className={styles.container}>
+          <div className={styles.heroBgPattern}></div>
           <div className={styles.loading}>
             <div className={styles.spinner}></div>
             <p>Loading users...</p>
@@ -66,6 +67,7 @@ export default function AdminUsers() {
     return (
       <AdminAuthWrapper>
         <div className={styles.container}>
+          <div className={styles.heroBgPattern}></div>
           <div className={styles.error}>
             <h2>Error</h2>
             <p>{error}</p>
@@ -81,6 +83,8 @@ export default function AdminUsers() {
   return (
     <AdminAuthWrapper>
       <div className={styles.container}>
+        <div className={styles.heroBgPattern}></div>
+        
         <div className={styles.header}>
           <div className={styles.headerTop}>
             <a href="/admin" className={styles.backButton}>
@@ -108,6 +112,10 @@ export default function AdminUsers() {
               <span className={styles.statNumber}>{users.length}</span>
               <span className={styles.statLabel}>Total Users</span>
             </div>
+            <div className={styles.stat}>
+              <span className={styles.statNumber}>{filteredUsers.length}</span>
+              <span className={styles.statLabel}>Filtered</span>
+            </div>
           </div>
         </div>
 
@@ -123,42 +131,44 @@ export default function AdminUsers() {
             </p>
           </div>
         ) : (
-          <table className={styles.usersTable}>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Address</th>
-                <th>Joined</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredUsers.map((user) => (
-                <tr key={user._id}>
-                  <td className={styles.userNameCell}>
-                    <div className={styles.userAvatarTable}>
-                      <i className="fas fa-user"></i>
-                    </div>
-                    {user.name || 'No name provided'}
-                  </td>
-                  <td className={styles.userEmailCell}>{user.email}</td>
-                  <td>{user.phone || 'No phone provided'}</td>
-                  <td>{user.address || 'No address provided'}</td>
-                  <td>{formatDate(user.createdAt)}</td>
-                  <td className={styles.userActionsCell}>
-                    <button className={styles.viewButton}>
-                      <i className="fas fa-eye"></i> View
-                    </button>
-                    <button className={styles.editButton}>
-                      <i className="fas fa-edit"></i> Edit
-                    </button>
-                  </td>
+          <div className={styles.tableContainer}>
+            <table className={styles.usersTable}>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Address</th>
+                  <th>Joined</th>
+                  <th>Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {filteredUsers.map((user) => (
+                  <tr key={user._id}>
+                    <td className={styles.userNameCell}>
+                      <div className={styles.userAvatarTable}>
+                        <i className="fas fa-user"></i>
+                      </div>
+                      {user.name || 'No name provided'}
+                    </td>
+                    <td className={styles.userEmailCell}>{user.email}</td>
+                    <td>{user.phone || 'No phone provided'}</td>
+                    <td>{user.address || 'No address provided'}</td>
+                    <td>{formatDate(user.createdAt)}</td>
+                    <td className={styles.userActionsCell}>
+                      <button className={styles.viewButton}>
+                        <i className="fas fa-eye"></i> View
+                      </button>
+                      <button className={styles.editButton}>
+                        <i className="fas fa-edit"></i> Edit
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
     </AdminAuthWrapper>

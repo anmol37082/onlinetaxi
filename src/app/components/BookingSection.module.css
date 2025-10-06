@@ -428,6 +428,17 @@
   }
 }
 
+/* Make table horizontally scrollable on small screens */
+@media (max-width: 600px) {
+  .results {
+    overflow-x: auto;
+  }
+  .cabsTable {
+    display: block;
+    min-width: 600px;
+  }
+}
+
 .noResults {
   padding: 8px 12px;
   color: #999;
