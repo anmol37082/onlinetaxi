@@ -69,13 +69,7 @@ const HeroSection = () => {
                 <i className="fas fa-mobile-alt"></i>
                 Book Ride Now
               </button>
-              <button
-                className={styles.ctaSecondary}
-                onClick={handleWatchDemo}
-              >
-                <i className="fas fa-play"></i>
-                Watch Demo
-              </button>
+            
             </div>
           </div>
 

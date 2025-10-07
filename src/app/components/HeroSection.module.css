@@ -51,9 +51,9 @@
   display: inline-block;
   animation: shimmer 3s ease-in-out infinite;
   min-height: 1.2em;
-  min-width: 200px;
+  min-width: 180px;
+  text-align: left;
 }
-
 @keyframes shimmer {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.8; }
