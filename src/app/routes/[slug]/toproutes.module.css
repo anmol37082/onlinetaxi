@@ -346,7 +346,7 @@
 .routeInfo > div:last-child {
   grid-column: 1 / -1;
   text-align: center;
-  padding: 2rem;
+  padding: 2rem 1rem;
   background: linear-gradient(135deg,
     #ff6b35,
     #ff8c42
@@ -614,134 +614,7 @@
   background: rgba(254, 242, 242, 0.3);
 }
 
-/* Mobile Responsive Enhancements */
-@media (max-width: 768px) {
-  .routesSection {
-    padding: 1rem 0;
-  }
-  
-  .container {
-    margin: 0 1rem;
-    padding: 0 1rem;
-    border-radius: 20px;
-  }
-  
-  .sectionTitle {
-    font-size: 2.5rem;
-    margin: 1.5rem 0;
-  }
-  
-  .cardImageContainer {
-    height: 300px;
-    margin-bottom: 1.5rem;
-    border-radius: 20px;
-  }
-  
-  .routeDescription {
-    font-size: 1.2rem;
-    padding: 2rem;
-  }
-  
-  .routeInfo {
-    padding: 2rem;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  .infoSection {
-    padding: 2rem;
-    margin-bottom: 2rem;
-  }
-  
-  .heading {
-    font-size: 1.6rem;
-  }
-  
-  .paragraph {
-    font-size: 1rem;
-  }
-  
-  .routeFeaturesList {
-    padding: 2rem;
-  }
-  
-  .routeFeaturesList ul {
-    grid-template-columns: 1fr;
-  }
-  
-  .viewAllBtn {
-    margin: 1.5rem 0 1rem;
-    padding: 0.9rem 1.8rem;
-    font-size: 0.95rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .container {
-    margin: 0 0.5rem;
-    border-radius: 16px;
-  }
-  
-  .sectionTitle {
-    font-size: 2rem;
-  }
-  
-  .routeInfo {
-    padding: 1.5rem;
-  }
-  
-  .infoSection {
-    padding: 1.5rem;
-  }
-  
-  .heading {
-    font-size: 1.4rem;
-  }
-  
-  .routeFeaturesList {
-    padding: 1.5rem;
-  }
-  
-  .cardImageContainer {
-    height: 250px;
-  }
-}
-
-/* Enhanced Animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.container > * {
-  animation: fadeInUp 0.8s ease-out forwards;
-}
-
-.infoSection:nth-child(odd) {
-  animation-delay: 0.1s;
-}
-
-.infoSection:nth-child(even) {
-  animation-delay: 0.2s;
-}
-
-/* Smooth scrolling enhancement */
-/* Removed invalid html selector to fix CSS module syntax error */
-
-/* Focus states for accessibility */
-.viewAllBtn:focus,
-.routeInfo p:focus,
-.infoSection:focus {
-  outline: 2px solid rgba(255, 107, 53, 0.5);
-  outline-offset: 2px;
-}
-
+/* Car Options Section */
 .carOptionsSection {
   margin: 20px 0;
   padding: 20px;
@@ -866,8 +739,102 @@
   box-shadow: 0 2px 8px rgba(255, 140, 0, 0.3);
 }
 
-/* Responsive Design */
+/* Mobile Responsive Enhancements */
 @media (max-width: 768px) {
+  .routesSection {
+    padding: 1rem 0;
+  }
+  
+  .container {
+    margin: 0 1rem;
+    padding: 0 1rem;
+    border-radius: 20px;
+  }
+  
+  .sectionTitle {
+    font-size: 2.5rem;
+    margin: 1.5rem 0;
+  }
+  
+  .cardImageContainer {
+    height: 300px;
+    margin-bottom: 1.5rem;
+    border-radius: 20px;
+  }
+  
+  .routeDescription {
+    font-size: 1.2rem;
+    padding: 2rem 1.5rem;
+  }
+  
+  .routeInfo {
+    padding: 1.5rem;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .routeInfo p {
+    font-size: 1rem;
+    padding: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .routeInfo p strong {
+    min-width: auto;
+  }
+  
+  /* Price box mobile responsive */
+  .routeInfo > div:last-child {
+    padding: 1.5rem 1rem;
+  }
+  
+  .routeInfo > div:last-child p {
+    font-size: 1.8rem !important;
+  }
+  
+  .routeInfo > div:last-child del {
+    font-size: 1.1rem !important;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .routeInfo > div:last-child span {
+    font-size: 1rem !important;
+    margin-left: 0 !important;
+    display: block;
+    margin-top: 0.5rem;
+    padding: 0.4rem 1rem;
+  }
+  
+  .infoSection {
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .heading {
+    font-size: 1.6rem;
+  }
+  
+  .paragraph {
+    font-size: 1rem;
+  }
+  
+  .routeFeaturesList {
+    padding: 2rem;
+  }
+  
+  .routeFeaturesList ul {
+    grid-template-columns: 1fr;
+  }
+  
+  .viewAllBtn {
+    margin: 1.5rem 0 1rem;
+    padding: 0.9rem 1.8rem;
+    font-size: 0.95rem;
+  }
+  
   .carOptionsSection {
     padding: 15px;
     margin: 15px 0;
@@ -896,4 +863,115 @@
     padding: 8px 16px;
     font-size: 0.8rem;
   }
+}
+
+@media (max-width: 480px) {
+  .container {
+    margin: 0 0.5rem;
+    border-radius: 16px;
+  }
+  
+  .sectionTitle {
+    font-size: 2rem;
+  }
+  
+  .routeInfo {
+    padding: 1.5rem 1rem;
+  }
+  
+  .routeInfo p {
+    font-size: 0.95rem;
+    padding: 0.8rem;
+  }
+  
+  /* Price box small mobile responsive */
+  .routeInfo > div:last-child {
+    padding: 1.2rem 0.8rem;
+  }
+  
+  .routeInfo > div:last-child p {
+    font-size: 1.5rem !important;
+  }
+  
+  .routeInfo > div:last-child del {
+    font-size: 1rem !important;
+  }
+  
+  .routeInfo > div:last-child span {
+    font-size: 0.9rem !important;
+    padding: 0.3rem 0.8rem;
+  }
+  
+  .infoSection {
+    padding: 1.5rem;
+  }
+  
+  .heading {
+    font-size: 1.4rem;
+  }
+  
+  .routeFeaturesList {
+    padding: 1.5rem;
+  }
+  
+  .cardImageContainer {
+    height: 250px;
+  }
+  
+  .routeDescription {
+    font-size: 1.1rem;
+    padding: 1.5rem 1rem;
+  }
+  
+  .carOptionsSection {
+    padding: 12px;
+    margin: 12px 0;
+  }
+  
+  .carOptionsTitle {
+    font-size: 1.2rem;
+  }
+  
+  .carOptionsTable th,
+  .carOptionsTable td {
+    padding: 8px 6px;
+    font-size: 0.8rem;
+  }
+  
+  .bookNowBtn {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+  }
+}
+
+/* Enhanced Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.container > * {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.infoSection:nth-child(odd) {
+  animation-delay: 0.1s;
+}
+
+.infoSection:nth-child(even) {
+  animation-delay: 0.2s;
+}
+
+/* Focus states for accessibility */
+.viewAllBtn:focus,
+.routeInfo p:focus,
+.infoSection:focus {
+  outline: 2px solid rgba(255, 107, 53, 0.5);
+  outline-offset: 2px;
 }
