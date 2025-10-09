@@ -24,7 +24,6 @@ const TestimonialsSection = () => {
         const data = await res.json();
         const reviews = data.reviews || [];
 
-        // Arrays of fallback values for random assignment
         const fallbackAvatars = ["👩‍⚕️", "👨‍💼", "👩‍💻", "👨‍💻", "👤", "🧑‍✈️", "👩‍🎓"];
         const fallbackGradientColors = [
           "linear-gradient(135deg, #10b981, #059669)",
@@ -35,7 +34,6 @@ const TestimonialsSection = () => {
         ];
         const fallbackTourImages = ["🏔️🚗", "🏙️🚙", "🏖️🚗", "🛡️👨‍✈️", "🌄🚕", "🚐🌅"];
 
-        // Transform reviews to match the expected format with random fallback assignment
         const formattedTestimonials = reviews.map((review, index) => ({
           id: review._id,
           name: review.name,
@@ -51,7 +49,6 @@ const TestimonialsSection = () => {
         setTestimonials(formattedTestimonials);
       } catch (err) {
         console.error('Error fetching testimonials:', err);
-        // Set empty testimonials array on error - don't show fallback data
         setTestimonials([]);
       } finally {
         setLoading(false);
@@ -67,7 +64,6 @@ const TestimonialsSection = () => {
     { icon: "🏆", value: "50+", label: "Awards Won" }
   ];
 
-  // Check screen size
   useEffect(() => {
     setIsClient(true);
     
@@ -128,18 +124,15 @@ const TestimonialsSection = () => {
   const handleBookNowClick = (e) => {
     e.preventDefault();
     if (pathname === '/') {
-      // On home page, scroll to booking section
       const bookingSection = document.getElementById('booking');
       if (bookingSection) {
         bookingSection.scrollIntoView({ behavior: 'smooth' });
       }
     } else {
-      // On other pages, navigate to home with scrollTo param
       router.push('/?scrollTo=booking');
     }
   };
 
-  // Loading Component
   const LoadingComponent = () => (
     <div className={styles.loadingContainer}>
       <div className={styles.loadingSpinner}>
@@ -149,7 +142,6 @@ const TestimonialsSection = () => {
     </div>
   );
 
-  // No Reviews Component
   const NoReviewsComponent = () => (
     <div className={styles.noReviewsContainer}>
       <div className={styles.noReviewsIcon}>📝</div>
@@ -168,7 +160,6 @@ const TestimonialsSection = () => {
     return (
       <div className={styles.mainContainer}>
         <div className={styles.container}>
-          {/* Header Section */}
           <div className={styles.headerSection}>
             <div className={styles.badge}>
               <span>🏆</span>
@@ -191,13 +182,9 @@ const TestimonialsSection = () => {
             </p>
           </div>
 
-          {/* Stats Section */}
           <div className={styles.statsGrid}>
             {stats.map((stat, index) => (
-              <div
-                key={index}
-                className={styles.statCard}
-              >
+              <div key={index} className={styles.statCard}>
                 <div className={styles.statIcon}>{stat.icon}</div>
                 <div className={styles.statValue}>{stat.value}</div>
                 <div className={styles.statLabel}>{stat.label}</div>
@@ -205,7 +192,6 @@ const TestimonialsSection = () => {
             ))}
           </div>
 
-          {/* Loading, No Reviews, or All Testimonials Grid */}
           {loading ? (
             <LoadingComponent />
           ) : testimonials.length === 0 ? (
@@ -218,7 +204,7 @@ const TestimonialsSection = () => {
                   className={`${styles.testimonialCard} ${isMobile ? styles.mobileTestimonialCard : ''}`}
                   style={{ height: 'auto' }}
                 >
-                  <div className={styles.quoteIcon}>💬</div>
+                  <div className={styles.quoteIcon}>🚕</div>
 
                   <div className={styles.userInfo}>
                     <div className={styles.avatar}>
@@ -244,13 +230,6 @@ const TestimonialsSection = () => {
             </div>
           )}
         </div>
-
-        <style jsx>{`
-          @keyframes pulse {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 0.3; }
-          }
-        `}</style>
       </div>
     );
   }
@@ -258,7 +237,6 @@ const TestimonialsSection = () => {
   return (
     <div className={styles.mainContainer}>
       <div className={styles.container}>
-        {/* Header Section */}
         <div className={styles.headerSection}>
           <div className={styles.badge}>
             <span>🏆</span>
@@ -281,13 +259,9 @@ const TestimonialsSection = () => {
           </p>
         </div>
 
-        {/* Stats Section */}
         <div className={styles.statsGrid}>
           {stats.map((stat, index) => (
-            <div
-              key={index}
-              className={styles.statCard}
-            >
+            <div key={index} className={styles.statCard}>
               <div className={styles.statIcon}>{stat.icon}</div>
               <div className={styles.statValue}>{stat.value}</div>
               <div className={styles.statLabel}>{stat.label}</div>
@@ -295,133 +269,65 @@ const TestimonialsSection = () => {
           ))}
         </div>
 
-        {/* Loading, No Reviews, or Main Testimonial Section */}
         {loading ? (
           <LoadingComponent />
         ) : testimonials.length === 0 ? (
           <NoReviewsComponent />
         ) : (
           <>
-            {/* Main Testimonial Section */}
-            <div className={styles.testimonialSection}>
-              {/* Tour Image Section - Dynamic tour visuals */}
-              <div className={styles.imageSection}>
-                  <div style={{
-                    background: testimonials[currentTestimonial]?.gradientColor || "linear-gradient(135deg, #10b981, #059669)"
-                  }} className={styles.tourImageContainer}>
-                    <div className={styles.overlayPattern}></div>
+            {/* Combined Testimonial Card */}
+            <div className={styles.testimonialCard}>
+              <div className={styles.quoteIcon} style={{ fontSize: '2rem', marginBottom: '1rem' }}>🚕</div>
 
-                    {/* Main Tour Image/Icon */}
-                    <div className={styles.tourImageIcon}>
-                      {testimonials[currentTestimonial]?.tourImage || "🏔️🚗"}
-                    </div>
-
-                    {/* Tour Information */}
-                    <h3 className={styles.tourTitle}>
-                      {testimonials[currentTestimonial]?.tourType || ""}
-                    </h3>
-
-                    <p className={styles.tourDescription}>
-                      {testimonials[currentTestimonial]?.tourDescription || ""}
-                    </p>
-
-                    {/* Customer Avatar Indicators - Centered */}
-                    <div style={{
-                      position: 'absolute',
-                      bottom: '1rem',
-                      left: '50%',
-                      transform: 'translateX(-50%)',
-                      display: 'flex',
-                      gap: '0.5rem',
-                      justifyContent: 'center'
-                    }}>
-                    {testimonials.map((testimonial, index) => (
-                      <div
-                        key={testimonial.id}
-                        style={{
-                          width: isMobile ? '2rem' : '2.5rem',
-                          height: isMobile ? '2rem' : '2.5rem',
-                          borderRadius: '50%',
-                          background: 'white',
-                          boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          fontSize: isMobile ? '1rem' : '1.25rem',
-                          cursor: 'pointer',
-                          transition: 'all 0.3s ease',
-                          transform: index === currentTestimonial ? 'scale(1.2)' : 'scale(0.9)',
-                          opacity: index === currentTestimonial ? '1' : '0.7',
-                          border: index === currentTestimonial ? '3px solid white' : '2px solid rgba(255,255,255,0.5)'
-                        }}
-                        onClick={() => setCurrentTestimonial(index)}
-                        onMouseEnter={(e) => (!isClient || !isMobile) && (e.currentTarget.style.transform = 'scale(1.1)')}
-                        onMouseLeave={(e) => (!isClient || !isMobile) && (e.currentTarget.style.transform = index === currentTestimonial ? 'scale(1.2)' : 'scale(0.9)')}
-                      >
-                        {testimonial.avatar}
-                      </div>
-                    ))}
+              <div className={styles.userInfo} style={{ alignItems: 'center', gap: '1.5rem', marginBottom: '1rem' }}>
+                <div className={styles.avatar} style={{ width: '5rem', height: '5rem', fontSize: '2.5rem', boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
+                  {testimonials[currentTestimonial]?.avatar}
+                </div>
+                <div>
+                  <h3 className={styles.userName} style={{ marginBottom: '0.25rem' }}>
+                    {testimonials[currentTestimonial]?.name}
+                  </h3>
+                  <p className={styles.userRole} style={{ marginTop: 0, fontStyle: 'italic', color: '#666' }}>
+                    {testimonials[currentTestimonial]?.role}
+                  </p>
+                  <div className={styles.stars} style={{ marginTop: '0.5rem' }}>
+                    {renderStars(testimonials[currentTestimonial]?.rating)}
                   </div>
                 </div>
               </div>
 
-              {/* Testimonial Card */}
-              <div>
-                <div className={`${styles.testimonialCard} ${isMobile ? styles.mobileTestimonialCard : ''}`}>
-                  <div>
-                    <div className={styles.quoteIcon}>💬</div>
+              <p className={styles.testimonialText} style={{ marginTop: '1.5rem', fontSize: '1.25rem', textAlign: 'center', fontStyle: 'italic', color: '#333' }}>
+                "{testimonials[currentTestimonial]?.text || "Great service!"}"
+              </p>
+            </div>
 
-                    <div className={styles.userInfo}>
-                      <div className={styles.avatar}>
-                        {testimonials[currentTestimonial]?.avatar }
-                      </div>
-                      <div>
-                        <h3 className={styles.userName}>
-                          {testimonials[currentTestimonial]?.name }
-                        </h3>
-                        <p className={styles.userRole}>{testimonials[currentTestimonial]?.role }</p>
-                      </div>
-                    </div>
+            {/* Navigation */}
+            <div className={styles.navigation}>
+              <button
+                className={styles.navButton}
+                onClick={prevTestimonial}
+                disabled={isAnimating}
+              >
+                ‹
+              </button>
 
-                    <div className={styles.stars}>
-                      {renderStars(testimonials[currentTestimonial]?.rating )}
-                    </div>
-
-                    <p className={styles.testimonialText}>
-                      "{testimonials[currentTestimonial]?.text || "Great service!"}"
-                    </p>
-                  </div>
-                </div>
-
-                {/* Navigation */}
-                <div className={styles.navigation}>
+              <div className={styles.dots}>
+                {testimonials.map((_, index) => (
                   <button
-                    className={styles.navButton}
-                    onClick={prevTestimonial}
-                    disabled={isAnimating}
-                  >
-                    ‹
-                  </button>
-
-                  <div className={styles.dots}>
-                    {testimonials.map((_, index) => (
-                      <button
-                        key={index}
-                        className={`${styles.dot} ${index === currentTestimonial ? styles.activeDot : styles.inactiveDot}`}
-                        onClick={() => setCurrentTestimonial(index)}
-                      />
-                    ))}
-                  </div>
-
-                  <button
-                    className={styles.navButton}
-                    onClick={nextTestimonial}
-                    disabled={isAnimating}
-                  >
-                    ›
-                  </button>
-                </div>
+                    key={index}
+                    className={`${styles.dot} ${index === currentTestimonial ? styles.activeDot : styles.inactiveDot}`}
+                    onClick={() => setCurrentTestimonial(index)}
+                  />
+                ))}
               </div>
+
+              <button
+                className={styles.navButton}
+                onClick={nextTestimonial}
+                disabled={isAnimating}
+              >
+                ›
+              </button>
             </div>
 
             {/* CTA Section */}

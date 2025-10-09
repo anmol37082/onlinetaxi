@@ -7,16 +7,6 @@
   position: relative;
 }
 
-.routesSection::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #ff8c00, #ffa500, #ff7f00);
-}
-
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -29,18 +19,19 @@
 }
 
 .sectionTitle {
-  font-size: 3.2rem;
-  font-weight: 800;
-  color: #c2410c;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1e293b;
   margin-bottom: 16px;
-  text-shadow: 0 2px 8px rgba(255, 140, 0, 0.1);
-  letter-spacing: 1px;
-  line-height: 1.2;
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .sectionSubtitle {
   font-size: 1.125rem;
-  color: #7c2d12;
+  color: #64748b;
   max-width: 650px;
   margin: 0 auto;
   line-height: 1.6;
@@ -181,7 +172,7 @@
 .routeTitle {
   font-size: 1.35rem;
   font-weight: 700;
-  color: #c2410c;
+  color: #ff8c00;
   margin-bottom: 8px;
   line-height: 1.3;
 }
@@ -365,15 +356,15 @@
 }
 
 .bookBtn.primary {
-  background: linear-gradient(135deg, #ff8c00, #ffa500);
+  background: #ffb938;
   color: white;
-  box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(255, 185, 56, 0.3);
 }
 
 .bookBtn.primary:hover {
-  background: linear-gradient(135deg, #e67e00, #ff9500);
+  background: #ffb938;
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(255, 140, 0, 0.4);
+  box-shadow: 0 6px 16px rgba(255, 185, 56, 0.4);
 }
 
 .bookBtn.secondary {
@@ -520,9 +511,15 @@
 }
 
 /* Responsive Design */
+@media (max-width: 1024px) {
+  .sectionTitle {
+    font-size: 2rem;
+  }
+}
+
 @media (max-width: 768px) {
   .sectionTitle {
-    font-size: 2.4rem;
+    font-size: 1.75rem;
   }
 
   .routesGrid {
@@ -576,8 +573,7 @@
   }
 
   .sectionTitle {
-    font-size: 2rem;
-    letter-spacing: 0.5px;
+    font-size: 1.5rem;
   }
 
   .sectionSubtitle {

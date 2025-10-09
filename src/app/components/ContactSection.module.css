@@ -1,5 +1,4 @@
 .contactSection {
-  padding: 6rem 2rem;
   background: #fff3db;
   position: relative;
   overflow: hidden;
@@ -290,9 +289,6 @@
 
 /* Medium Desktop (1024px - 1199px) */
 @media (max-width: 1199px) {
-  .contactSection {
-    padding: 5rem 1.5rem;
-  }
   
   .container {
     gap: 3rem;
@@ -313,9 +309,6 @@
 
 /* Tablet Landscape (992px - 1023px) */
 @media (max-width: 1023px) {
-  .contactSection {
-    padding: 4.5rem 1.5rem;
-  }
 
   .container {
     gap: 2.5rem;
@@ -338,7 +331,6 @@
 /* Tablet Portrait (768px - 991px) */
 @media (max-width: 991px) {
   .contactSection {
-    padding: 4rem 1rem;
     min-height: auto;
   }
 
@@ -390,9 +382,6 @@
 
 /* Large Mobile (600px - 767px) */
 @media (max-width: 767px) {
-  .contactSection {
-    padding: 3rem 1rem;
-  }
 
   .container {
     gap: 2.5rem;
@@ -444,9 +433,6 @@
 
 /* Medium Mobile (480px - 599px) */
 @media (max-width: 599px) {
-  .contactSection {
-    padding: 2.5rem 0.8rem;
-  }
 
   .heading {
     font-size: 2.2rem;
@@ -497,9 +483,6 @@
 
 /* Small Mobile (360px - 479px) */
 @media (max-width: 479px) {
-  .contactSection {
-    padding: 2rem 0.5rem;
-  }
 
   .container {
     gap: 2rem;
@@ -559,9 +542,6 @@
 
 /* Extra Small Mobile (320px - 359px) */
 @media (max-width: 359px) {
-  .contactSection {
-    padding: 1.5rem 0.3rem;
-  }
 
   .heading {
     font-size: 1.7rem;
@@ -603,9 +583,6 @@
 
 /* Ultra Small Mobile (less than 320px) */
 @media (max-width: 319px) {
-  .contactSection {
-    padding: 1rem 0.2rem;
-  }
 
   .heading {
     font-size: 1.5rem;

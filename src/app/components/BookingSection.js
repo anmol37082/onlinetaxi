@@ -430,7 +430,7 @@ const BookingSection = () => {
             <div className={styles.formSubmit}>
               <button type="submit" className={styles.submitBtn}>
                 <i className="fas fa-search"></i>
-                <span>Get Instant Quote</span>
+                <span>Search Cab</span>
               </button>
             </div>
 

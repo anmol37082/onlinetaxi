@@ -38,6 +38,10 @@
   align-items: center;
   gap: 8px;
   color: #333;
+  background-color: #28a745; /* green background */
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: white;
 }
 
 .topBarIcon {
@@ -56,15 +60,15 @@
   justify-content: center;
   width: 32px;
   height: 32px;
-  background: rgba(255, 255, 255, 0.2);
-  color: #FF4500;
+  background: #ffb938; /* book now background color */
+  color: white;
   text-decoration: none;
   border-radius: 8px;
   transition: all 0.3s ease;
 }
 
 .socialLink:hover {
-  background: rgba(255, 255, 255, 0.4);
+  background: #e6a832; /* darker shade on hover */
   transform: translateY(-2px);
 }
 
@@ -79,19 +83,19 @@
   justify-content: center;
   width: 36px;
   height: 36px;
-  background: linear-gradient(135deg, #FF4500 0%, #FFA500 100%);
+  background: #ffb938; /* book now background color */
   color: white;
   border: none;
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(255, 69, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(255, 185, 56, 0.3);
   font-size: 16px;
 }
 
 .profileButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(255, 69, 0, 0.4);
+  box-shadow: 0 6px 16px rgba(255, 185, 56, 0.4);
 }
 
 .profileDropdown {

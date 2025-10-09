@@ -92,9 +92,11 @@ const EnhancedFooter = () => {
       ]
     },
     locations: [
-      "Mohali", "Chandigarh", "Panchkula", "Zirakpur", 
+      "Mohali", "Chandigarh", "Panchkula", "Zirakpur",
       "Kharar", "Kurali", "Ropar", "Ambala",
-      "Ludhiana", "Amritsar", "Jalandhar", "Pathankot"
+      "Ludhiana", "Amritsar", "Jalandhar", "Pathankot",
+      "Patiala", "Bathinda", "Sangrur", "Barnala",
+      "Ferozepur", "Moga"
     ]
   };
 
@@ -317,21 +319,7 @@ const EnhancedFooter = () => {
         </div>
       </div>
 
-      {/* Bottom Footer */}
-      <div className={styles.bottomFooter}>
-        <div className={styles.bottomContent}>
-          <div className={styles.copyright}>
-            © 2024 OnlineTaxi. All rights reserved. | Made with ❤️ for better transportation
-          </div>
-          <div className={styles.bottomLinks} style={{ flexWrap: isMobile ? 'wrap' : 'nowrap', justifyContent: isMobile ? 'center' : 'flex-end' }}>
-            <Link href="/privacy-policy" className={styles.bottomLink}>Privacy Policy</Link>
-            <span>•</span>
-            <Link href="/terms" className={styles.bottomLink}>Terms of Service</Link>
-            <span>•</span>
-            <span>Cookie Policy</span>
-          </div>
-        </div>
-      </div>
+
     </footer>
   );
 };

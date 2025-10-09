@@ -1,88 +1,22 @@
-/* Modern Orange Transparent Theme - NO BLUR EFFECTS */
+/* Clean Simple Theme - Top Routes */
 
-/* Global Styles with Unique Background */
+/* Global Styles */
 .routesSection {
   min-height: 100vh;
-  background: 
-    radial-gradient(circle at 20% 20%, rgba(255, 107, 53, 0.15) 0%, transparent 40%),
-    radial-gradient(circle at 80% 60%, rgba(255, 140, 66, 0.12) 0%, transparent 50%),
-    radial-gradient(circle at 40% 90%, rgba(255, 165, 0, 0.1) 0%, transparent 60%),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(254, 247, 230, 0.85) 100%);
+  background: #FFF4E1;
   padding: 2rem 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  position: relative;
-  overflow-x: hidden;
 }
 
-/* Floating particles animation */
-.routesSection::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    radial-gradient(circle at 10% 10%, rgba(255, 107, 53, 0.03) 2px, transparent 2px),
-    radial-gradient(circle at 90% 30%, rgba(255, 140, 66, 0.04) 1px, transparent 1px),
-    radial-gradient(circle at 50% 80%, rgba(255, 165, 0, 0.02) 3px, transparent 3px);
-  background-size: 100px 100px, 150px 150px, 200px 200px;
-  animation: floatParticles 20s linear infinite;
-  pointer-events: none;
-  z-index: -1;
-}
-
-@keyframes floatParticles {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-}
-
-/* Main Container - NO BLUR */
+/* Main Container */
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1.5rem;
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 30px;
-  box-shadow:
-    0 25px 80px rgba(255, 107, 53, 0.1),
-    0 15px 60px rgba(0, 0, 0, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  overflow: hidden;
-  position: relative;
-}
-
-/* Unique floating elements - NO BLUR */
-.container::before {
-  content: '';
-  position: absolute;
-  top: -50px;
-  right: -50px;
-  width: 200px;
-  height: 200px;
-  background: linear-gradient(45deg, rgba(255, 107, 53, 0.1), rgba(255, 140, 66, 0.15));
-  border-radius: 50%;
-  animation: floatElement 8s ease-in-out infinite;
-  z-index: -1;
-}
-
-.container::after {
-  content: '';
-  position: absolute;
-  bottom: -30px;
-  left: -30px;
-  width: 150px;
-  height: 150px;
-  background: linear-gradient(-45deg, rgba(255, 165, 0, 0.08), rgba(255, 107, 53, 0.12));
-  border-radius: 50%;
-  animation: floatElement 6s ease-in-out infinite reverse;
-  z-index: -1;
-}
-
-@keyframes floatElement {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-15px) rotate(180deg); }
+  padding: 2rem 1.5rem;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 /* Enhanced Back Button */
@@ -91,372 +25,178 @@
   align-items: center;
   gap: 0.8rem;
   padding: 1rem 2rem;
-  margin: 2rem 0 1rem;
+  margin: 1rem 0;
   background: #ffb938;
   color: white;
   text-decoration: none;
   border-radius: 50px;
   font-weight: 600;
   font-size: 1rem;
-  letter-spacing: 0.5px;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow:
-    0 10px 30px rgba(255, 107, 53, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  position: relative;
-  overflow: hidden;
-}
-
-.viewAllBtn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transition: left 0.6s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 185, 56, 0.3);
 }
 
 .viewAllBtn:hover {
-  background: rgba(255, 140, 66, 0.95);
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 
-    0 15px 40px rgba(255, 107, 53, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  background: #ff8c42;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 140, 66, 0.4);
 }
 
-.viewAllBtn:hover::before {
-  left: 100%;
-}
-
-/* Modern Section Title */
+/* Section Title */
 .sectionTitle {
   font-size: clamp(2.5rem, 6vw, 4rem);
   font-weight: 800;
-  background: linear-gradient(135deg, 
-    rgba(255, 107, 53, 0.9) 0%, 
-    rgba(255, 140, 66, 0.8) 30%, 
-    rgba(255, 165, 0, 0.9) 70%, 
-    rgba(255, 179, 71, 0.8) 100%
-  );
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #ff8c42;
   text-align: center;
   margin: 2rem 0;
   line-height: 1.1;
-  letter-spacing: -1px;
-  position: relative;
 }
 
-.sectionTitle::after {
-  content: '';
-  position: absolute;
-  bottom: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 150px;
-  height: 6px;
-  background: linear-gradient(90deg, 
-    rgba(255, 107, 53, 0.7), 
-    rgba(255, 140, 66, 0.5), 
-    rgba(255, 107, 53, 0.7)
-  );
-  border-radius: 3px;
-  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
-  animation: pulseGlow 3s ease-in-out infinite;
-}
-
-@keyframes pulseGlow {
-  0%, 100% { opacity: 0.7; transform: translateX(-50%) scaleX(1); }
-  50% { opacity: 1; transform: translateX(-50%) scaleX(1.1); }
-}
-
-/* Image Container - NO BLUR */
+/* Image Container */
 .cardImageContainer {
   position: relative;
   width: 100%;
   height: 450px;
-  border-radius: 25px;
+  border-radius: 20px;
   overflow: hidden;
   margin: 2rem 0;
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow:
-    0 25px 60px rgba(255, 107, 53, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.cardImageContainer::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 107, 53, 0.1) 0%,
-    transparent 30%,
-    transparent 70%,
-    rgba(255, 140, 66, 0.1) 100%
-  );
-  z-index: 1;
-  pointer-events: none;
-  border-radius: 23px;
+  background: #f5f5f5;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  transition: all 0.4s ease;
 }
 
 .cardImageContainer:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 
-    0 35px 80px rgba(255, 107, 53, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  border-color: rgba(255, 107, 53, 0.4);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
 
 .routeImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  filter: saturate(1.1) brightness(1.05);
+  transition: transform 0.5s ease;
 }
 
 .cardImageContainer:hover .routeImage {
   transform: scale(1.05);
 }
 
-/* Transparent Quote-style Description */
+/* Route Description */
 .routeDescription {
   font-size: 1.4rem;
   line-height: 1.8;
-  color: rgba(55, 65, 81, 0.9);
+  color: #374151;
   margin: 2rem 0;
   text-align: center;
-  padding: 2.5rem;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 2rem;
+  background: #FFF4E1;
+  border-radius: 15px;
+  border: 2px solid #ffb938;
   font-weight: 500;
   font-style: italic;
-  position: relative;
-  box-shadow:
-    0 15px 40px rgba(255, 107, 53, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-.routeDescription::before,
-.routeDescription::after {
-  content: '"';
-  position: absolute;
-  font-size: 4rem;
-  color: rgba(255, 107, 53, 0.3);
-  font-family: serif;
-  font-weight: bold;
-}
-
-.routeDescription::before {
-  top: 10px;
-  left: 20px;
-}
-
-.routeDescription::after {
-  bottom: -10px;
-  right: 20px;
-  transform: rotate(180deg);
-}
-
-/* Floating Card Route Info - NO BLUR */
+/* Route Info Card */
 .routeInfo {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
   margin: 3rem 0;
-  background: rgba(255, 255, 255, 0.25);
+  background: #FFF4E1;
   padding: 2.5rem;
-  border-radius: 25px;
-  box-shadow:
-    0 20px 60px rgba(255, 107, 53, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  position: relative;
-}
-
-.routeInfo::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(45deg,
-    rgba(255, 107, 53, 0.3),
-    rgba(255, 140, 66, 0.2),
-    rgba(255, 165, 0, 0.3),
-    rgba(255, 107, 53, 0.2)
-  );
-  background-size: 400% 400%;
-  animation: flowingBorder 8s ease infinite;
-  z-index: -1;
-  border-radius: 27px;
-}
-
-@keyframes flowingBorder {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  border-radius: 20px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .routeInfo p {
   margin: 0.8rem 0;
   font-size: 1.1rem;
-  color: rgba(55, 65, 81, 0.9);
+  color: #374151;
   display: flex;
   align-items: center;
   gap: 1rem;
   padding: 1.2rem;
-  background: rgba(255, 255, 255, 0.4);
-  border-radius: 15px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-left: 4px solid rgba(255, 107, 53, 0.7);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: white;
+  border-radius: 12px;
+  border-left: 4px solid #ff8c42;
+  transition: all 0.3s ease;
   font-weight: 500;
-  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.08);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .routeInfo p:hover {
-  background: rgba(255, 247, 237, 0.6);
-  transform: translateX(8px) translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 107, 53, 0.15);
-  border-left-color: rgba(255, 140, 66, 0.8);
+  background: #FFF4E1;
+  transform: translateX(5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-left-color: #ffb938;
 }
 
 .routeInfo p strong {
-  color: rgba(31, 41, 55, 0.9);
+  color: #1f2937;
   font-weight: 700;
   min-width: 100px;
   font-size: 0.95rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
-/* Floating Price Display */
+/* Price Display */
 .routeInfo > div:last-child {
   grid-column: 1 / -1;
   text-align: center;
   padding: 2rem 1rem;
-  background: linear-gradient(135deg,
-    #ff6b35,
-    #ff8c42
-  );
-  border-radius: 20px;
-  box-shadow:
-    0 15px 40px rgba(255, 107, 53, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  color: white;
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-@keyframes shimmer {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.7; }
+  background: linear-gradient(135deg, #ff8c42, #ffb938);
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(255, 140, 66, 0.3);
+  color: #e98710;
 }
 
 .routeInfo > div:last-child p {
   background: none !important;
   border: none !important;
-  color: white !important;
+  color: #e98710 !important;
   font-size: 2.2rem !important;
   font-weight: 800 !important;
   margin: 0 !important;
   padding: 0 !important;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Floating Info Sections - NO BLUR */
+/* Info Sections */
 .infoSection {
   margin: 3rem 0;
-  background: rgba(255, 255, 255, 0.2);
+  background: white;
   padding: 3rem;
-  border-radius: 25px;
-  box-shadow:
-    0 20px 60px rgba(255, 107, 53, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-/* Animated top border */
-.infoSection::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: linear-gradient(90deg, 
-    rgba(255, 107, 53, 0.7), 
-    rgba(255, 140, 66, 0.5), 
-    rgba(255, 165, 0, 0.7)
-  );
-  background-size: 200% 100%;
-  animation: slideGradient 4s ease infinite;
-  border-radius: 25px 25px 0 0;
-}
-
-@keyframes slideGradient {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  border-radius: 20px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
 }
 
 .infoSection:hover {
-  transform: translateY(-6px) scale(1.01);
-  box-shadow: 
-    0 30px 80px rgba(255, 107, 53, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
-  border-color: rgba(255, 107, 53, 0.3);
-  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
 }
 
 .heading {
   font-size: 2rem;
   font-weight: 700;
-  color: rgba(31, 41, 55, 0.9);
+  color: #1f2937;
   margin-bottom: 1.5rem;
-  position: relative;
+  border-bottom: 3px solid #ffb938;
   padding-bottom: 1rem;
-}
-
-.heading::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 80px;
-  height: 4px;
-  background: linear-gradient(90deg, 
-    rgba(255, 107, 53, 0.8), 
-    rgba(255, 140, 66, 0.6)
-  );
-  border-radius: 2px;
-  box-shadow: 0 2px 10px rgba(255, 107, 53, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .paragraph {
   font-size: 1.1rem;
   line-height: 1.8;
-  color: rgba(75, 85, 99, 0.9);
+  color: #4b5563;
   text-align: justify;
   font-weight: 400;
 }
 
-/* Floating List Items */
+/* List Items */
 .list {
   list-style: none;
   padding: 0;
@@ -466,16 +206,15 @@
 .list li {
   padding: 1.3rem 1.5rem 1.3rem 3rem;
   margin: 1rem 0;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 15px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-left: 4px solid rgba(255, 107, 53, 0.7);
-  color: rgba(55, 65, 81, 0.9);
+  background: #FFF4E1;
+  border-radius: 12px;
+  border-left: 4px solid #ff8c42;
+  color: #374151;
   font-weight: 500;
   font-size: 1.05rem;
   position: relative;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.08);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .list li::before {
@@ -485,73 +224,33 @@
   top: 50%;
   transform: translateY(-50%);
   font-size: 1.2rem;
-  animation: twinkle 2s ease-in-out infinite;
-}
-
-@keyframes twinkle {
-  0%, 100% { opacity: 0.7; transform: translateY(-50%) scale(1); }
-  50% { opacity: 1; transform: translateY(-50%) scale(1.1); }
 }
 
 .list li:hover {
-  background: rgba(255, 247, 237, 0.4);
-  transform: translateX(12px) translateY(-2px);
-  box-shadow: 0 12px 35px rgba(255, 107, 53, 0.15);
-  border-left-color: rgba(255, 140, 66, 0.8);
+  background: white;
+  transform: translateX(10px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-left-color: #ffb938;
 }
 
-/* Enhanced Features Section - NO BLUR */
+/* Features Section */
 .routeFeaturesList {
   margin: 3rem 0;
-  background: rgba(255, 255, 255, 0.2);
+  background: #FFF4E1;
   padding: 3rem;
-  border-radius: 25px;
-  box-shadow:
-    0 25px 70px rgba(255, 107, 53, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  position: relative;
-}
-
-.routeFeaturesList::before {
-  content: '';
-  position: absolute;
-  top: -50px;
-  right: -50px;
-  width: 150px;
-  height: 150px;
-  background: radial-gradient(circle, rgba(255, 107, 53, 0.1), transparent);
-  animation: floatFeature 10s ease-in-out infinite;
-}
-
-@keyframes floatFeature {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-20px, -10px) scale(1.1); }
+  border-radius: 20px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .featuresTitle {
   font-size: 2rem;
   font-weight: 700;
-  color: rgba(31, 41, 55, 0.9);
+  color: #1f2937;
   margin-bottom: 2rem;
   text-align: center;
-  position: relative;
-}
-
-.featuresTitle::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  height: 4px;
-  background: linear-gradient(90deg, 
-    rgba(255, 107, 53, 0.7), 
-    rgba(255, 140, 66, 0.5)
-  );
-  border-radius: 2px;
-  box-shadow: 0 2px 10px rgba(255, 107, 53, 0.3);
+  border-bottom: 3px solid #ffb938;
+  padding-bottom: 1rem;
 }
 
 .routeFeaturesList ul {
@@ -564,15 +263,15 @@
 
 .routeFeaturesList li {
   padding: 1.8rem 1.5rem 1.5rem 4rem;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  color: rgba(55, 65, 81, 0.9);
+  background: white;
+  border-radius: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  color: #374151;
   font-weight: 600;
   font-size: 1.1rem;
   position: relative;
-  transition: all 0.4s ease;
-  box-shadow: 0 8px 25px rgba(255, 107, 53, 0.1);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .routeFeaturesList li::before {
@@ -581,75 +280,64 @@
   top: 20px;
   left: 20px;
   font-size: 1.8rem;
-  animation: bounce 3s ease-in-out infinite;
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
 }
 
 .routeFeaturesList li:hover {
-  background: rgba(255, 247, 237, 0.4);
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 15px 40px rgba(255, 107, 53, 0.2);
-  border-color: rgba(255, 107, 53, 0.4);
+  background: #FFF4E1;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  border-color: #ffb938;
 }
 
-/* Enhanced Loading and Error States */
+/* Loading and Error States */
 .loadingState, .errorState {
   text-align: center;
   padding: 4rem 2rem;
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 25px;
-  box-shadow:
-    0 20px 60px rgba(255, 107, 53, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
   margin: 2rem 0;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .errorState {
   border-color: rgba(239, 68, 68, 0.3);
-  background: rgba(254, 242, 242, 0.3);
+  background: #fef2f2;
 }
 
 /* Car Options Section */
 .carOptionsSection {
-  margin: 20px 0;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  margin: 2rem 0;
+  padding: 2rem;
+  background: #FFF4E1;
   border-radius: 15px;
-  border: 1px solid rgba(255, 165, 0, 0.3);
-  box-shadow: 0 8px 32px rgba(255, 165, 0, 0.1);
+  border: 2px solid #ffb938;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
 .carOptionsTitle {
-  color: #ff8c00;
+  color: #ff8c42;
   font-size: 1.5rem;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
   text-align: center;
-  text-shadow: 0 2px 4px rgba(255, 140, 0, 0.3);
 }
 
 .tableContainer {
-  background: rgba(255, 255, 255, 0.95);
+  background: white;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(255, 165, 0, 0.15);
-  border: 2px solid rgba(255, 165, 0, 0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .carOptionsTable {
   width: 100%;
   border-collapse: collapse;
-  font-family: 'Arial', sans-serif;
 }
 
 .carOptionsTable thead {
-  background: linear-gradient(135deg, #ff8c00, #ffa500);
+  background: linear-gradient(135deg, #ff8c42, #ffb938);
   color: white;
 }
 
@@ -658,7 +346,6 @@
   text-align: left;
   font-weight: 600;
   font-size: 0.95rem;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -667,15 +354,15 @@
 }
 
 .carOptionRow {
-  background: rgba(255, 255, 255, 0.8);
+  background: white;
   transition: all 0.3s ease;
-  border-bottom: 1px solid rgba(255, 165, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .carOptionRow:hover {
-  background: rgba(255, 165, 0, 0.1);
+  background: #FFF4E1;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 165, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .carOptionRow:last-child {
@@ -684,7 +371,7 @@
 
 .carOptionsTable td {
   padding: 15px 12px;
-  border-right: 1px solid rgba(255, 165, 0, 0.1);
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
   font-size: 0.9rem;
 }
 
@@ -704,7 +391,7 @@
 
 .carPrice {
   font-weight: 700;
-  color: #ff8c00;
+  color: #ff8c42;
   font-size: 1rem;
 }
 
@@ -714,7 +401,7 @@
 }
 
 .bookNowBtn {
-  background: linear-gradient(135deg, #ff8c00, #ffa500);
+  background: linear-gradient(135deg, #ff8c42, #ffb938);
   color: white;
   border: none;
   padding: 10px 20px;
@@ -723,23 +410,22 @@
   font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(255, 140, 66, 0.3);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
 .bookNowBtn:hover {
   background: linear-gradient(135deg, #e67e00, #ff8c00);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 140, 0, 0.4);
+  box-shadow: 0 6px 20px rgba(255, 140, 66, 0.4);
 }
 
 .bookNowBtn:active {
   transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(255, 140, 0, 0.3);
+  box-shadow: 0 2px 8px rgba(255, 140, 66, 0.3);
 }
 
-/* Mobile Responsive Enhancements */
+/* Mobile Responsive */
 @media (max-width: 768px) {
   .routesSection {
     padding: 1rem 0;
@@ -747,8 +433,8 @@
   
   .container {
     margin: 0 1rem;
-    padding: 0 1rem;
-    border-radius: 20px;
+    padding: 1.5rem 1rem;
+    border-radius: 15px;
   }
   
   .sectionTitle {
@@ -759,12 +445,12 @@
   .cardImageContainer {
     height: 300px;
     margin-bottom: 1.5rem;
-    border-radius: 20px;
+    border-radius: 15px;
   }
   
   .routeDescription {
     font-size: 1.2rem;
-    padding: 2rem 1.5rem;
+    padding: 1.5rem;
   }
   
   .routeInfo {
@@ -785,27 +471,12 @@
     min-width: auto;
   }
   
-  /* Price box mobile responsive */
   .routeInfo > div:last-child {
     padding: 1.5rem 1rem;
   }
   
   .routeInfo > div:last-child p {
     font-size: 1.8rem !important;
-  }
-  
-  .routeInfo > div:last-child del {
-    font-size: 1.1rem !important;
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-  
-  .routeInfo > div:last-child span {
-    font-size: 1rem !important;
-    margin-left: 0 !important;
-    display: block;
-    margin-top: 0.5rem;
-    padding: 0.4rem 1rem;
   }
   
   .infoSection {
@@ -830,19 +501,19 @@
   }
   
   .viewAllBtn {
-    margin: 1.5rem 0 1rem;
+    margin: 1rem 0;
     padding: 0.9rem 1.8rem;
     font-size: 0.95rem;
   }
   
   .carOptionsSection {
-    padding: 15px;
-    margin: 15px 0;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
   }
   
   .carOptionsTitle {
     font-size: 1.3rem;
-    margin-bottom: 15px;
+    margin-bottom: 1rem;
   }
   
   .carOptionsTable th,
@@ -868,7 +539,7 @@
 @media (max-width: 480px) {
   .container {
     margin: 0 0.5rem;
-    border-radius: 16px;
+    border-radius: 12px;
   }
   
   .sectionTitle {
@@ -884,22 +555,12 @@
     padding: 0.8rem;
   }
   
-  /* Price box small mobile responsive */
   .routeInfo > div:last-child {
     padding: 1.2rem 0.8rem;
   }
   
   .routeInfo > div:last-child p {
     font-size: 1.5rem !important;
-  }
-  
-  .routeInfo > div:last-child del {
-    font-size: 1rem !important;
-  }
-  
-  .routeInfo > div:last-child span {
-    font-size: 0.9rem !important;
-    padding: 0.3rem 0.8rem;
   }
   
   .infoSection {
@@ -924,8 +585,8 @@
   }
   
   .carOptionsSection {
-    padding: 12px;
-    margin: 12px 0;
+    padding: 1rem;
+    margin: 1rem 0;
   }
   
   .carOptionsTitle {
@@ -944,11 +605,11 @@
   }
 }
 
-/* Enhanced Animations */
+/* Simple Animations */
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -957,21 +618,13 @@
 }
 
 .container > * {
-  animation: fadeInUp 0.8s ease-out forwards;
+  animation: fadeInUp 0.6s ease-out forwards;
 }
 
-.infoSection:nth-child(odd) {
-  animation-delay: 0.1s;
-}
-
-.infoSection:nth-child(even) {
-  animation-delay: 0.2s;
-}
-
-/* Focus states for accessibility */
+/* Focus states */
 .viewAllBtn:focus,
 .routeInfo p:focus,
 .infoSection:focus {
-  outline: 2px solid rgba(255, 107, 53, 0.5);
+  outline: 2px solid #ff8c42;
   outline-offset: 2px;
 }

@@ -8,6 +8,7 @@ import styles from './toproutes.module.css';
 import TermsConditions from '../../components/TermsConditions';
 import BookNowButton from '../../components/BookNowButton';
 import BookingReceipt from '../../components/BookingReceipt';
+import EnhancedFooter from '../../components/footer';
 
 const RouteDetailPage = () => {
   const router = useRouter();
@@ -313,7 +314,7 @@ const RouteDetailPage = () => {
             priority
             onLoad={handleImageLoad}
             onError={handleImageError}
-            style={{ opacity: imageLoading ? 0.3 : 1 }}
+            style={{ opacity: 1 }}
           />
         </div>
 
@@ -461,7 +462,6 @@ const RouteDetailPage = () => {
   </div>
 )}
 
-
         {/* Enhanced Features */}
         {route.features && route.features.length > 0 && (
           <div className={styles.routeFeaturesList} style={{ animationDelay: '0.6s' }}>
@@ -541,6 +541,9 @@ const RouteDetailPage = () => {
         {/* Terms and Conditions Section */}
         <TermsConditions />
       </div>
+
+      {/* Footer */}
+      <EnhancedFooter />
 
       {/* Booking Receipt Modal */}
       {showBookingReceipt && selectedCar && (

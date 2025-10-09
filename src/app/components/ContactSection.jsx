@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { Phone, Mail, MapPin, Clock, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import styles from "./ContactSection.module.css";
 
 const ContactSection = () => {
@@ -22,48 +22,7 @@ const ContactSection = () => {
             out to us. We&apos;re here to help you with all your transportation needs!
           </p>
           
-          {/* Contact Info Grid */}
-          <div className={styles.contactInfo}>
-            <div className={styles.contactItem}>
-              <div className={styles.contactIcon}>
-                <Phone size={20} />
-              </div>
-              <div className={styles.contactText}>
-                <div className={styles.contactLabel}>Call Us</div>
-                <div className={styles.contactValue}>+91 9988-2222-83</div>
-              </div>
-            </div>
-            
-            <div className={styles.contactItem}>
-              <div className={styles.contactIcon}>
-                <Mail size={20} />
-              </div>
-              <div className={styles.contactText}>
-                <div className={styles.contactLabel}>Email Us</div>
-                <div className={styles.contactValue}>onlinetaxi09@gmail.com</div>
-              </div>
-            </div>
-            
-            <div className={styles.contactItem}>
-              <div className={styles.contactIcon}>
-                <MapPin size={20} />
-              </div>
-              <div className={styles.contactText}>
-                <div className={styles.contactLabel}>Visit Us</div>
-                <div className={styles.contactValue}>Sector 68, Mohali</div>
-              </div>
-            </div>
-            
-            <div className={styles.contactItem}>
-              <div className={styles.contactIcon}>
-                <Clock size={20} />
-              </div>
-              <div className={styles.contactText}>
-                <div className={styles.contactLabel}>Available</div>
-                <div className={styles.contactValue}>24/7 Service</div>
-              </div>
-            </div>
-          </div>
+
 
           <div className={styles.breadcrumb}>
             <a href="/">Home</a>

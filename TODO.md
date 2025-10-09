@@ -1,5 +1,2 @@
-- [x] Modify BookingSection.js to show "No locations available" message when no matches in from/to city dropdowns
-- [x] Add CSS for the no results message in BookingSection.module.css
-- [x] Make the booking section's table responsive
-- [x] Make the admin panel's users page table responsive
-- [x] Test the changes
+- [x] Remove extra top and bottom margins in terms and conditions CSS
+- [x] Remove extra space between terms and conditions heading and what's included section

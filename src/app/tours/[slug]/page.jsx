@@ -7,6 +7,7 @@ import Image from "next/image";
 import styles from './tours.module.css';
 import TermsConditions from '../../components/TermsConditions';
 import BookingForm from '../../components/BookingForm';
+import EnhancedFooter from '../../components/footer';
 
 const TourDetailPage = () => {
   const router = useRouter();
@@ -408,6 +409,9 @@ const TourDetailPage = () => {
         {/* Terms and Conditions */}
         <TermsConditions />
       </div>
+
+      {/* Footer */}
+      <EnhancedFooter />
 
       {/* Booking Form Modal */}
       {showBookingForm && (

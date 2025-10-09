@@ -1,6 +1,8 @@
+/* TestimonialsSection.module.css */
+
 .mainContainer {
   min-height: 100vh;
-  background: #fff3db;
+  background: #f7c45930;
   padding: 4rem 1rem;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
@@ -19,8 +21,8 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: #dcfce7;
-  color: #166534;
+  background: #e8f5e9;
+  color: #2e7d32;
   padding: 0.5rem 1rem;
   border-radius: 2rem;
   font-size: 0.875rem;
@@ -31,21 +33,18 @@
 .mainTitle {
   font-size: 3.5rem;
   font-weight: 800;
-  color: #1f2937;
+  color: #202124;
   margin-bottom: 1.5rem;
   line-height: 1.1;
 }
 
 .gradientText {
-  background: linear-gradient(135deg, #10b981, #2563eb);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #F18800;
 }
 
 .subtitle {
   font-size: 1.25rem;
-  color: #6b7280;
+  color: #5f6368;
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.7;
@@ -53,42 +52,55 @@
 }
 
 .statsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 2rem;
   margin-bottom: 4rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .statCard {
-  background: white;
-  padding: 2rem;
-  border-radius: 1.5rem;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  background: #FFF3E0; /* light orange theme */
+  padding: 1rem 1.5rem; /* reduced padding for smaller size */
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px rgba(60, 64, 67, 0.3), 0 4px 8px 3px rgba(60, 64, 67, 0.15);
   text-align: center;
   transition: all 0.3s ease;
   cursor: pointer;
+  border: 1px solid #FFCC80; /* light orange border */
+  width: 220px; /* reduced width */
+  height: 160px; /* increased height to fit content */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .statCard:hover {
-  transform: translateY(-5px);
+  box-shadow: 0 1px 6px rgba(60, 64, 67, 0.3), 0 8px 16px 6px rgba(60, 64, 67, 0.15);
+  transform: translateY(-2px);
 }
 
 .statIcon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
 }
 
 .statValue {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  color: #1f2937;
-  margin-bottom: 0.5rem;
+  color: #202124;
+  margin-bottom: 0.125rem;
 }
 
 .statLabel {
-  color: #6b7280;
+  color: #5f6368;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 0.75rem;
+  margin-bottom: 0;
 }
 
 /* Loading States */
@@ -108,8 +120,8 @@
 .spinner {
   width: 50px;
   height: 50px;
-  border: 4px solid #f3f4f6;
-  border-top: 4px solid #10b981;
+  border: 4px solid #f1f3f4;
+  border-top: 4px solid #4285f4;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -120,7 +132,7 @@
 }
 
 .loadingText {
-  color: #6b7280;
+  color: #5f6368;
   font-size: 1.125rem;
   font-weight: 500;
   margin: 0;
@@ -135,11 +147,12 @@
   min-height: 300px;
   text-align: center;
   background: white;
-  border-radius: 2rem;
+  border-radius: 1rem;
   padding: 3rem;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(60, 64, 67, 0.3), 0 4px 8px 3px rgba(60, 64, 67, 0.15);
   margin: 2rem auto;
   max-width: 500px;
+  border: 1px solid #dadce0;
 }
 
 .noReviewsIcon {
@@ -151,12 +164,12 @@
 .noReviewsTitle {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #1f2937;
+  color: #202124;
   margin-bottom: 0.5rem;
 }
 
 .noReviewsText {
-  color: #6b7280;
+  color: #5f6368;
   font-size: 1rem;
   line-height: 1.6;
   margin-bottom: 0;
@@ -165,21 +178,33 @@
 .testimonialSection {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  gap: 1.5rem;
   align-items: stretch;
+  margin-bottom: 2rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .testimonialCard {
   position: relative;
-  background: white;
-  border-radius: 2rem;
-  padding: 2rem;
-  box-shadow: 0 25px 50px rgba(0,0,0,0.1);
-  height: 20rem;
+  background: #fff3e0;
+  border: 1px solid #ffcc80;
+  border-radius: 1rem;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 1px 3px rgba(60, 64, 67, 0.3), 0 4px 8px 3px rgba(60, 64, 67, 0.15);
+  height: auto;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  transition: all 0.5s ease;
+  justify-content: center;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.testimonialCard:hover {
+  box-shadow: 0 1px 6px rgba(60, 64, 67, 0.3), 0 8px 16px 6px rgba(60, 64, 67, 0.15);
 }
 
 .testimonialsGrid {
@@ -193,9 +218,9 @@
   position: absolute;
   top: 1rem;
   right: 1rem;
-  font-size: 2rem;
-  color: #10b981;
-  opacity: 0.3;
+  font-size: 1.5rem;
+  color: #dadce0;
+  opacity: 0.5;
 }
 
 .userInfo {
@@ -209,24 +234,26 @@
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
-  background: linear-gradient(135deg, #10b981, #2563eb);
+  background: linear-gradient(135deg, #4285f4, #34a853);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
+  box-shadow: 0 2px 8px rgba(66, 133, 244, 0.3);
 }
 
 .userName {
   font-size: 1.25rem;
-  font-weight: bold;
-  color: #1f2937;
+  font-weight: 600;
+  color: #202124;
   margin: 0;
 }
 
 .userRole {
-  color: #6b7280;
+  color: #5f6368;
   margin: 0;
-  font-size: 1rem;
+  font-size: 0.95rem;
+  font-weight: 400;
 }
 
 .stars {
@@ -238,10 +265,11 @@
 
 .testimonialText {
   font-size: 1.125rem;
-  line-height: 1.7;
-  color: #4b5563;
-  font-style: italic;
+  line-height: 1.6;
+  color: #3c4043;
+  font-style: normal;
   text-align: left;
+  font-weight: 400;
 }
 
 .navigation {
@@ -257,19 +285,26 @@
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
-  background: white;
-  border: none;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  background: transparent;
+  border: 1px solid #202124;
+  box-shadow: none;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
   font-size: 1.25rem;
+  color: #202124;
 }
 
 .navButton:hover {
-  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  background: rgba(32, 33, 36, 0.1);
+  box-shadow: 0 0 8px rgba(32, 33, 36, 0.3);
+}
+
+.navButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .dots {
@@ -284,16 +319,21 @@
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
-  background: #d1d5db;
+  background: #dadce0;
 }
 
 .activeDot {
-  background: #10b981;
+  background: #4285f4;
   width: 2rem;
+  border-radius: 0.5rem;
 }
 
 .inactiveDot {
-  background: #d1d5db;
+  background: #dadce0;
+}
+
+.dot:hover {
+  background: #5f6368;
 }
 
 .imageSection {
@@ -302,11 +342,13 @@
   height: 20rem;
   margin: 0 auto;
   order: 0;
-  border-radius: 2rem;
+  border-radius: 1rem;
   overflow: hidden;
-  box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+  box-shadow: 0 1px 3px rgba(60, 64, 67, 0.3), 0 4px 8px 3px rgba(60, 64, 67, 0.15);
   display: flex;
   flex-direction: column;
+  background: white;
+  border: 1px solid #dadce0;
 }
 
 .tourImageContainer {
@@ -324,24 +366,24 @@
 .tourImageIcon {
   font-size: 4rem;
   margin-bottom: 0.75rem;
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
 }
 
 .tourTitle {
   color: white;
   font-size: 1.25rem;
-  font-weight: bold;
+  font-weight: 600;
   text-align: center;
   margin-bottom: 0.25rem;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
 .tourDescription {
-  color: rgba(255,255,255,0.9);
+  color: rgba(255,255,255,0.95);
   font-size: 0.875rem;
   text-align: center;
   padding: 0 1rem;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
 .overlayPattern {
@@ -357,13 +399,14 @@
   height: 4rem;
   border-radius: 50%;
   background: white;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 8px rgba(60, 64, 67, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.25rem;
   transition: all 0.5s ease;
   cursor: pointer;
+  border: 2px solid #dadce0;
 }
 
 .ctaSection {
@@ -375,21 +418,21 @@
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  background: linear-gradient(135deg, #10b981, #2563eb);
+  background: #F18800;
   color: white;
   padding: 1rem 2rem;
-  border-radius: 2rem;
+  border-radius: 0.5rem;
   font-size: 1.125rem;
-  font-weight: 600;
+  font-weight: 500;
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 1px 3px rgba(60, 64, 67, 0.3), 0 4px 8px 3px rgba(60, 64, 67, 0.15);
 }
 
 .ctaButton:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.5);
+  background: #d67a0f;
+  box-shadow: 0 1px 6px rgba(60, 64, 67, 0.3), 0 8px 16px 6px rgba(60, 64, 67, 0.15);
 }
 
 /* Responsive styles */
@@ -412,9 +455,11 @@
     padding: 0 1rem;
   }
   .statsGrid {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: center;
     gap: 1rem;
     margin-bottom: 2rem;
+    max-width: none;
   }
   .statCard {
     padding: 1.5rem 1rem;
@@ -430,17 +475,19 @@
   }
   .testimonialSection {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.5rem;
   }
   .testimonialsGrid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
   .testimonialCard {
-    height: 16rem;
+    height: auto;
+    min-height: 16rem;
+    padding: 2rem 1.5rem;
   }
   .quoteIcon {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
   .userInfo {
     gap: 0.75rem;
@@ -474,7 +521,8 @@
     font-size: 1rem;
   }
   .imageSection {
-    width: 18rem;
+    width: 100%;
+    max-width: 20rem;
     height: 16rem;
     order: -1;
   }
