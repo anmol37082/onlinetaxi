@@ -39,12 +39,13 @@ const TaxiServicesPage = () => {
           position: relative;
           overflow: hidden;
           min-height: 100vh;
+          padding: 20px 0;
         }
         
         .services-container {
           max-width: 1400px;
           margin: 0 auto;
-          padding: 100px 20px;
+          padding: 0 20px;
         }
         
         .header-section {

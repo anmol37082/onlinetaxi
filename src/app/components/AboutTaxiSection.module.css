@@ -2,7 +2,7 @@
   background: #fff3db;
   position: relative;
   overflow: hidden;
-  padding: 100px 0;
+  padding: 0;
 }
 
 .aboutContainer {
@@ -211,7 +211,7 @@
 
 @media (max-width: 768px) {
   .aboutWrapper {
-    padding: 60px 0;
+    padding: 0;
   }
   
   .aboutContainer {
