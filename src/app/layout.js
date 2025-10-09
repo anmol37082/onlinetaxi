@@ -20,6 +20,15 @@ const poppins = Poppins({
   display: 'swap', // Better performance
 })
 
+export const metadata = {
+  title: 'OnlineTaxi',
+  description: 'Online Taxi Booking Website',
+  icons: {
+    icon: '/favicon.ico', // या '/myicon.png'
+  },
+}
+
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`} data-scroll-behavior="smooth">
