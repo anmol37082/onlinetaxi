@@ -241,9 +241,17 @@
   gap: 0.5rem;
 }
 
+/* Table Wrapper for Horizontal Scroll */
+.tableWrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0;
+}
+
 .table {
   width: 100%;
   border-collapse: collapse;
+  min-width: 800px;
 }
 
 .tableHeader th {
@@ -255,6 +263,7 @@
   background: linear-gradient(135deg, #ffb938 0%, rgba(255, 140, 0, 0.9) 100%);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  white-space: nowrap;
 }
 
 .tableRow {
@@ -283,6 +292,7 @@
 .actions {
   display: flex;
   gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .editButton {
@@ -295,6 +305,7 @@
   transition: all 0.3s ease;
   font-size: 0.8rem;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .editButton:hover {
@@ -313,6 +324,7 @@
   transition: all 0.3s ease;
   font-size: 0.8rem;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .deleteButton:hover {
@@ -390,6 +402,17 @@
   100% { transform: rotate(360deg); }
 }
 
+/* Scroll Indicator for Mobile */
+.scrollIndicator {
+  display: none;
+  text-align: center;
+  padding: 0.5rem;
+  font-size: 0.8rem;
+  color: #666;
+  background: rgba(255, 185, 56, 0.1);
+  border-top: 1px solid rgba(255, 185, 56, 0.2);
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .container {
@@ -397,8 +420,12 @@
   }
 
   .title {
-    font-size: 2rem;
+    font-size: 1.75rem;
     padding: 0.75rem 1rem;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
   }
 
   .form {
@@ -414,12 +441,80 @@
     min-width: auto;
   }
 
+  .formSection {
+    padding: 1.5rem;
+  }
+
+  .formTitle {
+    font-size: 1.25rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.25rem;
+    padding: 1rem;
+  }
+
+  /* Show scroll indicator on mobile */
+  .scrollIndicator {
+    display: block;
+  }
+
+  /* Table responsive adjustments */
+  .tableWrapper {
+    border-radius: 0 0 20px 20px;
+    box-shadow: inset 0 0 10px rgba(255, 185, 56, 0.1);
+  }
+
   .table {
-    font-size: 0.8rem;
+    min-width: 600px;
+    font-size: 0.85rem;
+  }
+
+  .tableHeader th {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .tableCell {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .actions {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .editButton,
+  .deleteButton {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.75rem;
+    width: 100%;
+  }
+
+  .rating {
+    font-size: 0.9rem;
+  }
+
+  .backButton {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .submitButton {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+/* Tablet Responsive */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .table {
+    font-size: 0.9rem;
   }
 
   .tableHeader th,
   .tableCell {
-    padding: 0.75rem 0.5rem;
+    padding: 0.85rem;
   }
 }

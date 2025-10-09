@@ -261,55 +261,62 @@ const AdminReviewsPage = () => {
               <p>Add your first review using the form above.</p>
             </div>
           ) : (
-            <table className={styles.table}>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Role</th>
-                  <th>Rating</th>
-                  <th>Review Text</th>
-                  <th>Tour Type</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {reviews.map((review) => (
-                  <tr key={review._id} className={styles.tableRow}>
-                    <td className={styles.tableCell}>
-                      <strong>{review.name}</strong>
-                    </td>
-                    <td className={styles.tableCell}>{review.role}</td>
-                    <td className={styles.tableCell}>
-                      <div className={styles.rating}>
-                        {renderStars(review.rating)}
-                      </div>
-                    </td>
-                    <td className={styles.tableCell}>
-                      <div style={{ maxWidth: '300px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                        {review.text}
-                      </div>
-                    </td>
-                    <td className={styles.tableCell}>{review.tourType}</td>
-                    <td className={styles.tableCell}>
-                      <div className={styles.actions}>
-                        <button
-                          className={styles.editButton}
-                          onClick={() => handleEdit(review)}
-                        >
-                          ✏️ Edit
-                        </button>
-                        <button
-                          className={styles.deleteButton}
-                          onClick={() => handleDelete(review._id)}
-                        >
-                          🗑️ Delete
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <>
+              <div className={styles.tableWrapper}>
+                <table className={styles.table}>
+                  <thead className={styles.tableHeader}>
+                    <tr>
+                      <th>Name</th>
+                      <th>Role</th>
+                      <th>Rating</th>
+                      <th>Review Text</th>
+                      <th>Tour Type</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {reviews.map((review) => (
+                      <tr key={review._id} className={styles.tableRow}>
+                        <td className={styles.tableCell}>
+                          <strong>{review.name}</strong>
+                        </td>
+                        <td className={styles.tableCell}>{review.role}</td>
+                        <td className={styles.tableCell}>
+                          <div className={styles.rating}>
+                            {renderStars(review.rating)}
+                          </div>
+                        </td>
+                        <td className={styles.tableCell}>
+                          <div style={{ maxWidth: '300px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                            {review.text}
+                          </div>
+                        </td>
+                        <td className={styles.tableCell}>{review.tourType}</td>
+                        <td className={styles.tableCell}>
+                          <div className={styles.actions}>
+                            <button
+                              className={styles.editButton}
+                              onClick={() => handleEdit(review)}
+                            >
+                              ✏️ Edit
+                            </button>
+                            <button
+                              className={styles.deleteButton}
+                              onClick={() => handleDelete(review._id)}
+                            >
+                              🗑️ Delete
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className={styles.scrollIndicator}>
+                ← Swipe to see more →
+              </div>
+            </>
           )}
         </div>
       </div>
