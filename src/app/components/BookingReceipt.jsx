@@ -88,15 +88,17 @@ const BookingReceipt = ({ selectedCar, routeData, onClose }) => {
 
       // Create booking payload with car-specific data
       const isCabBooking = !!selectedCar;
+      const isFromTopRoute = !!routeData; // If routeData is present, it's from top routes
       const bookingPayload = {
-        bookingType: isCabBooking ? 'cab' : 'route',
+        bookingType: isCabBooking && !isFromTopRoute ? 'cab' : 'route', // Show as 'route' if from top routes car options
         title: routeData?.title || selectedCar?.Car || '',
-        image: isCabBooking ? (selectedCar.Imgg || selectedCar.imgg || '') : (routeData?.image || ''),
+        image: isFromTopRoute ? (routeData?.image || '') : (selectedCar?.Imgg || selectedCar?.imgg || ''), // Use route image if from top routes
         price: selectedCar?.Price || selectedCar?.price || 0,
         travelDate: formData.date,
         time: formData.time,
         specialRequests: formData.message,
         pickupLocation: formData.address,
+        // dropLocation: isCabBooking && !isFromTopRoute ? formData.address : undefined, // For cab bookings, set drop location same as pickup
         userPhone: formData.phone,
         routeId: routeData?._id,
         carDetails: isCabBooking ? {
@@ -253,15 +255,15 @@ const BookingReceipt = ({ selectedCar, routeData, onClose }) => {
           fontWeight: '700'
         }}>📋 Booking Details</h3>
 
-        {/* Cab Image */}
-        {selectedCar?.Imgg && (
+        {/* Booking Image */}
+        {(routeData?.image || selectedCar?.Imgg) && (
           <div style={{
             textAlign: 'center',
             marginBottom: '1.5rem'
           }}>
             <img
-              src={selectedCar.Imgg.startsWith('http') ? selectedCar.Imgg : `/images/${selectedCar.Imgg}`}
-              alt={selectedCar.Car || selectedCar.name}
+              src={routeData?.image || (selectedCar.Imgg.startsWith('http') ? selectedCar.Imgg : `/images/${selectedCar.Imgg}`)}
+              alt={routeData?.title || selectedCar?.Car || selectedCar?.name}
               style={{
                 width: '100%',
                 maxWidth: '300px',

@@ -126,6 +126,7 @@
 /* Details Sections */
 .basicDetails,
 .routeDetails,
+.cabDetails,
 .tourDetails,
 .additionalDetails,
 .userInfo,
@@ -136,6 +137,7 @@
   border-left: 4px solid #ff6b35;
 }
 
+.cabDetails h3,
 .routeDetails h3,
 .tourDetails h3,
 .additionalDetails h3,

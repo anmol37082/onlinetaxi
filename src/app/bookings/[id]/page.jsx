@@ -206,7 +206,7 @@ const BookingDetailPage = () => {
                 Booking #{booking.bookingReference}
               </span>
               <span className={styles.bookingType}>
-                {booking.bookingType === 'route' ? '🚗 Route' : '🏛️ Tour'}
+                {booking.bookingType === 'route' ? '🚗 Route' : booking.bookingType === 'cab' ? '🚕 Cab (Not Route)' : '🏛️ Tour'}
               </span>
             </div>
           </div>
@@ -294,6 +294,31 @@ const BookingDetailPage = () => {
                         <span className={styles.value}>{booking.routeId.carOptions[0].seats}</span>
                       </div>
                     )}
+                  </div>
+                </div>
+              )}
+
+              {/* Cab Specific Details */}
+              {booking.bookingType === 'cab' && booking.carDetails && (
+                <div className={styles.cabDetails}>
+                  <h3>Cab Information</h3>
+                  <div className={styles.cabGrid}>
+                    <div className={styles.detailRow}>
+                      <span className={styles.label}>Car Name:</span>
+                      <span className={styles.value}>{booking.carDetails.name}</span>
+                    </div>
+                    <div className={styles.detailRow}>
+                      <span className={styles.label}>Seats:</span>
+                      <span className={styles.value}>{booking.carDetails.seats}</span>
+                    </div>
+                    <div className={styles.detailRow}>
+                      <span className={styles.label}>Luggage:</span>
+                      <span className={styles.value}>{booking.carDetails.luggage}</span>
+                    </div>
+                    <div className={styles.detailRow}>
+                      <span className={styles.label}>Price:</span>
+                      <span className={styles.value}>₹{booking.carDetails.price}</span>
+                    </div>
                   </div>
                 </div>
               )}
