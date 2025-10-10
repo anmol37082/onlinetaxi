@@ -1,10 +1,9 @@
-# Reduce Extra Margin on Home Page Components
+# TODO: Save From/To Locations in Cab Bookings
 
-## Tasks to Complete:
-- [ ] HeroSection.module.css: Reduce padding from `10px 0 40px 0` to `5px 0 20px 0`
-- [ ] BookingSection.module.css: Reduce margin from `-50px auto 80px` to `-25px auto 40px`
-- [ ] ToursSection.module.css: Reduce padding from `60px 0` to `30px 0`
-- [ ] TopRoutes.module.css: Reduce padding from `60px 0` to `30px 0`
-- [ ] TaxiServicesPage.jsx: Reduce inline padding from `'80px 0'` to `'40px 0'`
-- [ ] AboutTaxiSection.module.css: Reduce padding from `100px 0` to `50px 0`
-- [ ] TestimonialsSection.module.css: Reduce padding from `80px 0` to `40px 0`
+## Completed Tasks
+- [x] Add fromLocation and toLocation fields to Booking model (src/models/Booking.js)
+- [x] Update BookingReceipt to include fromLocation and toLocation in booking payload (src/app/components/BookingReceipt.jsx)
+
+## Followup Steps
+- [ ] Test cab booking flow to verify from/to locations are saved correctly
+- [ ] Check admin panel to ensure from/to locations are displayed in booking details

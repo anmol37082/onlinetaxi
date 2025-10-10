@@ -323,6 +323,27 @@ const BookingDetailPage = () => {
                 </div>
               )}
 
+              {/* Cab Route Details */}
+              {booking.bookingType === 'cab' && (booking.fromLocation || booking.toLocation) && (
+                <div className={styles.routeDetails}>
+                  <h3>Route Information</h3>
+                  <div className={styles.routeGrid}>
+                    {booking.fromLocation && (
+                      <div className={styles.detailRow}>
+                        <span className={styles.label}>From:</span>
+                        <span className={styles.value}>{booking.fromLocation}</span>
+                      </div>
+                    )}
+                    {booking.toLocation && (
+                      <div className={styles.detailRow}>
+                        <span className={styles.label}>To:</span>
+                        <span className={styles.value}>{booking.toLocation}</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
               {/* Tour Specific Details */}
               {booking.bookingType === 'tour' && booking.tourId && (
                 <div className={styles.tourDetails}>

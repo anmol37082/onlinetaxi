@@ -98,6 +98,8 @@ const BookingReceipt = ({ selectedCar, routeData, onClose }) => {
         time: formData.time,
         specialRequests: formData.message,
         pickupLocation: formData.address,
+        fromLocation: routeData?.fromCity || selectedCar?.From || selectedCar?.from || '',
+        toLocation: routeData?.toCity || selectedCar?.To || selectedCar?.to || selectedCar?.City || '',
         // dropLocation: isCabBooking && !isFromTopRoute ? formData.address : undefined, // For cab bookings, set drop location same as pickup
         userPhone: formData.phone,
         routeId: routeData?._id,

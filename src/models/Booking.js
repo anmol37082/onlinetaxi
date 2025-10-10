@@ -24,6 +24,8 @@ const BookingSchema = new mongoose.Schema({
   // Additional Details
   pickupLocation: { type: String },
   dropLocation: { type: String },
+  fromLocation: { type: String },
+  toLocation: { type: String },
   tripType: { type: String, enum: ['oneway', 'roundtrip', 'hourly'] },
 
   // Status and Tracking

@@ -411,6 +411,20 @@ const MyBookingsPage = () => {
                     </>
                   )}
 
+                  {/* From/To Locations */}
+                  {booking.fromLocation && (
+                    <div className={styles.detailRow}>
+                      <span className={styles.label}>From:</span>
+                      <span className={styles.value}>{booking.fromLocation}</span>
+                    </div>
+                  )}
+                  {booking.toLocation && (
+                    <div className={styles.detailRow}>
+                      <span className={styles.label}>To:</span>
+                      <span className={styles.value}>{booking.toLocation}</span>
+                    </div>
+                  )}
+
                   {/* Pickup/Drop Locations */}
                   {booking.pickupLocation && (
                     <div className={styles.detailRow}>
