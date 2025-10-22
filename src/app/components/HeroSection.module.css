@@ -1,5 +1,5 @@
 .hero {
-  background: linear-gradient(135deg, rgba(255, 165, 0, 0.8) 0%, rgba(255, 255, 255, 0.8) 100%);
+  background: #fff3db;
   min-height: 80vh;
   display: flex;
   align-items: center;
@@ -38,13 +38,13 @@
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 800;
   line-height: 1.2;
-  color: white;
+  color: rgb(0, 0, 0);
   margin-bottom: 16px;
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .highlight {
-  background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+  background: #ffb938;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -52,6 +52,7 @@
   animation: shimmer 3s ease-in-out infinite;
   min-height: 1.2em;
   min-width: 200px;
+  text-shadow: none;
 }
 
 @keyframes shimmer {
@@ -61,7 +62,7 @@
 
 .heroContent p {
   font-size: 18px;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(0, 0, 0, 0.9);
   margin-bottom: 24px;
   font-weight: 400;
   line-height: 1.7;
@@ -75,7 +76,7 @@
 }
 
 .ctaPrimary {
-  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  background: #ffb938;
   color: white;
   padding: 18px 36px;
   border: none;
@@ -84,7 +85,7 @@
   font-size: 16px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 8px 25px rgba(67, 233, 123, 0.3);
+  box-shadow: 0 8px 25px rgb(233 209 67 / 30%);
   display: inline-flex;
   align-items: center;
   gap: 10px;

@@ -2,7 +2,7 @@
 
 .routesSection {
   padding: 30px 0 20px;
-  background: linear-gradient(135deg, #fff7ed 0%, #fff3db 100%);
+  background: rgb(255, 243, 219);
   min-height: 100vh;
   position: relative;
 }
@@ -23,7 +23,7 @@
   font-weight: 700;
   color: #1e293b;
   margin-bottom: 16px;
-  background: linear-gradient(135deg, #f97316, #ea580c);
+  background: #ffb938;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -107,14 +107,19 @@
   position: absolute;
   top: 12px;
   left: 12px;
-  background: linear-gradient(135deg, #ff8c00, #ffa500);
-  color: white;
+
   padding: 6px 12px;
   border-radius: 20px;
   font-weight: 600;
   font-size: 0.8rem;
   z-index: 2;
-  box-shadow: 0 2px 8px rgba(255, 140, 0, 0.3);
+
+}
+
+.brandLogo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .favoriteBtn {

@@ -10,7 +10,7 @@
 }
 
 .bookingContainer {
-  padding: 50px;
+  padding: 15px;
 }
 
 .bookingHeader {
@@ -22,7 +22,7 @@
   font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 2.5rem;
   font-weight: 700;
-  color: #FF4500;
+  color: #ffb938;
   margin-bottom: 12px;
 }
 
@@ -72,7 +72,7 @@
 .formGroup select {
   width: 100%;
   padding: 18px 50px 18px 20px;
-  border: 2px solid #e5e7eb;
+  border: 2px solid #ffb938;
   border-radius: 12px;
   font-size: 16px;
   font-family: var(--font-inter), 'Inter', sans-serif;
@@ -82,12 +82,29 @@
   box-sizing: border-box;
 }
 
+.formGroup select option {
+  background: white;
+  color: #1f2937;
+  padding: 10px;
+}
+
+.formGroup select option:hover {
+  background: white !important;
+  color: #1f2937 !important;
+}
+
+.formGroup select option:focus,
+.formGroup select option:checked {
+  background: #ff9900 !important;
+  color: white !important;
+}
+
 .formGroup input:focus,
 .formGroup select:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #ffb938;
   background: white;
-  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+  box-shadow: 0 0 0 4px rgba(255, 185, 56, 0.1);
   transform: none;
 }
 
@@ -110,11 +127,11 @@
 }
 
 .inputWrapper i {
-  color: #6b7280;
+  color: #ffb938;
 }
 
 .selectWrapper i {
-  color: #6b7280;
+  color: #ffb938;
 }
 
 .fromIcon {
@@ -127,7 +144,7 @@
 
 .formGroup:focus-within .inputWrapper i,
 .formGroup:focus-within .selectWrapper i {
-  color: #667eea;
+  color: #ffb938;
 }
 
 .positionRelative {
@@ -156,7 +173,17 @@
 }
 
 .listGroupItem:hover {
-  background-color: #f9fafb;
+  background-color: #ff9900 !important;
+}
+
+.dropdown .listGroupItem.selected:hover {
+  background: #ffb938 !important;
+  color: white !important;
+}
+
+.dropdown .listGroupItem.selected {
+  background: #ffb938 !important;
+  color: white !important;
 }
 
 .listGroupItem:last-child {
@@ -445,4 +472,89 @@
   font-style: italic;
   cursor: default;
   user-select: none;
+}
+
+/* Custom Dropdown Styles */
+.customSelect {
+  position: relative;
+  width: 100%;
+  padding: 18px 50px 18px 20px;
+  border: 2px solid #ffb938;
+  border-radius: 12px;
+  font-size: 16px;
+  font-family: var(--font-inter), 'Inter', sans-serif;
+  background: #f9fafb;
+  color: #1f2937;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.customSelect:focus {
+  outline: none;
+  border-color: #ffb938;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(255, 185, 56, 0.1);
+}
+
+.customSelect.disabled {
+  background: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.selectedText {
+  color: #1f2937;
+  font-weight: 500;
+}
+
+.placeholderText {
+  color: #9ca3af;
+}
+
+.dropdownIcon {
+  color: #ffb938;
+  font-size: 14px;
+  transition: transform 0.3s ease;
+}
+
+.customSelect:focus .dropdownIcon,
+.customSelect:hover .dropdownIcon {
+  transform: rotate(180deg);
+}
+
+.customDropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 10;
+  margin-top: 4px;
+}
+
+.customOption {
+  padding: 12px 20px;
+  cursor: pointer;
+  border-bottom: 1px solid #e5e7eb;
+  transition: background-color 0.2s ease;
+  font-size: 16px;
+  color: #1f2937;
+}
+
+.customOption:hover {
+  background-color: #ffb938;
+  color: white;
+}
+
+.customOption:last-child {
+  border-bottom: none;
 }

@@ -21,7 +21,6 @@ const BookingSection = () => {
     from_airport: '',
     to_airport: '',
     city: '',
-    // Additional fields from dublicate booking form
     tripCategory: '',
     tripType: '',
     localType: '',
@@ -39,9 +38,8 @@ const BookingSection = () => {
   const [showBookingModal, setShowBookingModal] = useState(false)
   const [selectedCab, setSelectedCab] = useState(null)
   const [showResults, setShowResults] = useState(false)
-
-
-
+  const [showServiceDropdown, setShowServiceDropdown] = useState(false)
+  const [showTripDropdown, setShowTripDropdown] = useState(false)
 
   const getAdjustedPrice = (cab) => {
     if (cab.incrementPercent) {
@@ -49,8 +47,6 @@ const BookingSection = () => {
     }
     return cab.Price;
   };
-
-
 
   useEffect(() => {
     const api = formData.trip_type === 'oneway' ? '/api/locations' : '/api/roundtrips-locations'
@@ -62,7 +58,6 @@ const BookingSection = () => {
     fetchLocations()
   }, [formData.trip_type])
 
-  // Fetch hourly data when local type is hourly
   useEffect(() => {
     if (formData.trip_type === 'hourly') {
       const fetchHourlyData = async () => {
@@ -77,8 +72,6 @@ const BookingSection = () => {
     }
   }, [formData.trip_type])
 
-
-
   const filteredFrom = locations.from
     ? locations.from.filter((loc) => loc.toLowerCase().startsWith(formData.from_location.toLowerCase()))
     : []
@@ -87,16 +80,12 @@ const BookingSection = () => {
     ? (locations.toByFrom[formData.from_location] || []).filter((loc) => loc.toLowerCase().startsWith(formData.to_location.toLowerCase()))
     : []
 
-
-
   const handleInputChange = (field, value) => {
     setFormData(prev => {
       const updated = { ...prev, [field]: value }
 
-      // Reset trip_type when service_type changes
       if (field === 'service_type') {
         updated.trip_type = ''
-        // Reset other dependent fields
         updated.from_location = ''
         updated.to_location = ''
         updated.package = ''
@@ -109,7 +98,6 @@ const BookingSection = () => {
         setShowToDropdown(false)
       }
 
-      // Reset fields when trip_type changes
       if (field === 'trip_type') {
         updated.from_location = ''
         updated.to_location = ''
@@ -149,8 +137,7 @@ const BookingSection = () => {
           api = '/api/hourlytrips'
           body = { city: formData.city, hours: formData.hours }
         } else if (formData.trip_type === 'airport') {
-          // For airport transfers, we might need a different API or handle differently
-          api = '/api/cars' // Using cars API for now, might need adjustment
+          api = '/api/cars'
           body = { from: formData.from_airport, to: formData.to_airport }
         }
       }
@@ -163,9 +150,8 @@ const BookingSection = () => {
         })
         const data = await res.json()
         setResults(data)
-        setAvailableCabs(data) // Keep for backward compatibility
+        setAvailableCabs(data)
         setShowResults(true)
-        // Scroll to results table
         setTimeout(() => {
           const resultsElement = document.querySelector(`.${styles.results}`)
           if (resultsElement) {
@@ -192,8 +178,6 @@ const BookingSection = () => {
     setShowBookingModal(true);
   }
 
-
-
   return (
     <section id="booking" className={styles.bookingSection}>
         <div className={styles.bookingContainer}>
@@ -203,20 +187,43 @@ const BookingSection = () => {
           </div>
 
           <form onSubmit={handleGetQuote} className={styles.bookingForm}>
-            {/* Service Selection Row */}
             <div className={styles.formRow}>
               <div className={styles.formGroup}>
                 <label>Service Type</label>
                 <div className={styles.selectWrapper}>
-                  <select 
-                    value={formData.service_type}
-                    onChange={(e) => handleInputChange('service_type', e.target.value)}
-                    required
+                  <div
+                    className={styles.customSelect}
+                    onClick={() => setShowServiceDropdown(!showServiceDropdown)}
+                    onBlur={() => setTimeout(() => setShowServiceDropdown(false), 100)}
+                    tabIndex={0}
                   >
-                    <option value="">Choose Service</option>
-                    <option value="outstation">OutStation</option>
-                    <option value="local">Local</option>
-                  </select>
+                    <span className={formData.service_type ? styles.selectedText : styles.placeholderText}>
+                      {formData.service_type ? (formData.service_type === 'outstation' ? 'OutStation' : 'Local') : 'Choose Service'}
+                    </span>
+                    <i className={`fas fa-chevron-down ${styles.dropdownIcon}`}></i>
+                  </div>
+                  {showServiceDropdown && (
+                    <ul className={styles.customDropdown}>
+                      <li
+                        className={styles.customOption}
+                        onMouseDown={() => {
+                          handleInputChange('service_type', 'outstation')
+                          setShowServiceDropdown(false)
+                        }}
+                      >
+                        OutStation
+                      </li>
+                      <li
+                        className={styles.customOption}
+                        onMouseDown={() => {
+                          handleInputChange('service_type', 'local')
+                          setShowServiceDropdown(false)
+                        }}
+                      >
+                        Local
+                      </li>
+                    </ul>
+                  )}
                   <i className="fas fa-car"></i>
                 </div>
               </div>
@@ -224,26 +231,70 @@ const BookingSection = () => {
               <div className={styles.formGroup}>
                 <label>Trip Type</label>
                 <div className={styles.selectWrapper}>
-                  <select 
-                    value={formData.trip_type}
-                    onChange={(e) => handleInputChange('trip_type', e.target.value)}
-                    disabled={!formData.service_type}
-                    required
+                  <div
+                    className={`${styles.customSelect} ${!formData.service_type ? styles.disabled : ''}`}
+                    onClick={() => formData.service_type && setShowTripDropdown(!showTripDropdown)}
+                    onBlur={() => setTimeout(() => setShowTripDropdown(false), 100)}
+                    tabIndex={formData.service_type ? 0 : -1}
                   >
-                    <option value="">Choose Trip</option>
-                    {formData.service_type === 'outstation' && (
-                      <>
-                        <option value="oneway">One Way</option>
-                        <option value="roundtrip">Round Trip</option>
-                      </>
-                    )}
-                    {formData.service_type === 'local' && (
-                      <>
-                        <option value="hourly">Hourly Basis</option>
-                        <option value="airport">Airport Transfer</option>
-                      </>
-                    )}
-                  </select>
+                    <span className={formData.trip_type ? styles.selectedText : styles.placeholderText}>
+                      {formData.trip_type ?
+                        (formData.trip_type === 'oneway' ? 'One Way' :
+                         formData.trip_type === 'roundtrip' ? 'Round Trip' :
+                         formData.trip_type === 'hourly' ? 'Hourly Basis' :
+                         formData.trip_type === 'airport' ? 'Airport Transfer' : 'Choose Trip') :
+                        'Choose Trip'}
+                    </span>
+                    <i className={`fas fa-chevron-down ${styles.dropdownIcon}`}></i>
+                  </div>
+                  {showTripDropdown && formData.service_type && (
+                    <ul className={styles.customDropdown}>
+                      {formData.service_type === 'outstation' && (
+                        <>
+                          <li
+                            className={styles.customOption}
+                            onMouseDown={() => {
+                              handleInputChange('trip_type', 'oneway')
+                              setShowTripDropdown(false)
+                            }}
+                          >
+                            One Way
+                          </li>
+                          <li
+                            className={styles.customOption}
+                            onMouseDown={() => {
+                              handleInputChange('trip_type', 'roundtrip')
+                              setShowTripDropdown(false)
+                            }}
+                          >
+                            Round Trip
+                          </li>
+                        </>
+                      )}
+                      {formData.service_type === 'local' && (
+                        <>
+                          <li
+                            className={styles.customOption}
+                            onMouseDown={() => {
+                              handleInputChange('trip_type', 'hourly')
+                              setShowTripDropdown(false)
+                            }}
+                          >
+                            Hourly Basis
+                          </li>
+                          <li
+                            className={styles.customOption}
+                            onMouseDown={() => {
+                              handleInputChange('trip_type', 'airport')
+                              setShowTripDropdown(false)
+                            }}
+                          >
+                            Airport Transfer
+                          </li>
+                        </>
+                      )}
+                    </ul>
+                  )}
                   <i className="fas fa-route"></i>
                 </div>
               </div>
@@ -263,9 +314,7 @@ const BookingSection = () => {
               </div>
             </div>
 
-            {/* Conditional Inputs Row */}
             <div className={styles.formRow}>
-              {/* Outstation oneway or roundtrip: From City and To City */}
               {formData.service_type === 'outstation' && (formData.trip_type === 'oneway' || formData.trip_type === 'roundtrip') && (
                 <>
                   <div className={`${styles.formGroup} ${styles.positionRelative}`}>
@@ -290,7 +339,11 @@ const BookingSection = () => {
                             filteredFrom.map((loc) => (
                               <li
                                 key={loc}
-                                className={styles.listGroupItem}
+                                className={`${styles.listGroupItem} ${loc === formData.from_location ? styles.selected : ''}`}
+                                style={{
+                                  backgroundColor: loc === formData.from_location ? '#ffb938' : 'white',
+                                  color: loc === formData.from_location ? 'white' : '#1f2937'
+                                }}
                                 onMouseDown={() => {
                                   handleInputChange('from_location', loc)
                                   setShowFromDropdown(false)
@@ -332,7 +385,11 @@ const BookingSection = () => {
                             filteredTo.map((loc) => (
                               <li
                                 key={loc}
-                                className={styles.listGroupItem}
+                                className={`${styles.listGroupItem} ${loc === formData.to_location ? styles.selected : ''}`}
+                                style={{
+                                  backgroundColor: loc === formData.to_location ? '#ffb938' : 'white',
+                                  color: loc === formData.to_location ? 'white' : '#1f2937'
+                                }}
                                 onMouseDown={() => {
                                   handleInputChange('to_location', loc)
                                   setShowToDropdown(false)
@@ -351,7 +408,6 @@ const BookingSection = () => {
                 </>
               )}
 
-              {/* Local hourly: Select City and Hours */}
               {formData.service_type === 'local' && formData.trip_type === 'hourly' && (
                 <>
                   <div className={styles.formGroup}>
@@ -390,7 +446,6 @@ const BookingSection = () => {
                 </>
               )}
 
-              {/* Airport transfer: From Location and To Location */}
               {formData.service_type === 'local' && formData.trip_type === 'airport' && (
                 <>
                   <div className={styles.formGroup}>
@@ -424,9 +479,6 @@ const BookingSection = () => {
               )}
             </div>
 
-
-
-            {/* Submit Button */}
             <div className={styles.formSubmit}>
               <button type="submit" className={styles.submitBtn}>
                 <i className="fas fa-search"></i>
@@ -434,7 +486,6 @@ const BookingSection = () => {
               </button>
             </div>
 
-            {/* Info */}
             <div className={styles.formInfo}>
               <div className={styles.infoItem}>
                 <i className="fas fa-clock"></i>
@@ -451,7 +502,6 @@ const BookingSection = () => {
             </div>
           </form>
 
-          {/* Available Cabs Display */}
           {showResults && availableCabs.length > 0 && (
             <div className={styles.results}>
               <h3>Available Cabs</h3>
@@ -499,7 +549,6 @@ const BookingSection = () => {
             </div>
           )}
 
-          {/* Booking Modal */}
           {showBookingModal && (
             <div style={{
               position: 'fixed',

@@ -153,7 +153,14 @@ const TopRoutes = ({ showViewAll = true, maxRoutes, initialRoutes = [] }) => {
                 </div>
 
                 <div className={styles.brandBadge} itemProp="provider" itemScope itemType="https://schema.org/Organization">
-                  <span itemProp="name">OnlineTaxi</span>
+                  <Image
+                    src="/images/onlinetaxi-logo.png"
+                    alt="OnlineTaxi Logo"
+                    width={80}
+                    height={20}
+                    className={styles.brandLogo}
+                    itemProp="logo"
+                  />
                 </div>
 
                 <button
