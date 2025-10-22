@@ -374,6 +374,9 @@
   font-size: 14px;
   color: #374151;
   font-family: var(--font-inter), 'Inter', sans-serif;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .cabsTable tbody tr:nth-child(even) {
@@ -415,28 +418,7 @@
 /* Responsive for Table */
 @media (max-width: 768px) {
   .cabsTable {
-    font-size: 12px;
-  }
-
-  .cabsTable th,
-  .cabsTable td {
-    padding: 6px 8px;
-  }
-
-  .tableImg {
-    width: 50px;
-    height: 35px;
-  }
-
-  .bookNowBtn {
-    padding: 6px 12px;
-    font-size: 11px;
-  }
-}
-
-@media (max-width: 480px) {
-  .cabsTable {
-    font-size: 11px;
+    font-size: 10px;
   }
 
   .cabsTable th,
@@ -445,24 +427,57 @@
   }
 
   .tableImg {
-    width: 40px;
+    width: 45px;
     height: 30px;
   }
 
   .bookNowBtn {
     padding: 5px 10px;
-    font-size: 10px;
+    font-size: 9px;
   }
 }
 
-/* Make table horizontally scrollable on small screens */
-@media (max-width: 600px) {
-  .results {
-    overflow-x: auto;
-  }
+@media (max-width: 480px) {
   .cabsTable {
-    display: block;
-    min-width: 600px;
+    font-size: 9px;
+  }
+
+  .cabsTable th,
+  .cabsTable td {
+    padding: 3px 4px;
+  }
+
+  .tableImg {
+    width: 35px;
+    height: 25px;
+  }
+
+  .bookNowBtn {
+    padding: 4px 8px;
+    font-size: 8px;
+  }
+}
+
+/* Make table fit on small screens and hide Route column, shorten Luggage column, make header font size same as luggage */
+@media (max-width: 600px) {
+  .cabsTable {
+    width: 100%;
+    table-layout: fixed;
+  }
+  /* Hide Route column in mobile view */
+  .cabsTable th:nth-child(3),
+  .cabsTable td:nth-child(3) {
+    display: none;
+  }
+  /* Shorten Luggage column */
+  .cabsTable th:nth-child(5),
+  .cabsTable td:nth-child(5) {
+    width: 60px;
+    font-size: 11px;
+  }
+  /* Make header font size same as luggage */
+  .cabsTable th {
+    font-size: 11px;
   }
 }
 

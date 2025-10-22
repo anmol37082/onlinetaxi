@@ -178,22 +178,14 @@
 
 .heroIllustration {
   width: 100%;
-  max-width: 320px;
+  max-width: 400px;
   height: auto;
-  border: 2px solid rgba(255, 165, 0, 0.2);
   border-radius: 12px;
-  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.15)) blur(0.5px);
-  backdrop-filter: blur(1px);
   margin-top: 20px;
   transition: all 0.3s ease;
   cursor: pointer;
 }
 
-.heroIllustration:hover {
-  border-color: rgba(255, 165, 0, 0.6);
-  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.15)) blur(0.5px) brightness(1.05);
-  transform: scale(1.02);
-}
 
 @keyframes float {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
