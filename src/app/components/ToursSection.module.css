@@ -76,15 +76,14 @@
   position: absolute;
   top: 12px;
   left: 12px;
-  background: linear-gradient(135deg, #f97316, #ea580c);
-  color: #ffffff;
   padding: 6px 12px;
   border-radius: 20px;
-  font-size: 12px;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 0.8rem;
+  z-index: 2;
+  width: 100px;
+  height: 30px;
+  object-fit: contain;
 }
 
 .cardContent {

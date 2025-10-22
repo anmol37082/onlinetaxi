@@ -140,7 +140,7 @@ const ToursSection = ({ initialTours = [] }) => {
                         e.target.src = '/api/placeholder/400/200' // Fallback image
                       }}
                     />
-                    <div className={styles.destinationTag}>{tour.tag}</div>
+                    <img src="/images/onlinetaxi-logo.png" alt="Logo" className={styles.destinationTag} />
                   </div>
                   <div className={styles.cardContent}>
                     <h3 className={styles.tourTitle}>{tour.title}</h3>

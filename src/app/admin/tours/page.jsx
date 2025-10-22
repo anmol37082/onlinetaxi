@@ -11,7 +11,6 @@ export default function AdminTours() {
     description: '',
     image: '',
     imagePublicId: '',
-    tag: '',
     duration: '',
     price: '',
     rating: 5,
@@ -106,7 +105,6 @@ export default function AdminTours() {
           description: '',
           image: '',
           imagePublicId: '',
-          tag: '',
           duration: '',
           price: '',
           rating: 5,
@@ -158,7 +156,6 @@ export default function AdminTours() {
           <form onSubmit={handleSubmit} className={styles.form}>
             {/* Basic Info */}
             <input className={styles.input} type="text" placeholder="Tour Title" value={form.title} onChange={e => handleInputChange('title', e.target.value)} required />
-            <input className={styles.input} type="text" placeholder="Tour Tag" value={form.tag} onChange={e => handleInputChange('tag', e.target.value)} required />
             <textarea className={`${styles.input} ${styles.textarea}`} placeholder="Tour Description" value={form.description} onChange={e => handleInputChange('description', e.target.value)} required />
             <ImageUpload 
               onImageUpload={handleImageUpload} 
@@ -239,7 +236,6 @@ export default function AdminTours() {
                   <div className={styles.tourInfo}>
                     <h3 className={styles.tourTitle}>{tour.title}</h3>
                     <div className={styles.tourDetails}>
-                      <span className={styles.tourTag}>{tour.tag}</span>
                       <span className={styles.tourPrice}>₹{tour.price}</span>
                       <span className={styles.tourRating}>⭐ {tour.rating}</span>
                       <span className={styles.tourDuration}>🕒 {tour.duration}</span>
