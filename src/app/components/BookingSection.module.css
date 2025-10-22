@@ -251,7 +251,7 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .bookingContainer {
-    padding: 30px 25px;
+    padding: 30px 15px;
   }
 
   .bookingHeader h2 {
@@ -288,7 +288,7 @@
   }
 
   .bookingContainer {
-    padding: 25px 20px;
+    padding: 25px 10px;
   }
 
   .bookingHeader h2 {
