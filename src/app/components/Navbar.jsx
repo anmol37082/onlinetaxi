@@ -111,13 +111,13 @@ const Navbar = () => {
             <span>+(91) 9988-2222-83</span>
           </div>
           <div className={styles.topBarRight}>
-            <Link href="#" className={styles.socialLink}>
+            <Link href="https://www.instagram.com/online_taxi22" className={styles.socialLink}>
               <i className="fab fa-instagram"></i>
             </Link>
-            <Link href="#" className={styles.socialLink}>
+            <Link href="https://www.facebook.com/share/QKavA74oJndJzUjf/?mibextid=qi2Omg" className={styles.socialLink}>
               <i className="fab fa-facebook-f"></i>
               </Link>
-            <Link href="#" className={styles.socialLink}>
+            <Link href="https://www.twitter.com/" className={styles.socialLink}>
               <i className="fab fa-twitter"></i>
             </Link>
             {/* Profile Icon in Top Bar */}
